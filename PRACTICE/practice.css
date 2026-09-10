@@ -1,0 +1,50 @@
+body{
+    font-family: arial;
+}
+.input {
+    height:30px;
+    width: 400px;
+    font-size: 20px;
+    padding-left: 20px;
+    margin-right: 30px;
+}
+.date{
+    height:30px;
+    width: 200px;
+    font-size: 20px;
+    margin-right: 30px;
+}
+.js-add{
+      height:33px;
+      width: 100px;
+     font-size: 20px;
+     border: none;
+     background-color: green;
+     color: white;
+     cursor: pointer;
+}
+.Displaying-todo{
+    margin-top: 40px;
+    display:grid ;
+    grid-template-columns: 427px 206px 100px ;
+    column-gap: 33px;
+    row-gap: 15px;
+    align-items: center;
+    
+}
+.Activity-div{
+    
+    font-size: 22px;
+}
+.date-div{
+    
+    font-size: 22px;
+}
+.delete-button{
+    height: 33px;
+    font-size: 18px;
+    border: none;
+     background-color: red;
+     color: white;
+     cursor: pointer;
+}

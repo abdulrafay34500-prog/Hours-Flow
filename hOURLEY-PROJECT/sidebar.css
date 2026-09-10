@@ -1,0 +1,56 @@
+.middle-sidebar{
+    background-color: #e7e7e7;
+    position: fixed;
+    top: 120px;
+    left: 0px;
+    bottom: 0px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    padding-left: 20px;
+}
+
+.Dashboard-div{
+    display: flex;
+    align-items: center;
+}
+.dashboard-image{
+ height: 40px;
+ margin-right: 10px;
+}
+
+.employes-div{
+    display: flex;
+}
+.employes-logo{
+     height: 41px;
+      margin-right: 10px;
+}
+.setting-div{
+    display: flex;
+    align-items: center;
+    
+}
+.setting-image{
+    height: 32px;
+    background: transparent;
+    margin-right: 10px;
+}
+.dashboard-text,
+.employ-text,
+.setting-text{
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(0, 116, 248);
+  cursor: pointer;
+}
+.dashboard-text:hover{
+  color: rgb(91, 168, 255);
+}
+.employ-text:hover{
+  color: rgb(91, 168, 255);
+}
+.setting-text:hover{
+  color: rgb(91, 168, 255);
+}
