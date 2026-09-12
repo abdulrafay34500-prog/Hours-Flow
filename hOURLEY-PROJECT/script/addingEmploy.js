@@ -1,4 +1,4 @@
-import { Employes , AddingEmploy} from "../data/employes.js";
+import { Employes , AddingEmploy,EmptyingInputs} from "../data/employes.js";
 
 renderEmployDetails()
 export function renderEmployDetails() {
@@ -28,7 +28,6 @@ export function renderEmployDetails() {
 let AddButton = document.querySelector('.js-add-employ-button')
 let saveButton = document.querySelector('.js-save-button')
 let crossButton =document.querySelector('.js-Cross-sign')
-
 let totalEmploye = document.querySelector('.js-Employe-numbers')
 
 
@@ -46,6 +45,7 @@ AddButton.addEventListener('click',()=>{
 crossButton.addEventListener('click',()=>{
     let main =document.querySelector('.main-addingEmploy-page')
     main.classList.remove('show')
+    EmptyingInputs()
 })
 saveButton.addEventListener('click' ,()=>{
 

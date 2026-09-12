@@ -29,19 +29,50 @@ export function AddingEmploy() {
 
                 localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
 
-                id.value=''
-                Name.value=''
-                shiftType.value=''
+                EmptyingInputs()
 
                 let main =document.querySelector('.main-addingEmploy-page')
                 main.classList.remove('show')
 
                 renderEmployDetails()
             }else{
-                console.log('id already taken')
+                ShowingErrorFunction('This Id is already Taken ') 
             }
            
 
 
-     }  
+     }  else{
+
+           ShowingErrorFunction('Enter all Details to continue') 
+     }
+}
+
+let timeoutId;
+function ShowingErrorFunction(errorReason) {
+            let addingEmployPage=document.querySelector('.AddingEmploye-main-page')
+            let errorText =document.querySelector('.js-Error-reason')
+            addingEmployPage.classList.add('showingError')
+
+            errorText.innerHTML=errorReason
+            
+                clearTimeout(timeoutId)
+
+               timeoutId = setTimeout(()=>{
+                 clearTimeout(timeoutId)
+                  addingEmployPage.classList.remove('showingError')
+               },2000)
+
+}
+
+export function EmptyingInputs() {
+     let id=document.querySelector('.js-id-input')
+     let Id =id.value
+     let Name=document.querySelector('.js-name-input')
+     let name =Name.value
+     let shiftType=document.querySelector('.js-Select-shift')
+     let ShiftType =shiftType.value
+
+    id.value=''
+    Name.value=''
+    shiftType.value=''
 }
