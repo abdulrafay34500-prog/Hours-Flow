@@ -48,24 +48,27 @@
   height: 59px;
   background-color: rgb(212, 212, 212) ;
   display: grid;
-  grid-template-columns: 199px 1fr;
+  grid-template-columns: 190px 590px;
   width: 780px;
 
 }
 .Every-employ-details div{
     font-size: 20px;
     font-weight: bold;
+    
 }
 .employ-name{
-    width: 190px;
+    
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding-left: 20px;
+    
 }
 .weekley-hours{
     display: flex;
-    column-gap: 64px;
+    column-gap: 55px;
     align-items: center;
-    justify-content: center;
-    margin-right: 20px;   
+    
+    
+    
 }

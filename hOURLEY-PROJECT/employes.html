@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="header.css">
+         <link rel="stylesheet" href="general.css">
+         <link rel="stylesheet" href="sidebar.css">
+         <link rel="stylesheet" href="weekley-overview.css">
+         <link rel="stylesheet" href="employes.css">
+         <link rel="stylesheet" href="addingemploypage.css">
+        <title>Employes Details</title>
+    </head>
+    <body>
+        <header>
+            <div class="left-header">
+                <img class="logo" src="logo/logo.png.png">
+
+            </div>
+            <div class="middle-header">
+               <input class="Search-bar" placeholder="Search by employ name">
+                <button class="search-button">
+                    <img class="search-icon" src="icons/searchIcon.png">
+                </button>
+            </div>
+            <div class="right-header">
+                <img class="notification-img" src="icons/notification.png">
+                <div class="profile-pic-div">
+                    <img class="profile-image" src="logo/logo.png.png"> 
+                </div>
+
+            </div>
+
+        </header>
+        <sidebar>
+            <div class="middle-sidebar">
+                <div class="Dashboard-div">
+                    <img class="dashboard-image" src="icons/dashboard.png" alt="My Image">
+                    <p class="dashboard-text">Dashboard</p>
+                </div>
+                <a href="employes.html" class="employes-div">
+                    <img class="employes-logo" src="icons/employ.png">
+                    <p class="employ-text">Employes</p>
+                </a>
+                <div class="setting-div">
+                    <img class="setting-image" src="icons/setting.png">
+                    <p class="setting-text">Settings</p>
+                </div>
+                <a href="DashBoard.html" class="WeekLey=report-div setting-div">
+                    <img class="setting-image" src="icons/weeklet-icon.png.png">
+                    <p class="setting-text"> Weekley Report</p>
+                </a>
+
+            </div>
+        </sidebar>
+        <main class="main-addingEmploy-page">
+            <div class="Adding-Employe-main-div">
+                <div class="Employe-main-header">
+                    <div class="header-text-div">
+                        <p class="employes-text">Employees</p>
+                        <p class="manage-team-text">Manage your team members and their details</p>
+
+                    </div>
+                    <button class="add-button js-add-employ-button">
+                         + Add Employe 
+                    </button>
+                </div>
+                <div class="employ-hours-payroll-div">
+                    <div class="Total-employ-div">
+                        <img class="employ-icon" src="icons/employ.png">
+                        <p class="total-employ-text">Total Employes</p>
+                        <p class="Employe-numbers js-Employe-numbers">0</p>
+                    </div>
+                    <div class="Total-Hours-div">
+                         <img class="clock-icon" src="icons/clock.png">
+                         <p class="total-Hours-text">Total Hours (This Month)</p>
+                         <p class="Total-hours-numbers">0</p>
+                    </div>
+                    <div class="Total-Payroll-div">
+                        <img class="currency-icon" src="icons/rupee.png">
+                        <p class="total-Payroll-text">Total Payroll (This Month)</p>
+                        <p class="monthly-Payroll-Amount">0</p>
+                    </div>
+                </div>
+                <div class="Employe-Details-main-div">
+                    <div class="Employer-Details-mainHeader">
+                         <p class="Employ-id">ID</p>
+                         <P class="Employ-namee">Employ Name</P>
+                         <p class="Employ-ShiftTypee">Shift Type</p>
+                    </div>
+                    <div class="added-Employes-details js-added-Employes-details">
+                      
+                         
+                    </div>
+
+                </div>
+            </div>
+            <div class="AddingEmploye-main-page">
+                <div class="adding-employ-div">
+                    <h1>Enter Employ Details</h1>
+                    <div class="input-id-div">
+                        <h3>Enter Id :</h3>
+                        <input class="id-input js-id-input" type="number">
+                    </div>
+                    <div class="input-name-div">
+                        <h3>Enter Name :</h3>
+                        <input class="name-input js-name-input" type="text">
+                    </div>
+                    <div class="input-shift-div">
+                        <h3>Select Shift Type :</h3>
+                        <select class="Select-shift js-Select-shift">
+                            <option>Morning</option>
+                            <option>Evening</option>
+                        </select>
+                    </div>
+                    <button class="Save-button js-save-button">
+                        Save
+                    </button>
+                    <div class="Cross-sign js-Cross-sign">
+                       ✖ 
+                    </div>                  
+                </div>
+               
+            </div>
+        </main>
+
+
+    </body>
+    <script src="script/addingEmploy.js" type="module"></script>
+</html>
