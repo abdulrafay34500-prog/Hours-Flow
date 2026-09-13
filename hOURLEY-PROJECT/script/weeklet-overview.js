@@ -19,13 +19,13 @@ Employes.forEach((Employe ,index)=>{
   WeekleyReportHTML+=`
 <div class="Every-employ-details">
     <div class="employ-name">${Employe.Name}</div>
-    <div class="mon-hour">${Employe.Days.mon}</div>
-    <div class="tue-hour">${Employe.Days.tue}</div>
-    <div class="wed-hour">${Employe.Days.wed}</div>
-    <div class="thu-hour">${Employe.Days.thu}</div>
-    <div class="fri-hour">${Employe.Days.fri}</div>
-    <div class="sat-hour">${Employe.Days.Sat}</div>
-    <div class="sun-hour">${Employe.Days.Sun}</div>
+    <input class="mon-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="tue-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="wed-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="thu-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="fri-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="sat-hour days-hours" value='${Employe.Days.mon}'></input>
+    <input class="sun-hour days-hours" value='${Employe.Days.mon}'></input>
     <div>${TotalHours}</div>   
 </div>`
 })

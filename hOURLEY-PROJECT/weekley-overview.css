@@ -54,3 +54,10 @@
     font-weight: bold;
     
 }
+.days-hours{
+    width: 39px;
+    height: 30px;
+    font-size: 19px;
+    background-color:  rgb(212, 212, 212);
+    border: none;
+}
