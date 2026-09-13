@@ -51,5 +51,6 @@ saveButton.addEventListener('click' ,()=>{
 
       AddingEmploy();
       TotalNumberOfEmployes();
+      renderEmployDetails()
 })
 

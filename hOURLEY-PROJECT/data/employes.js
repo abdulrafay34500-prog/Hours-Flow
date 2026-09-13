@@ -1,4 +1,4 @@
-import {renderEmployDetails} from '../script/addingEmploy.js'
+
 
 export let Employes =JSON.parse(localStorage.getItem('EmployDetails')) || [];
 
@@ -25,6 +25,15 @@ export function AddingEmploy() {
                     Id : Id,
                     Name :name,
                     ShiftType:ShiftType,
+                       Days:{
+                            mon:0,
+                            tue:0,
+                            wed:0,
+                            thu:0,
+                            fri:0,
+                            Sat:0,
+                            Sun:0,
+                         }
                 })
 
                 localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
@@ -34,7 +43,7 @@ export function AddingEmploy() {
                 let main =document.querySelector('.main-addingEmploy-page')
                 main.classList.remove('show')
 
-                renderEmployDetails()
+                
             }else{
                 ShowingErrorFunction('This Id is already Taken ') 
             }
