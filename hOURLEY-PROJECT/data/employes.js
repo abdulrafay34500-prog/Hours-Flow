@@ -85,3 +85,32 @@ export function EmptyingInputs() {
     Name.value=''
     shiftType.value=''
 }
+
+export function updatingWeekleyHours(EmployId ) {
+
+    let currentUpdatingEmploy;
+    Employes.forEach((employ)=>{
+        if(employ.Id == EmployId){
+            currentUpdatingEmploy=employ
+        }      
+    })
+    let inputs = document.querySelectorAll(
+        `.js-days-hours[data-employ-id="${EmployId}"]`
+    );
+
+    let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'Sat', 'Sun'];
+   
+    inputs.forEach((input)=>{
+      
+      let dayIndex=input.dataset.day;
+      let hours=Number(input.value)
+      let dayName=days[dayIndex]
+      currentUpdatingEmploy.Days[dayName]=hours
+    })
+    
+    
+  
+    localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
+
+   
+}

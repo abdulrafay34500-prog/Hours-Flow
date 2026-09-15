@@ -48,6 +48,7 @@
   align-items: center;
   width: 780px;
   padding-left: 10px;
+  position: relative;
 }
 .Every-employ-details div{
     font-size: 20px;
@@ -61,3 +62,23 @@
     background-color:  rgb(212, 212, 212);
     border: none;
 }
+.save-button,
+.edit-button{
+  width: 90px;
+  height: 25px;
+  position: absolute;
+  bottom: 15px;
+  left: 110px;
+  cursor: pointer;
+
+}
+.save-button{
+display: none;
+}
+.clicked-Edit .save-button{
+  display: initial;
+}
+
+ 
+
+
