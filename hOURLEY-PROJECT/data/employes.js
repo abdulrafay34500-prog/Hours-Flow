@@ -25,15 +25,8 @@ export function AddingEmploy() {
                     Id : Id,
                     Name :name,
                     ShiftType:ShiftType,
-                       Days:{
-                            mon:0,
-                            tue:0,
-                            wed:0,
-                            thu:0,
-                            fri:0,
-                            Sat:0,
-                            Sun:0,
-                         }
+
+                       Hours:{}
                 })
 
                 localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
@@ -102,10 +95,7 @@ export function updatingWeekleyHours(EmployId ) {
    
     inputs.forEach((input)=>{
       
-      let dayIndex=input.dataset.day;
-      let hours=Number(input.value)
-      let dayName=days[dayIndex]
-      currentUpdatingEmploy.Days[dayName]=hours
+
     })
     
     

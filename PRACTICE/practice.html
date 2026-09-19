@@ -6,113 +6,25 @@
     </head>
     <body>
 
-        <input class="input" placeholder="Add things to do">
-        <input class="date" placeholder="Add things to do" type="date">
-
-        <button class="js-add">Add</button>
-
-        <div class="js-Displaying-todo Displaying-todo">
-
-        </div>
+      
 
         <script>
-            let storingArray=JSON.parse(localStorage.getItem('todoList')) || [];
+            let startingDate='2026-9-14'
+
+            let weekDAys=[]
+
+            for (let i = 1; i <=7; i++) {
+                let date=new Date(startingDate)
+                date.setDate(date.getDate()+i)
+                weekDAys.push(date.toISOString().split('T')[0])
+            }
+
             
-            rendering()
 
-            let addButton =document.querySelector('.js-add')
-            addButton.addEventListener('click' ,(()=>{
+         
 
-                let input=document.querySelector('.input')
-                let date=document.querySelector('.date')
-
-                if (!input.value =='' && !date.value==''){
-                        
-                        
-                        storingArray.push({
-                            activity: input.value,
-                            date:date.value
-                        })
-
-                        input.value=''
-                        date.value=''
-                    
-
-                        rendering()
-
-                        localStorage.setItem('todoList' ,JSON.stringify(storingArray))
-                }
-     
-                    
+            console.log(weekDAys)
     
-            }))
-
-            function rendering() {
-                    let tedolistHTML=''
-               
-                    storingArray.forEach((tasks ,i) => {
-                           tedolistHTML+=`<div class="Activity-div">${tasks.activity} </div>
-                                        <div class="date-div">${tasks.date}</div>
-                                        <button class="delete-button" onclick="storingArray.splice(${i} , 1); rendering()
-                                        localStorage.setItem('todoList' ,JSON.stringify(storingArray))
-                                        ">
-                                            Delete
-                                        </button>
-                                        `
-                    });
-
-                     
-                        
-                        
-                    
-                    
-                    
-                    
-                
-                    document.querySelector('.js-Displaying-todo')
-                    .innerHTML=tedolistHTML
-            }
-            
- 
-        
-        let add=(add2)=>{
-            document.body.innerHTML=
-            `<button class="Button" onClick="clicking()">
-                Add
-            </button>
-            <button onClick="dec()"  class="Button">Remove</button>
-            `
-
-        }
-        add()
-        let num =0
-        let clicking=()=>{
-           
-            num++
-        }
-         let dec=()=>{
-           
-            num--
-        }
-        setInterval(()=>{
-            if (num){
-                if (document.title == 'Todo App'){
-                document.title=`(${num}) New Messages`
-                }else{
-                    document.title='Todo App'
-                }
-            }else{
-                document.title='Todo App'
-            }
-           
-            
-        },1500)
-
-        
-        
-       
-
-        
         </script>
     </body>
 </html>

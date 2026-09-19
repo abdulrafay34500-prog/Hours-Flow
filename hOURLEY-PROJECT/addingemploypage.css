@@ -1,105 +1,443 @@
-.AddingEmploye-main-page{
-    height: 100%;
-    width: 100%;
-    background-color: rgb(10, 10, 10 ,0.5);
+/* =========================================
+   ADD EMPLOYEE MODAL BACKGROUND
+========================================= */
+
+.AddingEmploye-main-page {
+
     position: fixed;
+
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
-    padding-top: 200px;
-    padding-left: 420px;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    /* Dark transparent background */
+    background-color: rgba(15, 23, 42, 0.55);
+
+    /* Center the popup */
     display: none;
-    z-index: 2; 
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+
+    /* Slight blur behind popup */
+    backdrop-filter: blur(4px);
 }
-.show .AddingEmploye-main-page{
-  display: initial;
+
+
+/* Show popup */
+
+.show .AddingEmploye-main-page {
+    display: flex;
 }
-.adding-employ-div{
-    height: 500px;
-    width: 700px;
+
+
+/* =========================================
+   POPUP BOX
+========================================= */
+
+.adding-employ-div {
+
+    width: 600px;
+    min-height: 450px;
+
     background-color: white;
-    border-radius: 10px;
-    padding-left: 70px;
+
+    border-radius: 18px;
+
+    padding: 35px 45px;
+
+    box-sizing: border-box;
+
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+
+    row-gap: 25px;
+
     position: relative;
+
+    /* Nice shadow around popup */
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+
+    /* Small animation */
+    animation: popupAnimation 0.25s ease;
 }
+
+
+/* Popup animation */
+
+@keyframes popupAnimation {
+
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   POPUP TITLE
+========================================= */
+
+.adding-employ-div h1 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+
+/* =========================================
+   INPUT ROWS
+========================================= */
+
 .input-id-div,
 .input-name-div,
-.input-shift-div{
-    display: flex;
-    width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 50px;
+.input-shift-div {
 
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0;
+
+    box-sizing: border-box;
 }
+
+
+/* Labels */
+
+.input-id-div h3,
+.input-name-div h3,
+.input-shift-div h3 {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #475569;
+}
+
+
+/* =========================================
+   ID + NAME INPUT
+========================================= */
+
 .id-input,
-.name-input{
-    height: 30px;
-    border: none;
-    border-bottom: 1px solid black;
-    padding-left: 10px;
-    font-size: 17px;
+.name-input {
+
+    width: 300px;
+
+    height: 42px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    font-size: 15px;
+
+    color: #1e293b;
+
+    background-color: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    transition: 0.2s;
 }
-.Select-shift{
-    height: 30px;
-    border: none;
-    font-size: 22px;
+
+
+/* When user clicks input */
+
+.id-input:focus,
+.name-input:focus {
+
+    background-color: white;
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================
+   SHIFT SELECT
+========================================= */
+
+.Select-shift {
+
+    width: 300px;
+
+    height: 42px;
+
+    padding: 0 12px;
+
+    font-size: 15px;
+
+    color: #1e293b;
+
+    background-color: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
     cursor: pointer;
+
+    transition: 0.2s;
 }
-.Save-button{
+
+
+.Select-shift:focus {
+
+    background-color: white;
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* =========================================
+   SAVE BUTTON
+========================================= */
+
+.Save-button {
+
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    height: 40px;
-    width: 130px;
+
+    right: 45px;
+    bottom: 30px;
+
+    width: 120px;
+    height: 42px;
+
     border: none;
-    background-color: rgb(0, 126, 230);
+
+    border-radius: 9px;
+
+    background-color: #2563eb;
+
     color: white;
-    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
     cursor: pointer;
-    font-size: 22px;
+
+    transition: 0.2s;
 }
-.Cross-sign{
+
+
+.Save-button:hover {
+
+    background-color: #1d4ed8;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+}
+
+
+.Save-button:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.Cross-sign {
+
     position: absolute;
-    font-size: 20px;
-    font-weight: bold;
-    right: 10px;
-    top: 10px;
+
+    top: 20px;
+    right: 25px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    color: #64748b;
+
     cursor: pointer;
+
+    transition: 0.2s;
 }
-@keyframes moveErrorBox{
-    from{
-        transform: translateX(170px);
+
+
+.Cross-sign:hover {
+
+    background-color: #fee2e2;
+
+    color: #ef4444;
+}
+
+
+/* =========================================
+   ERROR NOTIFICATION
+========================================= */
+
+@keyframes moveErrorBox {
+
+    from {
+
+        transform: translateX(40px);
+
+        opacity: 0;
     }
- 
+
+    to {
+
+        transform: translateX(0);
+
+        opacity: 1;
+    }
 }
-.Error-notification{
-    height: 100px;
-    width: 330px;
-    background-color: rgb(253, 253, 253);
-    border-radius: 10px;
+
+
+.Error-notification {
+
     position: fixed;
-    right: 40px;
-    animation: moveErrorBox 0.4s;
-    display: inline;
-    padding-left: 20px;
-    padding-top: 15px;
+
+    top: 100px;
+    right: 30px;
+
+    width: 330px;
+
+    min-height: 90px;
+
+    padding: 18px 20px;
+
+    box-sizing: border-box;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    /* Red line on left */
+    border-left: 4px solid #ef4444;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
     display: none;
+
+    animation: moveErrorBox 0.3s ease;
+
+    z-index: 3000;
 }
-.showingError .Error-notification{
-    display: initial;
+
+
+/* Show error */
+
+.showingError .Error-notification {
+
+    display: block;
 }
-.Error-Text{
-    font-size: 30px;
-    font-weight: bold;
-    color: red;
+
+
+/* Error title */
+
+.Error-Text {
+
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: #ef4444;
 }
-.Error-reason{
- color: red;
- margin-top: 10px;
+
+
+/* Error message */
+
+.Error-reason {
+
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: #64748b;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .adding-employ-div {
+
+        width: 90%;
+
+        padding: 30px;
+
+    }
+
+
+    .input-id-div,
+    .input-name-div,
+    .input-shift-div {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        row-gap: 8px;
+
+    }
+
+
+    .id-input,
+    .name-input,
+    .Select-shift {
+
+        width: 100%;
+
+    }
+
+
+    .Save-button {
+
+        right: 30px;
+
+    }
+
 }

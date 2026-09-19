@@ -1,84 +1,341 @@
-.Weekley-overview-main-div{
-    background-color:  rgb(212, 212, 212);
-    width: 800px;
-    height: 700px;
+/* ========================================
+   WEEKLY OVERVIEW MAIN CONTAINER
+======================================== */
+
+.Weekley-overview-main-div {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    min-height: 650px;
+
+    margin: 30px auto;
+    padding: 25px;
+
+    background-color: #f8fafc;
+
+    border-radius: 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   WEEKLY HEADER
+======================================== */
+
+.Weekley-overview-header {
+    width: 100%;
+    height: 65px;
+
     display: grid;
-    row-gap: 20px;
+
+    /*
+        First column = employee name
+        Remaining 8 columns = 7 days + total
+    */
+    grid-template-columns: 2.5fr repeat(8, 1fr);
+
     align-items: center;
-    justify-content: center;
-    margin-left: 30px;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+
+    margin-bottom: 12px;
+
+    box-sizing: border-box;
 }
-.Weekley-overview-header{
-  background-color: rgb(255, 255, 255);
-  display: grid;
-  grid-template-columns: 3fr repeat(8 , 1fr);
-  align-items: center;
-  height: 50px;
-  width: 780px;
-  border-radius: 20px;
-  background-color: rgb(248, 250, 250);
+
+
+/* Header text */
+
+.Weekley-overview-header p {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #64748b;
 }
-.Weekley-overview-header p{
-   
-    font-size: 20px;
-    font-weight: bold;
+
+
+/* Employee heading */
+
+.Weekley-overview-header .Employ-header-text {
+    text-align: left;
+
+    padding-left: 25px;
+
+    font-size: 15px;
+
+    color: #1e293b;
+}
+
+
+/* ========================================
+   EMPLOYEE ROW
+======================================== */
+
+.Every-employ-details {
+
+    width: 100%;
+    min-height: 70px;
+
     display: grid;
-    
+
+    grid-template-columns: 2.5fr repeat(8, 1fr);
+
+    align-items: center;
+
+    background-color: white;
+
+    border-radius: 14px;
+
+    margin-bottom: 10px;
+
+    padding: 8px 0;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
-.Weekley-report-main-div{
-  background-color: rgb(255, 255, 255);
-  width: 780px;
-  height: 580px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  align-items: center;
-  justify-content: start;
-  padding-top: 10px;
-  
+
+/* Small hover effect */
+
+.Every-employ-details:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
-.Every-employ-details{
-  width: 770px;
-  height: 59px;
-  background-color: rgb(212, 212, 212) ;
-  display: grid;
-  grid-template-columns: 3fr repeat(8 ,1fr);
-  align-items: center;
-  width: 780px;
-  padding-left: 10px;
-  position: relative;
+
+
+/* ========================================
+   EMPLOYEE NAME
+======================================== */
+
+.Every-employ-details .employ-name {
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #1e293b;
+
+    padding-left: 25px;
 }
-.Every-employ-details div{
-    font-size: 20px;
-    font-weight: bold;
+
+
+/* ========================================
+   HOURS INPUT
+======================================== */
+
+.days-hours {
+
+    width: 55px;
+    height: 38px;
+
+    margin: auto;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    color: #1e293b;
+
+    background-color: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+}
+
+
+/* Remove browser arrows */
+
+.days-hours::-webkit-inner-spin-button,
+.days-hours::-webkit-outer-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+}
+
+
+/* Input focus */
+
+.days-hours:focus {
+
+    background-color: white;
+
+    border-color: #3b82f6;
+
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+
+/* Input hover */
+
+.days-hours:hover {
+
+    border-color: #94a3b8;
+}
+
+
+/* ========================================
+   TOTAL HOURS
+======================================== */
+
+.Every-employ-details > div:last-child {
+
+    width: 55px;
+    height: 38px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-color: #eff6ff;
+
+    color: #2563eb;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* ========================================
+   REPORT AREA
+======================================== */
+
+.Weekley-report-main-div {
+
+    width: 100%;
+
+    min-height: 500px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    background-color: transparent;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    justify-content: flex-start;
+
+    row-gap: 10px;
+
+    overflow-y: auto;
+}
+
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+.Weekley-report-main-div::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+
+.Weekley-report-main-div::-webkit-scrollbar-thumb {
+
+    border-radius: 10px;
+
+    background-color: #cbd5e1;
+}
+
+
+.Weekley-report-main-div::-webkit-scrollbar-track {
+
+    background-color: transparent;
+}
+.week-buttons-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.Previous-Next-button{
     
-}
-.days-hours{
-    width: 39px;
-    height: 30px;
-    font-size: 19px;
-    background-color:  rgb(212, 212, 212);
+    width: 120px;
+    height: 42px;
+
     border: none;
-}
-.save-button,
-.edit-button{
-  width: 90px;
-  height: 25px;
-  position: absolute;
-  bottom: 15px;
-  left: 110px;
-  cursor: pointer;
+
+    border-radius: 9px;
+
+    background-color: #2563eb;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
 
 }
-.save-button{
-display: none;
+.Previous-Next-button:hover{
+    
+    background-color: #1d4ed8;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
 }
-.clicked-Edit .save-button{
-  display: initial;
+.Previous-Next-button:active {
+
+    transform: translateY(0);
 }
+/* ========================================
+   MOBILE
+======================================== */
 
- 
+@media (max-width: 900px) {
 
+    .Weekley-overview-main-div {
 
+        width: 95%;
+
+        padding: 15px;
+
+        overflow-x: auto;
+    }
+
+    .Weekley-overview-header,
+    .Every-employ-details {
+
+        min-width: 850px;
+    }
+
+}
