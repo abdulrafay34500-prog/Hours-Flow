@@ -74,7 +74,10 @@
 
     color: #1e293b;
 }
-
+.GoingMonth-Text{
+    font-size: 25px;
+    font-weight: 700;
+}
 
 /* ========================================
    EMPLOYEE ROW

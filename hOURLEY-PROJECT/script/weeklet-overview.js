@@ -28,15 +28,33 @@ function rendringWeekleyOverview() {
     
     let WeekleyReportHTML='';
     let weekDaysHTML='';
+    let GoingMonth='';
 
     let weekleyHeader='<p class="Employ-header-text">Employess</p>';
 
     let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+     ];
+    
+     
     weekDays.forEach((days ,i)=>{
         let date=new Date(days)
         
+         GoingMonth=`${months[date.getMonth()]} Report `
     
-    
+        
     weekDaysHTML+=`<p>${dayNames[date.getDay()]} ${date.getDate()}</p> `
     })
     weekleyHeader+=weekDaysHTML
@@ -70,6 +88,9 @@ function rendringWeekleyOverview() {
 
     document.querySelector('.js-Weekley-overview-header')
     .innerHTML=weekleyHeader;
+
+    document.querySelector('.jsGoingMonth-Text')
+    .innerHTML=GoingMonth;
     
     let SaveInput =document.querySelectorAll('.js-days-hours')
   
