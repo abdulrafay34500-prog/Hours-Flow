@@ -335,8 +335,8 @@
 
     position: fixed;
 
-    top: 100px;
-    right: 30px;
+    bottom: 100px;
+    right: 50px;
 
     width: 330px;
 
@@ -368,6 +368,7 @@
 .showingError .Error-notification {
 
     display: block;
+
 }
 
 
