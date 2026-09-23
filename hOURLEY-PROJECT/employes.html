@@ -9,6 +9,7 @@
          <link rel="stylesheet" href="CSS-files/weekley-overview.css">
          <link rel="stylesheet" href="CSS-files/employes.css">
          <link rel="stylesheet" href="CSS-files/addingemploypage.css">
+         <link rel="stylesheet" href="CSS-files/singleEmployDetail.css">
         <title>Employes Details</title>
     </head>
     <body>
@@ -54,76 +55,83 @@
             </div>
         </sidebar>
         <main class="main-addingEmploy-page">
-            <div class="Adding-Employe-main-div">
-                <div class="Employe-main-header">
-                    <div class="header-text-div">
-                        <p class="employes-text">Employees</p>
-                        <p class="manage-team-text">Manage your team members and their details</p>
+            <div class="combining-AddingAndSingle-Employ-div">
+                <div class="Adding-Employe-main-div">
+                    <div class="Employe-main-header">
+                        <div class="header-text-div">
+                            <p class="employes-text">Employees</p>
+                            <p class="manage-team-text">Manage your team members and their details</p>
+
+                        </div>
+                        <button class="add-button js-add-employ-button">
+                            + Add Employe 
+                        </button>
+                    </div>
+                    <div class="employ-hours-payroll-div">
+                        <div class="Total-employ-div">
+                            <img class="employ-icon" src="icons/employ.png">
+                            <p class="total-employ-text">Total Employes</p>
+                            <p class="Employe-numbers js-Employe-numbers">0</p>
+                        </div>
+                        <div class="Total-Hours-div">
+                            <img class="clock-icon" src="icons/clock.png">
+                            <p class="total-Hours-text">Total Hours (This Month)</p>
+                            <p class="Total-hours-numbers">0</p>
+                        </div>
+                        <div class="Total-Payroll-div">
+                            <img class="currency-icon" src="icons/rupee.png">
+                            <p class="total-Payroll-text">Total Payroll (This Month)</p>
+                            <p class="monthly-Payroll-Amount">0</p>
+                        </div>
+                    </div>
+                    <div class="Employe-Details-main-div">
+                        <div class="Employer-Details-mainHeader">
+                            <p class="Employ-id">ID</p>
+                            <P class="Employ-namee">Employ Name</P>
+                            <p class="Employ-ShiftTypee">Shift Type</p>
+                        </div>
+                        <div class="added-Employes-details js-added-Employes-details">
+                        
+                            
+                        </div>
 
                     </div>
-                    <button class="add-button js-add-employ-button">
-                         + Add Employe 
-                    </button>
                 </div>
-                <div class="employ-hours-payroll-div">
-                    <div class="Total-employ-div">
-                        <img class="employ-icon" src="icons/employ.png">
-                        <p class="total-employ-text">Total Employes</p>
-                        <p class="Employe-numbers js-Employe-numbers">0</p>
-                    </div>
-                    <div class="Total-Hours-div">
-                         <img class="clock-icon" src="icons/clock.png">
-                         <p class="total-Hours-text">Total Hours (This Month)</p>
-                         <p class="Total-hours-numbers">0</p>
-                    </div>
-                    <div class="Total-Payroll-div">
-                        <img class="currency-icon" src="icons/rupee.png">
-                        <p class="total-Payroll-text">Total Payroll (This Month)</p>
-                        <p class="monthly-Payroll-Amount">0</p>
-                    </div>
-                </div>
-                <div class="Employe-Details-main-div">
-                    <div class="Employer-Details-mainHeader">
-                         <p class="Employ-id">ID</p>
-                         <P class="Employ-namee">Employ Name</P>
-                         <p class="Employ-ShiftTypee">Shift Type</p>
-                    </div>
-                    <div class="added-Employes-details js-added-Employes-details">
-                      
-                         
-                    </div>
-
+                <div class="Single-employ-detail">
+                   <button class="Cross-sign-button">
+                       ✖
+                   </button>
                 </div>
             </div>
             <div class="AddingEmploye-main-page">
-                <div class="adding-employ-div">
-                    <h1>Enter Employ Details</h1>
-                    <div class="input-id-div">
-                        <h3>Enter Id :</h3>
-                        <input class="id-input js-id-input" type="number">
+                    <div class="adding-employ-div">
+                        <h1>Enter Employ Details</h1>
+                        <div class="input-id-div">
+                            <h3>Enter Id :</h3>
+                            <input class="id-input js-id-input" type="number">
+                        </div>
+                        <div class="input-name-div">
+                            <h3>Enter Name :</h3>
+                            <input class="name-input js-name-input" type="text">
+                        </div>
+                        <div class="input-shift-div">
+                            <h3>Select Shift Type :</h3>
+                            <select class="Select-shift js-Select-shift">
+                                <option selected>Morning</option>
+                                <option>Evening</option>
+                            </select>
+                        </div>
+                        <button class="Save-button js-save-button">
+                            Save
+                        </button>
+                        <div class="Cross-sign js-Cross-sign">
+                        ✖ 
+                        </div>                  
                     </div>
-                    <div class="input-name-div">
-                        <h3>Enter Name :</h3>
-                        <input class="name-input js-name-input" type="text">
+                    <div class="Error-notification">
+                        <p class="Error-Text">Error</p>
+                        <p class="Error-reason js-Error-reason"></p>
                     </div>
-                    <div class="input-shift-div">
-                        <h3>Select Shift Type :</h3>
-                        <select class="Select-shift js-Select-shift">
-                            <option selected>Morning</option>
-                            <option>Evening</option>
-                        </select>
-                    </div>
-                    <button class="Save-button js-save-button">
-                        Save
-                    </button>
-                    <div class="Cross-sign js-Cross-sign">
-                       ✖ 
-                    </div>                  
-                </div>
-                <div class="Error-notification">
-                    <p class="Error-Text">Error</p>
-                    <p class="Error-reason js-Error-reason"></p>
-                </div>
             </div>
         </main>
 

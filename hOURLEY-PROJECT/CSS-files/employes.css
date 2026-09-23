@@ -2,6 +2,13 @@
    MAIN PAGE
 ========================================= */
 
+
+.combining-AddingAndSingle-Employ-div{
+    display: flex;
+    column-gap: 10px;
+    max-width: 1800px;
+    margin-left: 30px;
+}
 .Adding-Employe-main-div {
     width: calc(100% - 50px);
     max-width: 1200px;
