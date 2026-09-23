@@ -1,27 +1,211 @@
 .Single-employ-detail{
     width: 500px;
     height: 700px;
-    background-color: aqua;   
+    background-color: rgb(247, 247, 247);   
     margin: 30px auto;
     padding: 0;
     box-sizing: border-box;
     border-radius: 14px;
     position: relative;
     margin-right: 20px;
+    padding: 35px 30px;
+    background-color: #ffffff;
+    border-left: 1px solid #e5e7eb;
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.08);
     display: none;
 }
-.Cross-sign-button{
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    font-size: 17px;
-    border-radius: 9px;
-    color: rgb(107, 107, 107);
-    padding: 5px 10px;
+.after-Clicked .Single-employ-detail{
+    display: initial;
+}
+
+
+.Single-employ-detail.after-Clicked {
+    transform: translateX(0);
+}
+
+.Cross-sign-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 22px;
+    right: 22px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    color: #6b7280;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
 }
-.Cross-sign-button:hover{
-    background-color:rgb(255, 199, 199);
+
+.Cross-sign-button:hover {
+    background-color: #fee2e2;
+    color: #dc2626;
 }
+
+.employee-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-right: 40px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.employee-avatar {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #eef2ff;
+    color: #4f46e5;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.employee-header-info h2 {
+    margin: 0 0 5px;
+    color: #111827;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.Employee-Id {
+    margin: 0 0 4px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.Employee-Id span {
+    font-weight: 600;
+    color: #374151;
+}
+
+.Position {
+    margin: 0;
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.employee-hours {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.hours-box {
+    padding: 17px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background-color: #f9fafb;
+}
+
+.hours-label {
+    display: block;
+    margin-bottom: 10px;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.hours-box strong {
+    display: block;
+    color: #111827;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.hours-box small {
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.employee-info-section {
+    margin-top: 30px;
+}
+
+.employee-info-section h3 {
+    margin: 0 0 18px;
+    color: #111827;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-row span {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.info-row strong {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.edit-delete-button-div {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.edit-delete-button-div button {
+    flex: 1;
+    height: 42px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edit-button {
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
+    color: #374151;
+}
+
+.edit-button:hover {
+    background-color: #f3f4f6;
+}
+
+.delete-button {
+    border: 1px solid #fecaca;
+    background-color: #ffffff;
+    color: #dc2626;
+}
+
+.delete-button:hover {
+    background-color: #fef2f2;
+}
+
+@media (max-width: 600px) {
+    .Single-employ-detail {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .employee-hours {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+

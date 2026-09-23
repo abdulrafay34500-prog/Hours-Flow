@@ -1,4 +1,6 @@
 import { Employes , AddingEmploy,EmptyingInputs} from "../data/employes.js";
+import {singleEmployDetail} from "../script/singleEmployDetails.js";
+
 
 renderEmployDetails()
 export function renderEmployDetails() {
@@ -6,7 +8,9 @@ export function renderEmployDetails() {
 
     Employes.forEach((employ)=>{
     EmployHTML+=` 
-    <div class="employ-detail">
+    <div class="employ-detail js-employ-detail-click"
+    data-employe=${JSON.stringify(employ)}
+    >
         <div class="ID">
             ${employ.Id}
         </div>
@@ -29,6 +33,8 @@ let AddButton = document.querySelector('.js-add-employ-button')
 let saveButton = document.querySelector('.js-save-button')
 let crossButton =document.querySelector('.js-Cross-sign')
 let totalEmploye = document.querySelector('.js-Employe-numbers')
+let EmployDetailClicked = document.querySelectorAll('.js-employ-detail-click')
+
 
 
   TotalNumberOfEmployes();
@@ -52,5 +58,16 @@ saveButton.addEventListener('click' ,()=>{
       AddingEmploy();
       TotalNumberOfEmployes();
       renderEmployDetails()
+})
+EmployDetailClicked.forEach((employClicked)=>{
+   employClicked.addEventListener('click',()=>{
+    let employString=employClicked.dataset.employe
+    let employ=JSON.parse(employString)
+
+    singleEmployDetail(employ)
+    
+    document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.add('after-Clicked')
+
+   })
 })
 
