@@ -9,7 +9,7 @@ export function renderEmployDetails() {
     Employes.forEach((employ)=>{
     EmployHTML+=` 
     <div class="employ-detail js-employ-detail-click"
-    data-employe=${JSON.stringify(employ)}
+    data-employe-id=${employ.Id}
     >
         <div class="ID">
             ${employ.Id}
@@ -61,13 +61,11 @@ saveButton.addEventListener('click' ,()=>{
 })
 EmployDetailClicked.forEach((employClicked)=>{
    employClicked.addEventListener('click',()=>{
-    let employString=employClicked.dataset.employe
-    let employ=JSON.parse(employString)
+    let employId=employClicked.dataset.employeId
 
-    singleEmployDetail(employ)
+    singleEmployDetail(employId)
     
     document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.add('after-Clicked')
 
    })
 })
-

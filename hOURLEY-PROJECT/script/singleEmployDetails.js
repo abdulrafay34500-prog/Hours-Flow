@@ -1,17 +1,38 @@
-export function singleEmployDetail(employ) {
+import { Employes} from "../data/employes.js";
 
-    console.log(employ)
+console.log(Employes)
+export function singleEmployDetail(employId) {
+
+    let matchingEmploye=''
+  
+    Employes.forEach((employ) => {
+        if (employ.Id ==employId){
+            matchingEmploye=employ
+        }
+    });
+
+    let name=matchingEmploye.Name
+    
+    let initials=name.split(" ")
+    .map((word)=>{
+       return word[0]
+    }).join("")
+   
+
+    console.log(initials)
+
+
    let singleEmployHtml=`                    
                     <button class="Cross-sign-button js-Cross-sign-button"
                     >✕</button>
 
                     <div class="employee-header">
-                        <div class="employee-avatar">AH</div>
+                        <div class="employee-avatar">${initials}</div>
 
                         <div class="employee-header-info">
-                            <h2>${employ.Name}</h2>
-                            <p class="Employee-Id">Employee ID: <span>${employ.Id}</span></p>
-                            <p class="Position">Customer Sales Representative</p>
+                            <h2>${matchingEmploye.Name}</h2>
+                            <p class="Employee-Id">Employee ID: <span>${matchingEmploye.Id}</span></p>
+                            <p class="Position">Customer Support Representative</p>
                         </div>
                     </div>
 
