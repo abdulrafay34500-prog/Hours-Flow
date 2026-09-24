@@ -10,6 +10,17 @@ export function AddingEmploy() {
      let name =Name.value
      let shiftType=document.querySelector('.js-Select-shift')
      let ShiftType =shiftType.value
+     let hourleyWage=document.querySelector('.js-hourleyInput-input')
+     let HourleyWage =hourleyWage.value
+     let jobRole=document.querySelector('.js-jobRole-input')
+     let JobRole =jobRole.value
+     let email=document.querySelector('.js-Email-input')
+     let Email =email.value
+     let phoneNo=document.querySelector('.js-Phonenumber-input')
+     let PhoneNo =phoneNo.value
+     let joiningDate=document.querySelector('.js-JoiningDate-input')
+     let JoiningDate =joiningDate.value
+     
 
      if (Id != '' && name != '' && ShiftType != ''){
 
@@ -25,6 +36,11 @@ export function AddingEmploy() {
                     Id : Id,
                     Name :name,
                     ShiftType:ShiftType,
+                    HourleyWage:HourleyWage,
+                    JobRole:JobRole,
+                    Email:Email,
+                    PhoneNo:PhoneNo,
+                    JoiningDate:JoiningDate,
 
                        Hours:{}
                 })

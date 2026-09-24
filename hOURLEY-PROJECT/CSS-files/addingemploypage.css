@@ -18,7 +18,7 @@
     background-color: rgba(15, 23, 42, 0.55);
 
     /* Center the popup */
-    display: none;
+    display:none ;
     align-items: center;
     justify-content: center;
 
@@ -42,8 +42,8 @@
 
 .adding-employ-div {
 
-    width: 600px;
-    min-height: 450px;
+    width: 700px;
+    min-height: 700px;
 
     background-color: white;
 
@@ -64,7 +64,7 @@
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
 
     /* Small animation */
-    animation: popupAnimation 0.25s ease;
+    animation: popupAnimation .5s ease;
 }
 
 
@@ -106,7 +106,12 @@
 
 .input-id-div,
 .input-name-div,
-.input-shift-div {
+.input-shift-div,
+.input-hourleyInput-div,
+.input-position-div,
+.input-Email-div,
+.input-Phonenumber-div,
+.input-JoiningDate-div {
 
     width: 100%;
 
@@ -126,7 +131,12 @@
 
 .input-id-div h3,
 .input-name-div h3,
-.input-shift-div h3 {
+.input-shift-div h3,
+.input-hourleyInput-div h3,
+.input-position-div h3,
+.input-Email-div h3,
+.input-Phonenumber-div h3,
+.input-JoiningDate-div h3 {
 
     margin: 0;
 
@@ -143,7 +153,12 @@
 ========================================= */
 
 .id-input,
-.name-input {
+.name-input,
+.hourleyInput-input,
+.js-jobRole-input,
+.Email-input,
+.Phonenumber-input,
+.JoiningDate-input {
 
     width: 300px;
 

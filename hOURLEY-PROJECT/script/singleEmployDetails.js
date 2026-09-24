@@ -65,7 +65,6 @@ export function singleEmployDetail(employId) {
         TotalMonthlyHours+=Number(matchingEmploye.Hours[days] || 0)      
     })
     
-    console.log(TotalMonthlyHours)
     
    let singleEmployHtml=`                    
                     <button class="Cross-sign-button js-Cross-sign-button"
@@ -77,7 +76,7 @@ export function singleEmployDetail(employId) {
                         <div class="employee-header-info">
                             <h2>${matchingEmploye.Name}</h2>
                             <p class="Employee-Id">Employee ID: <span>${matchingEmploye.Id}</span></p>
-                            <p class="Position">Customer Support Representative</p>
+                            <p class="Position">${matchingEmploye.JobRole}</p>
                         </div>
                     </div>
 
@@ -98,22 +97,22 @@ export function singleEmployDetail(employId) {
 
                         <div class="info-row">
                             <span>Email</span>
-                            <strong>ali@example.com</strong>
+                            <strong>${matchingEmploye.Email}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Phone No</span>
-                            <strong>+92 300 1234567</strong>
+                            <strong>${matchingEmploye.PhoneNo}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Date Joined</span>
-                            <strong>September 12, 2026</strong>
+                            <strong>${matchingEmploye.JoiningDate}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Hourly Rate</span>
-                            <strong>$12 / hour</strong>
+                            <strong>PKR ${matchingEmploye.HourleyWage} / hour</strong>
                         </div>
                     </div>
 
