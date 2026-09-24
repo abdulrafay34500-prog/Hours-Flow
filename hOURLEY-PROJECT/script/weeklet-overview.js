@@ -1,30 +1,35 @@
 import { Employes ,updatingWeekleyHours } from "../data/employes.js";
 
-let startingDay=new Date()
-
-let day=startingDay.getDay()
-
-let diffrence= day ==0? -6:  1-day;
-
-startingDay.setDate(startingDay.getDate() + diffrence)
 
 
-let weekDays=[];
-
-for(let i=0;i<7;i++){
-    let date=new Date(startingDay)
-    date.setDate(date.getDate()+i)
-     let formattedDate =
-        date.getFullYear() + '-' +
-        String(date.getMonth() + 1).padStart(2, '0') + '-' +
-        String(date.getDate()).padStart(2, '0');
-    weekDays.push(formattedDate)
-}
-
-
-
+let WeekoffSet=0;
 rendringWeekleyOverview()
 function rendringWeekleyOverview() {
+
+    let startingDay=new Date()
+
+    let day=startingDay.getDay()
+
+    let diffrence= day ==0? -6:  1-day;
+
+    startingDay.setDate(startingDay.getDate() + diffrence)
+
+    
+    startingDay.setDate(startingDay.getDate() + (WeekoffSet *7))
+
+
+    let weekDays=[];
+
+    for(let i=0;i<7;i++){
+        let date=new Date(startingDay)
+        date.setDate(date.getDate()+i)
+        let formattedDate =
+            date.getFullYear() + '-' +
+            String(date.getMonth() + 1).padStart(2, '0') + '-' +
+            String(date.getDate()).padStart(2, '0');
+        weekDays.push(formattedDate)
+    }
+
     
     let WeekleyReportHTML='';
     let weekDaysHTML='';
@@ -114,3 +119,17 @@ function rendringWeekleyOverview() {
     })
 }
 
+let previousButton =document.querySelector('.js-previous-button')
+let NextButton =document.querySelector('.js-Next-button')
+
+
+previousButton.addEventListener('click' ,()=>{
+    WeekoffSet--
+   
+    rendringWeekleyOverview()
+})
+NextButton.addEventListener('click' ,()=>{
+    WeekoffSet++
+    
+    rendringWeekleyOverview()
+})
