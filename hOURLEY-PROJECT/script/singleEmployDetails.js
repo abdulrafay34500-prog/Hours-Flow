@@ -1,5 +1,6 @@
 import { Employes} from "../data/employes.js";
 
+// Getting Weekley dates
 let startingDate=new Date()
 let day=startingDate.getDay()
 
@@ -17,6 +18,25 @@ for (let i = 0; i <7; i++) {
 
     weekDays.push(formatedDate)
 }
+// Getting Monthly  dates
+let Today=new Date()
+let year=Today.getFullYear()
+let month=Today.getMonth()
+
+let numberOfDays=new Date(year,month+1 , 0).getDate()
+
+let monthDays=[]
+for (let day = 1; day <= numberOfDays; day++) {
+    let date=new Date(year ,month ,day)
+    let formatedDate=date.getFullYear() + '-' +
+        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+        String(date.getDate()).padStart(2, '0');
+
+    monthDays.push(formatedDate)
+}
+ 
+
+  // Function Starting.
 
 export function singleEmployDetail(employId) {
 
@@ -39,8 +59,14 @@ export function singleEmployDetail(employId) {
     weekDays.forEach((days)=>{
         TotalWeekleyHours+=Number(matchingEmploye.Hours[days] || 0)      
     })
-    
 
+    let TotalMonthlyHours=0
+     monthDays.forEach((days)=>{
+        TotalMonthlyHours+=Number(matchingEmploye.Hours[days] || 0)      
+    })
+    
+    console.log(TotalMonthlyHours)
+    
    let singleEmployHtml=`                    
                     <button class="Cross-sign-button js-Cross-sign-button"
                     >✕</button>
@@ -63,7 +89,7 @@ export function singleEmployDetail(employId) {
 
                         <div class="hours-box">
                             <span class="hours-label">Hours This Month</span>
-                            <strong>209 <small>hrs</small></strong>
+                            <strong>${TotalMonthlyHours} <small>hrs</small></strong>
                         </div>
                     </div>
 
