@@ -55,15 +55,21 @@ export function singleEmployDetail(employId) {
        return word[0]
     }).join("")
    
+    // Calculating Weekley Hours
     let TotalWeekleyHours=0
     weekDays.forEach((days)=>{
         TotalWeekleyHours+=Number(matchingEmploye.Hours[days] || 0)      
     })
 
+    // Calculating Monthly Hours
     let TotalMonthlyHours=0
      monthDays.forEach((days)=>{
         TotalMonthlyHours+=Number(matchingEmploye.Hours[days] || 0)      
     })
+
+    // Calculating Monthly Salary
+    let salary=0;
+    salary=TotalMonthlyHours * Number(matchingEmploye.HourleyWage)
     
     
    let singleEmployHtml=`                    
@@ -90,6 +96,10 @@ export function singleEmployDetail(employId) {
                             <span class="hours-label">Hours This Month</span>
                             <strong>${TotalMonthlyHours} <small>hrs</small></strong>
                         </div>
+                    </div>
+                    <div class="salary-div">
+                            <span class="Salary-label">Monthly Salary so far</span>
+                            <strong>${salary} <small>PKR</small></strong>
                     </div>
 
                     <div class="employee-info-section">
