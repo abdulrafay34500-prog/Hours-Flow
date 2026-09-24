@@ -64,7 +64,7 @@ function rendringWeekleyOverview() {
         let TotalHours=0;
 
         weekDays.forEach((days)=>{
-            TotalHours+=Employe.Hours[days] || 0
+             TotalHours+=Employe.Hours[days] || 0
         })
         
        

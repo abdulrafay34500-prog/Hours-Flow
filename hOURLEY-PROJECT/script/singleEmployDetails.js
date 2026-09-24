@@ -1,6 +1,23 @@
 import { Employes} from "../data/employes.js";
 
-console.log(Employes)
+let startingDate=new Date()
+let day=startingDate.getDay()
+
+let difrence=day==0? -6 :1- day;
+
+startingDate.setDate(startingDate.getDate() + difrence)
+let weekDays=[];
+
+for (let i = 0; i <7; i++) {
+    let date=new Date(startingDate)
+    date.setDate(date.getDate() +i)
+    let formatedDate=date.getFullYear() + '-' +
+        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+        String(date.getDate()).padStart(2, '0');
+
+    weekDays.push(formatedDate)
+}
+
 export function singleEmployDetail(employId) {
 
     let matchingEmploye=''
@@ -18,9 +35,11 @@ export function singleEmployDetail(employId) {
        return word[0]
     }).join("")
    
-
-    console.log(initials)
-
+    let TotalWeekleyHours=0
+    weekDays.forEach((days)=>{
+        TotalWeekleyHours+=Number(matchingEmploye.Hours[days] || 0)      
+    })
+    
 
    let singleEmployHtml=`                    
                     <button class="Cross-sign-button js-Cross-sign-button"
@@ -39,7 +58,7 @@ export function singleEmployDetail(employId) {
                     <div class="employee-hours">
                         <div class="hours-box">
                             <span class="hours-label">Hours This Week</span>
-                            <strong>48 <small>hrs</small></strong>
+                            <strong>${TotalWeekleyHours} <small>hrs</small></strong>
                         </div>
 
                         <div class="hours-box">
