@@ -1,4 +1,5 @@
-import { Employes} from "../data/employes.js";
+import { Employes , deletionEmploy} from "../data/employes.js";
+import {renderEmployDetails} from "./addingEmploy.js";
 
 // Getting Weekley dates
 let startingDate=new Date()
@@ -128,7 +129,7 @@ export function singleEmployDetail(employId) {
 
                     <div class="edit-delete-button-div">
                         <button class="edit-button">Edit</button>
-                        <button class="delete-button">Delete</button>
+                        <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
                     </div>`;
 
 
@@ -137,11 +138,21 @@ export function singleEmployDetail(employId) {
 
 
     let EmployDetailCrossed = document.querySelector('.js-Cross-sign-button')
+    let deleteEmployButton = document.querySelector('.js-delete-button')
 
     EmployDetailCrossed.addEventListener('click',()=>{
 
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked')
 
+    })
+    deleteEmployButton.addEventListener('click',()=>{
+
+        let employId=deleteEmployButton.dataset.employId
+        deletionEmploy(employId)
+
+        document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked')
+        
+        renderEmployDetails()
     })
 
 }

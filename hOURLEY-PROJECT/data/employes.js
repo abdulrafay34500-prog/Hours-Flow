@@ -95,28 +95,17 @@ export function EmptyingInputs() {
     shiftType.value=''
 }
 
-export function updatingWeekleyHours(EmployId ) {
 
-    let currentUpdatingEmploy;
+export function deletionEmploy(employId) {
+    let newEmployArray=[]
+
     Employes.forEach((employ)=>{
-        if(employ.Id == EmployId){
-            currentUpdatingEmploy=employ
-        }      
-    })
-    let inputs = document.querySelectorAll(
-        `.js-days-hours[data-employ-id="${EmployId}"]`
-    );
-
-    let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'Sat', 'Sun'];
-   
-    inputs.forEach((input)=>{
-      
-
+       if (employId !=employ.Id){
+         newEmployArray.push(employ)
+       }
     })
     
-    
-  
+    Employes=newEmployArray;
+
     localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
-
-   
 }

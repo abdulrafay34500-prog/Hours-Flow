@@ -1,4 +1,4 @@
-import { Employes ,updatingWeekleyHours } from "../data/employes.js";
+import { Employes  } from "../data/employes.js";
 
 
 
