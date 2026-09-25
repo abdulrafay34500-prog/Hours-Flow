@@ -1,5 +1,6 @@
 import { Employes , AddingEmploy,EmptyingInputs} from "../data/employes.js";
 import {singleEmployDetail} from "../script/singleEmployDetails.js";
+import {addingEmployPage} from "../script/addingEmployPages.js";
 
 
 renderEmployDetails()
@@ -34,35 +35,15 @@ ClickingButtons()
 function ClickingButtons() {
     
     let AddButton = document.querySelector('.js-add-employ-button')
-    let saveButton = document.querySelector('.js-save-button')
-    let crossButton =document.querySelector('.js-Cross-sign')
-    let totalEmploye = document.querySelector('.js-Employe-numbers')
     let EmployDetailClicked = document.querySelectorAll('.js-employ-detail-click')
 
-
-
-    TotalNumberOfEmployes();
-
-    function TotalNumberOfEmployes() {
-        let EmployCount=0;
-        EmployCount+=Number(Employes.length);
-        totalEmploye.innerHTML=EmployCount;
-    }
     AddButton.addEventListener('click',()=>{
+        let heading='Enter Employ Details'
+        addingEmployPage(heading)
         let main =document.querySelector('.main-addingEmploy-page')
         main.classList.add('show')
     })
-    crossButton.addEventListener('click',()=>{
-        let main =document.querySelector('.main-addingEmploy-page')
-        main.classList.remove('show')
-        EmptyingInputs()
-    })
-    saveButton.addEventListener('click' ,()=>{
 
-        AddingEmploy();
-        TotalNumberOfEmployes();
-        renderEmployDetails()
-    })
     EmployDetailClicked.forEach((employClicked)=>{
     employClicked.addEventListener('click',()=>{
         let employId=employClicked.dataset.employeId
@@ -74,5 +55,12 @@ function ClickingButtons() {
     })
     })
 
+     TotalNumberOfEmployes();
+}
 
+export function TotalNumberOfEmployes() {
+    let totalEmploye = document.querySelector('.js-Employe-numbers')
+        let EmployCount=0;
+        EmployCount+=Number(Employes.length);
+        totalEmploye.innerHTML=EmployCount;
 }

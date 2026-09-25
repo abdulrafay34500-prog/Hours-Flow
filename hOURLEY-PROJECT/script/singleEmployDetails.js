@@ -1,5 +1,6 @@
 import { Employes , deletionEmploy} from "../data/employes.js";
 import {renderEmployDetails} from "./addingEmploy.js";
+import {addingEmployPage} from "./addingEmployPages.js";
 
 // Getting Weekley dates
 let startingDate=new Date()
@@ -128,7 +129,7 @@ export function singleEmployDetail(employId) {
                     </div>
 
                     <div class="edit-delete-button-div">
-                        <button class="edit-button">Edit</button>
+                        <button class="edit-button js-edit-button" data-employ-id=${matchingEmploye.Id}>Edit</button>
                         <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
                     </div>`;
 
@@ -139,12 +140,14 @@ export function singleEmployDetail(employId) {
 
     let EmployDetailCrossed = document.querySelector('.js-Cross-sign-button')
     let deleteEmployButton = document.querySelector('.js-delete-button')
+    let EditEmployButton = document.querySelector('.js-edit-button')
 
     EmployDetailCrossed.addEventListener('click',()=>{
 
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked')
 
     })
+
     deleteEmployButton.addEventListener('click',()=>{
 
         let employId=deleteEmployButton.dataset.employId
@@ -153,6 +156,18 @@ export function singleEmployDetail(employId) {
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked')
         
         renderEmployDetails()
+    })
+
+     EditEmployButton.addEventListener('click',()=>{
+
+        let employId=deleteEmployButton.dataset.employId
+        let EditPageHeading=`Update ${matchingEmploye.Name} Info`
+
+        let main =document.querySelector('.main-addingEmploy-page')
+        main.classList.add('show')
+        addingEmployPage(EditPageHeading , matchingEmploye)
+
+       
     })
 
 }
