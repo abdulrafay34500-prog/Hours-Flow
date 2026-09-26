@@ -135,7 +135,7 @@ export function singleEmployDetail(employId) {
 
        let deletingPopUPHTML=`<div class="delete-popup-box">
                     <h2>Delete Employee?</h2>
-                    <p>Are you sure you want to delete this employee?</p>
+                    <p>Are you sure you want to Remove ${matchingEmploye.Name}?</p>
                     <p class="delete-warning">
                         This action cannot be undone.
                     </p>
@@ -143,7 +143,9 @@ export function singleEmployDetail(employId) {
                         <button class="cancel-delete-button js-cancel-delete">
                             Cancel
                         </button>
-                        <button class="confirm-delete-button js-confirm-delete" data-employ-id=${matchingEmploye.Id}>
+                        <button class="confirm-delete-button js-confirm-delete" data-employ-id=${matchingEmploye.Id}
+                        data-employ-name=${matchingEmploye.Name}
+                        >
                             Delete
                         </button>
                     </div>
@@ -176,7 +178,6 @@ export function singleEmployDetail(employId) {
     })
     ConformDeleteButton.addEventListener('click',()=>{
         let employId=ConformDeleteButton.dataset.employId
-        deletionEmploy(employId)
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked') 
         renderEmployDetails()
         mainPage.classList.remove('clickingDelete')
