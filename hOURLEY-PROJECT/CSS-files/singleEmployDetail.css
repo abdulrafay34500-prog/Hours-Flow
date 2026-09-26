@@ -211,7 +211,14 @@
 .edit-button:hover {
     background-color: #f3f4f6;
 }
-
+.History-button{
+    border: 1px solid rgb(173, 253, 173);
+    background-color: rgb(252, 252, 252);
+    color: rgb(54, 219, 54);
+}
+.History-button:hover{
+   background-color: rgb(173, 253, 173);
+}
 .delete-button {
     border: 1px solid #fecaca;
     background-color: #ffffff;

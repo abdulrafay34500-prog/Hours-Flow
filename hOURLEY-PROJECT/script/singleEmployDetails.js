@@ -130,6 +130,7 @@ export function singleEmployDetail(employId) {
 
                     <div class="edit-delete-button-div">
                         <button class="edit-button js-edit-button" data-employ-id=${matchingEmploye.Id}>Edit</button>
+                        <button class="History-button js-History-button" data-employ-id=${matchingEmploye.Id}>History</button>
                         <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
                     </div>`;
 
@@ -160,6 +161,7 @@ export function singleEmployDetail(employId) {
     let EmployDetailCrossed = document.querySelector('.js-Cross-sign-button')
     let deleteEmployButton = document.querySelector('.js-delete-button')
     let EditEmployButton = document.querySelector('.js-edit-button')
+    let HistoryButton = document.querySelector('.js-History-button')
     let cancelDeleteButton=document.querySelector('.js-cancel-delete')
     let ConformDeleteButton=document.querySelector('.js-confirm-delete')
     let mainPage=document.querySelector('.main-addingEmploy-page');
@@ -193,6 +195,10 @@ export function singleEmployDetail(employId) {
         addingEmployPage(EditPageHeading , matchingEmploye)
 
        
+    })
+    HistoryButton.addEventListener('click',()=>{
+        let employId=deleteEmployButton.dataset.employId
+         console.log(employId)
     })
 
 }
