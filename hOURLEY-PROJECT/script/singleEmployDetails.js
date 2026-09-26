@@ -133,14 +133,34 @@ export function singleEmployDetail(employId) {
                         <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
                     </div>`;
 
+       let deletingPopUPHTML=`<div class="delete-popup-box">
+                    <h2>Delete Employee?</h2>
+                    <p>Are you sure you want to delete this employee?</p>
+                    <p class="delete-warning">
+                        This action cannot be undone.
+                    </p>
+                    <div class="delete-popup-buttons">
+                        <button class="cancel-delete-button js-cancel-delete">
+                            Cancel
+                        </button>
+                        <button class="confirm-delete-button js-confirm-delete" data-employ-id=${matchingEmploye.Id}>
+                            Delete
+                        </button>
+                    </div>
+                </div>`             
+
 
 
     document.querySelector('.js-Single-employ-detail').innerHTML=singleEmployHtml;
+    document.querySelector('.js-delete-popup').innerHTML=deletingPopUPHTML;
 
 
     let EmployDetailCrossed = document.querySelector('.js-Cross-sign-button')
     let deleteEmployButton = document.querySelector('.js-delete-button')
     let EditEmployButton = document.querySelector('.js-edit-button')
+    let cancelDeleteButton=document.querySelector('.js-cancel-delete')
+    let ConformDeleteButton=document.querySelector('.js-confirm-delete')
+    let mainPage=document.querySelector('.main-addingEmploy-page');
 
     EmployDetailCrossed.addEventListener('click',()=>{
 
@@ -149,13 +169,17 @@ export function singleEmployDetail(employId) {
     })
 
     deleteEmployButton.addEventListener('click',()=>{
-
-        let employId=deleteEmployButton.dataset.employId
+        mainPage.classList.add('clickingDelete')
+    })
+    cancelDeleteButton.addEventListener('click',()=>{
+        mainPage.classList.remove('clickingDelete')
+    })
+    ConformDeleteButton.addEventListener('click',()=>{
+        let employId=ConformDeleteButton.dataset.employId
         deletionEmploy(employId)
-
-        document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked')
-        
+        document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked') 
         renderEmployDetails()
+        mainPage.classList.remove('clickingDelete')
     })
 
      EditEmployButton.addEventListener('click',()=>{

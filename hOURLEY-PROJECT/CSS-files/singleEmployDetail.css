@@ -222,6 +222,7 @@
     background-color: #fef2f2;
 }
 
+
 @media (max-width: 600px) {
     .Single-employ-detail {
         width: 100%;
@@ -232,6 +233,79 @@
         grid-template-columns: 1fr;
     }
 }
+
+.clickingDelete .delete-popup{
+    display: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-popup {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: none;
+}
+.delete-popup-box {
+    width: 400px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.delete-popup-box h2 {
+    margin-top: 0;
+}
+.delete-popup-box p {
+    margin: 10px 0;
+}
+.delete-warning {
+    font-size: 14px;
+    color: #777;
+}
+.delete-popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  margin-top: 25px;
+}
+.delete-popup-buttons button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.cancel-delete-button {
+    background: #e5e5e5;
+}
+
+.confirm-delete-button {
+    background: #d9534f;
+    color: white;
+}
+
+.cancel-delete-button:hover {
+    background: #d0d0d0;
+}
+
+.confirm-delete-button:hover {
+    background: #c9302c;
+}
+
+.delete-popup.show-delete-popup {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 
 

@@ -97,6 +97,7 @@ export function EmptyingInputs() {
 }
 
 export function deletionEmploy(employId) {
+ 
     let newEmployArray=[]
 
     Employes.forEach((employ)=>{

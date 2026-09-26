@@ -74,11 +74,11 @@ export function addingEmployPage(Heading ,matchingEmploye='') {
       
         
         if(!employee){
-            console.log('Save')
+            
             AddingEmploy();
             
         }else {
-             console.log('update')
+          
              updatingEmployInfo(employee)
              singleEmployDetail(employee.Id)
         }
