@@ -1,6 +1,9 @@
+import{Employes}from"../data/employes.js"
 
-HistoryPageREnder()
-export function HistoryPageREnder() {
+export function HistoryPageREnder(employId) {
+
+    let matchingEmploy=Employes.find((employ)=>employId==employ.Id)
+    
     let Html=`<div class="history-popup-overlay js-history-popup">
 
                     <div class="history-popup">
@@ -10,7 +13,7 @@ export function HistoryPageREnder() {
 
                             <div>
                                 <p class="history-label">EMPLOYEE HISTORY</p>
-                                <h2>Rafay</h2>
+                                <h2>${matchingEmploy.Name}</h2>
                                 <p class="history-subtitle">Last 6 months</p>
                             </div>
 
@@ -31,125 +34,7 @@ export function HistoryPageREnder() {
                                 <span>SALARY</span>
                             </div>
 
-
-                            <!-- September -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>September</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>176</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,250</strong>
-                                </div>
-
-                            </div>
-
-
-                            <!-- August -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>August</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>168</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,200</strong>
-                                </div>
-
-                            </div>
-
-
-                            <!-- July -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>July</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>172</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,220</strong>
-                                </div>
-
-                            </div>
-
-
-                            <!-- June -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>June</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>160</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,150</strong>
-                                </div>
-
-                            </div>
-
-
-                            <!-- May -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>May</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>180</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,280</strong>
-                                </div>
-
-                            </div>
-
-
-                            <!-- April -->
-                            <div class="history-month-row">
-
-                                <div class="month-info">
-                                    <strong>April</strong>
-                                    <span>2026</span>
-                                </div>
-
-                                <div class="hours-info">
-                                    <strong>165</strong>
-                                    <span>hrs</span>
-                                </div>
-
-                                <div class="salary-info">
-                                    <strong>$1,180</strong>
-                                </div>
-
-                            </div>
+                          ${MonthlyDivs()}
 
                         </div>
 
@@ -166,4 +51,51 @@ export function HistoryPageREnder() {
      crossButton.addEventListener('click' ,()=>{
          mainPage.classList.remove('clicking-history-button')
      })
+}
+
+
+    let months = ["January","February","March","April","May","June","July","August","September",
+        "October","November","December"
+     ];
+
+let curentMonth=new Date().getMonth()
+let curentYear=new Date().getFullYear()
+
+
+
+let SixMonthsArray=[];
+for (let i = 1; i <= 6 ; i++) {
+    let month=new Date(curentYear , curentMonth-i)
+    let formatedDate=months[month.getMonth()]
+
+    SixMonthsArray.push(formatedDate)
+}
+console.log(SixMonthsArray)
+
+function MonthlyDivs() {
+    let Html='';
+
+    SixMonthsArray.forEach((Month)=>{
+       Html+=` 
+         <div class="history-month-row">
+
+            <div class="month-info">
+                <strong>${Month}</strong>
+                <span>${curentYear}</span>
+            </div>
+
+            <div class="hours-info">
+                <strong>165</strong>
+                <span>hrs</span>
+            </div>
+
+            <div class="salary-info">
+                <strong>$1,180</strong>
+            </div>
+
+        </div>`
+    })
+   
+
+        return Html;
 }
