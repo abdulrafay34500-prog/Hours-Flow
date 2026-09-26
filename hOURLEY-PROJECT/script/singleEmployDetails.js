@@ -100,7 +100,7 @@ export function singleEmployDetail(employId) {
                         </div>
                     </div>
                     <div class="salary-div">
-                            <span class="Salary-label">Monthly Salary so far</span>
+                            <span class="Salary-label">This Month Salary so far</span>
                             <strong>${salary} <small>PKR</small></strong>
                     </div>
 
