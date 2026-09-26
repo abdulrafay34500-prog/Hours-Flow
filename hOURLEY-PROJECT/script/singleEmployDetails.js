@@ -1,6 +1,7 @@
 import { Employes , deletionEmploy} from "../data/employes.js";
 import {renderEmployDetails} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
+import {HistoryPageREnder} from "./historyPage.js";
 
 // Getting Weekley dates
 let startingDate=new Date()
@@ -198,7 +199,8 @@ export function singleEmployDetail(employId) {
     })
     HistoryButton.addEventListener('click',()=>{
         let employId=deleteEmployButton.dataset.employId
-         console.log(employId)
+        mainPage.classList.add('clicking-history-button')
+         HistoryPageREnder(employId)
     })
 
 }
