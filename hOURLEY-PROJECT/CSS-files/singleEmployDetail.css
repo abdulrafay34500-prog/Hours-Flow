@@ -13,14 +13,27 @@
     border-left: 1px solid #e5e7eb;
     box-shadow: -10px 0 35px rgba(0, 0, 0, 0.08);
     display: none;
+
+    
+   
+}
+
+@keyframes slide{
+    from{
+       transform: translateX(200px);
+    }
+    to{
+       transform: translateX(0px);
+    }
 }
 .after-Clicked .Single-employ-detail{
     display: initial;
+    animation: slide 0.25s ;
 }
 
 
 .Single-employ-detail.after-Clicked {
-    transform: translateX(0);
+    transform: translateX(50px);
 }
 
 .Cross-sign-button {
