@@ -64,10 +64,6 @@ export function HistoryPageREnder(employId) {
 function MonthlyDivs(employId) {
     let Html='';
 
-    let Today=new Date()
-    let year=Today.getFullYear()
-    let month=Today.getMonth()
-
     let curentMonth=new Date().getMonth()
     let curentYear=new Date().getFullYear()
 
