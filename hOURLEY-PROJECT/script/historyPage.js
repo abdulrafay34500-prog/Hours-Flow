@@ -89,7 +89,6 @@ function MonthlyDivs(employId) {
         let monthlyDays=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getDate()
         let month=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getMonth()
 
-        console.log(monthlyDays , month)
         let monthlyDates=[];
         for (let i = 1; i <= monthlyDays; i++) {
             const date =new Date(curentYear,month,i)
@@ -102,9 +101,11 @@ function MonthlyDivs(employId) {
     
 
          // Calcuting all Month Total hours
+         let YearOFMonth='';
         let TotalMonthlyHours=0;      
         monthlyDates.forEach((Dates)=>{
             TotalMonthlyHours+=Number(matchingEmploy.Hours[Dates] || 0)
+            YearOFMonth=new Date(Dates).getFullYear();           
         })
 
         // Calcuting all Monthly salaries
@@ -116,7 +117,7 @@ function MonthlyDivs(employId) {
 
             <div class="month-info">
                 <strong>${Month}</strong>
-                <span>${curentYear}</span>
+                <span>${YearOFMonth}</span>
             </div>
 
             <div class="hours-info">
