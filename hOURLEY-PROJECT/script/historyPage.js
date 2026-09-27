@@ -34,7 +34,7 @@ export function HistoryPageREnder(employId) {
                                 <span>SALARY</span>
                             </div>
 
-                          ${MonthlyDivs()}
+                          ${MonthlyDivs(employId)}
 
                         </div>
 
@@ -58,24 +58,63 @@ export function HistoryPageREnder(employId) {
         "October","November","December"
      ];
 
-let curentMonth=new Date().getMonth()
-let curentYear=new Date().getFullYear()
 
 
-
-let SixMonthsArray=[];
-for (let i = 1; i <= 6 ; i++) {
-    let month=new Date(curentYear , curentMonth-i)
-    let formatedDate=months[month.getMonth()]
-
-    SixMonthsArray.push(formatedDate)
-}
-console.log(SixMonthsArray)
-
-function MonthlyDivs() {
+/// starting Function
+function MonthlyDivs(employId) {
     let Html='';
 
+    let Today=new Date()
+    let year=Today.getFullYear()
+    let month=Today.getMonth()
+
+    let curentMonth=new Date().getMonth()
+    let curentYear=new Date().getFullYear()
+
+     let matchingEmploy=Employes.find((employ)=>employId==employ.Id)
+   
+    /// Making last 6 months Array
+    let SixMonthsArray=[];
+    for (let i = 1; i <= 6 ; i++) {
+        let month=new Date(curentYear , curentMonth-i)
+        let formatedDate=months[month.getMonth()]
+
+        SixMonthsArray.push(formatedDate)
+    }
+
+    let monthlyDaysNUM=1
+    
     SixMonthsArray.forEach((Month)=>{
+
+        monthlyDaysNUM--
+        
+        /// MAking all dates in a month 
+
+        let monthlyDays=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getDate()
+        let month=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getMonth()
+
+        console.log(monthlyDays , month)
+        let monthlyDates=[];
+        for (let i = 1; i <= monthlyDays; i++) {
+            const date =new Date(curentYear,month,i)
+            let formatedDate=date.getFullYear() + '-' +
+                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                String(date.getDate()).padStart(2, '0');
+
+            monthlyDates.push(formatedDate)   
+        }
+    
+
+         // Calcuting all Month Total hours
+        let TotalMonthlyHours=0;      
+        monthlyDates.forEach((Dates)=>{
+            TotalMonthlyHours+=Number(matchingEmploy.Hours[Dates] || 0)
+        })
+
+        // Calcuting all Monthly salaries
+        let MonthlySalary=0
+        MonthlySalary=TotalMonthlyHours*Number(matchingEmploy.HourleyWage)
+        
        Html+=` 
          <div class="history-month-row">
 
@@ -85,12 +124,12 @@ function MonthlyDivs() {
             </div>
 
             <div class="hours-info">
-                <strong>165</strong>
+                <strong>${TotalMonthlyHours}</strong>
                 <span>hrs</span>
             </div>
 
             <div class="salary-info">
-                <strong>$1,180</strong>
+                <strong>PKR ${MonthlySalary}</strong>
             </div>
 
         </div>`
@@ -99,3 +138,4 @@ function MonthlyDivs() {
 
         return Html;
 }
+
