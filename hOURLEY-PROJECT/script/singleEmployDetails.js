@@ -182,6 +182,7 @@ export function singleEmployDetail(employId) {
     ConformDeleteButton.addEventListener('click',()=>{
         let employId=ConformDeleteButton.dataset.employId
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked') 
+        deletionEmploy(employId)
         renderEmployDetails()
         mainPage.classList.remove('clickingDelete')
     })
