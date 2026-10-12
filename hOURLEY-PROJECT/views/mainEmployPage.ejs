@@ -51,12 +51,13 @@
                     </div>
                     <div class="Employe-Details-main-div">
                         <div class="Employer-Details-mainHeader">
-                            <p class="Employ-id">ID</p>
-                            <P class="Employ-namee">Employ Name</P>
-                            <p class="Employ-ShiftTypee">Shift Type</p>
+                            <span class="Employ-id">ID</span>
+                            <span class="Employ-namee">Employee Name</span>
+                            <span class="Employ-ShiftTypee">Shift</span>
                         </div>
                         <div class="added-Employes-details js-added-Employes-details">
                             <% employee.forEach((employe)=>{ %>
+                                <a href="/SingleEmployPage/<%=employe._id%>">
                                  <div class="employ-detail js-employ-detail-click">
                                         <div class="ID">
                                             <%=employe.id%>
@@ -67,7 +68,8 @@
                                         <div class="shift-type">
                                             <%=employe.shiftType%>
                                         </div>
-                               </div>   
+                               </div>
+                               </a>   
                             <%})%>                                                    
                         </div>
 
