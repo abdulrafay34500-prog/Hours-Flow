@@ -56,8 +56,19 @@
                             <p class="Employ-ShiftTypee">Shift Type</p>
                         </div>
                         <div class="added-Employes-details js-added-Employes-details">
-                        
-                            
+                            <% employee.forEach((employe)=>{ %>
+                                 <div class="employ-detail js-employ-detail-click">
+                                        <div class="ID">
+                                            <%=employe.id%>
+                                        </div>
+                                        <div class="Employ-name">
+                                            <%=employe.name%>
+                                        </div>
+                                        <div class="shift-type">
+                                            <%=employe.shiftType%>
+                                        </div>
+                               </div>   
+                            <%})%>                                                    
                         </div>
 
                     </div>

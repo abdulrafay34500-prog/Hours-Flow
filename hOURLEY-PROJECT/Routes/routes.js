@@ -1,9 +1,10 @@
 import express, { response } from 'express'
 const router=express.Router()
 
-router.get('/',(req,res)=>{
-    res.render('mainEmployPage')
-})
+import {MAinPAgeFun} from '../controler/mainEmployPageFUN.js'
+
+router.get('/',MAinPAgeFun)
+
 router.get('/weekleyReport',(req,res)=>{
     res.render('weekleyReport')
 })
