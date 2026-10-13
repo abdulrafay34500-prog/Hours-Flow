@@ -111,6 +111,14 @@ body {
 .button-history:hover {
     background: #e0e7ff;
 }
+.button-delete{
+     color: #cf3a0d;
+    background: #f8e7e4;
+    border-color: #e0e7ff;
+}
+.button-delete:hover {
+    background: #fcd3c9;
+}
 
 /* ========================================
    PROFILE CARD

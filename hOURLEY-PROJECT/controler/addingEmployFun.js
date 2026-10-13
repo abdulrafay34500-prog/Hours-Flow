@@ -1,6 +1,6 @@
 import employes from '../Model/EmployDatabase.js'
 
-export const AddingEmployFun= async (req,res)=>{
+export const AddingEmployPostFun= async (req,res)=>{
 
    
         if(req.body.id !== '' && req.body.name !== ''&& req.body.hourleyWage !== ''&& req.body.jobRole !== ''&&
@@ -23,4 +23,8 @@ export const AddingEmployFun= async (req,res)=>{
             }     
         } 
     
+}
+
+export const AddingEmployGetFun= (req,res)=>{
+    res.render('addemployPage')
 }

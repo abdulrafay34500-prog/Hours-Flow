@@ -29,18 +29,18 @@
             </div>
 
             <div class="top-actions">
-                <a
-                    class="button button-secondary"
-                    href="/editEmploy/<%= employee._id %>"
-                >
-                    <span>✎</span> Edit Employee
-                </a>
-
+                
                 <a
                     class="button button-history"
                     href="/history/<%= employee._id %>"
                 >
                     <span>◷</span> History
+                </a>
+                <a
+                    class="button button-delete"
+                    href="/deleteEmploy/<%= employee._id %>"
+                >
+                    <span>◷</span> Delete Employ
                 </a>
             </div>
         </div>
@@ -147,7 +147,7 @@
 
                 <a
                     class="button button-secondary"
-                    href="/editEmploy/<%= employee._id %>"
+                    href="/updateEmployPage/<%= employee._id %>"
                 >
                     ✎ Edit Details
                 </a>

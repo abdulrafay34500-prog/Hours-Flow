@@ -16,6 +16,19 @@ const employSchema=new mongoose.Schema({
      shiftType:{
         type:String,
         required:true,
+    },
+     jobRole:{
+       
+    },
+     email:{
+        
+    },
+     PhoneNo:{
+        
+    },
+     joiningDate:{
+    
+        
     }
 })
 
