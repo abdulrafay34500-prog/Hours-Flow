@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/header.css">
+         <link rel="stylesheet" href="/general.css">
+         <link rel="stylesheet" href="/sidebar.css">
+         <link rel="stylesheet" href="/weekley-overview.css">
+         <link rel="stylesheet" href="/employes.css">
+         <link rel="stylesheet" href="/addingemploypage.css">
+         <link rel="stylesheet" href="/singleEmployDetail.css">
+         <link rel="stylesheet" href="/historyPage.css">
+         <link rel="stylesheet" href="/blurr.css">
+         <link rel="stylesheet" href="/deleteEmployPage.css">
+         
+        <title>Employes Details</title>
+    </head>
+    <body>
+        <%- include('header.ejs')%>
+        <%- include('sidebar.ejs')%>
+        <main class="main-addingEmploy-page">
+
+            <!-- Page Heading -->
+            <div class="page-heading">
+                <div>
+                    <a href="/" class="back-link">← Back to Employees</a>
+                    <h1>Employee Profile</h1>
+                    <p>View and manage employee information.</p>
+                </div>
+
+                <div class="top-actions">
+                    
+                    <a
+                        class="button button-history"
+                       
+                    >
+                        <span>◷</span> History
+                    </a>
+                    <a
+                        class="button button-delete"
+                    
+                    >
+                        <span>◷</span> Delete Employ
+                    </a>
+                </div>
+            </div>
+
+            <!-- Employee Profile Card -->
+            <section class="profile-card">
+
+                <div class="profile-main">
+
+                    <div class="profile-avatar">
+                        
+                    </div>
+
+                    <div class="profile-identity">
+                        
+
+                        <p class="employee-job">
+                            
+                        </p>
+
+                        <div class="profile-meta">
+                            <span class="employee-id">
+                                ID: 
+                            </span>
+
+                            <span class="status-badge">
+                                <span class="status-dot"></span>
+                                Employee Record
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="profile-shift">
+                    <span class="meta-label">Assigned Shift</span>
+                    <span class="shift-badge">
+                        
+                    </span>
+                </div>
+
+            </section>
+
+            <!-- Statistics Cards -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Hourly Rate</span>
+                        <span class="stat-icon purple">₨</span>
+                    </div>
+
+                    <h3>
+                        PKR 
+                    </h3>
+
+                    <p>Payment per working hour</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Hours This Month</span>
+                        <span class="stat-icon blue">◷</span>
+                    </div>
+
+                    <h3>
+                        
+                        <small>hrs</small>
+                    </h3>
+
+                    <p>Total recorded working hours</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Estimated Salary</span>
+                        <span class="stat-icon green">₨</span>
+                    </div>
+
+                    <h3>
+                        PKR 
+                    </h3>
+
+                    <p>Based on recorded hours</p>
+                </div>
+
+            </section>
+
+            <!-- Employee Information -->
+            <section class="information-card">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Personal & Employment Information</h2>
+                        <p>Employee details saved in HourFlow.</p>
+                    </div>
+
+                    <a
+                        class="button button-secondary"
+                       
+                    >
+                        ✎ Edit Details
+                    </a>
+                </div>
+
+                <div class="information-grid">
+
+                    <div class="information-item">
+                        <span class="information-label">Full Name</span>
+                        <p> Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Employee ID</span>
+                        <p>'Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Job Role</span>
+                        <p>Not provided></p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Email Address</span>
+                        <p>Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Phone Number</span>
+                        <p>Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Joining Date</span>
+                        <p>
+                            Not provided
+                            
+                        </p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Shift Type</span>
+                        <p>Not assigned</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Hourly Wage</span>
+                        <p>PKR </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+       
+        
+
+        </main>
+
+          
+        <div class="delete-modal-overlay" id="deleteModal">
+            <div class="delete-modal">
+
+                <div class="delete-icon">
+                    <span>!</span>
+                </div>
+
+                <h2>Delete Employee?</h2>
+
+                <p class="delete-message">
+                    Are you sure you want to delete <%=employee.name%>?
+                    This action cannot be undone.
+                </p>
+
+                <div class="delete-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-delete"
+                        onclick="history.back()">
+                        Cancel
+                    </button>
+
+                    <form
+                        action="/deleteEmploy/<%= employee._id %>"
+                        method="POST">
+
+                        <button type="submit" class="confirm-delete">
+                            <span>🗑</span> Delete Employee
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </body>
+    <script src="script/addingEmploy.js" type="module"></script>
+</html>
