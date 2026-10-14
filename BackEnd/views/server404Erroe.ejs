@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/severError.css">
+</head>
+<body>
+    <div  class="doing-blur">
+        <div>
+            <a href="/" class="Cross-sign-button js-Cross-sign-button"
+                        >✕</a>
+
+                        <div class="employee-header">
+                            <div class="employee-avatar">R</div>
+
+                            <div class="employee-header-info">
+                                <h2></h2>
+                                <p class="Employee-Id">Employee ID: <span></span></p>
+                                <p class="Position">Velaa</p>
+                            </div>
+                        </div>
+
+                        <div class="employee-hours">
+                            <div class="hours-box">
+                                <span class="hours-label">Hours This Week</span>
+                                <strong>48<small>hrs</small></strong>
+                            </div>
+
+                            <div class="hours-box">
+                                <span class="hours-label">Hours This Month</span>
+                                <strong>208</strong><small>hrs</small></strong>
+                            </div>
+                        </div>
+                        <div class="salary-div">
+                                <span class="Salary-label">This Month Salary so far</span>
+                                <strong>108000 <small>PKR</small></strong>
+                        </div>
+
+                        <div class="employee-info-section">
+                            <h3>Employee Information</h3>
+
+                            <div class="info-row">
+                                <span>Email</span>
+                                <strong></strong>
+                            </div>
+
+                            <div class="info-row">
+                                <span>Phone No</span>
+                                <strong></strong>
+                            </div>
+
+                            <div class="info-row">
+                                <span>Date Joined</span>
+                                <strong></strong>
+                            </div>
+
+                            <div class="info-row">
+                                <span>Hourly Rate</span>
+                                <strong>PKR  / hour</strong>
+                            </div>
+                        </div>
+
+                <div class="edit-delete-button-div">
+                    <a href="/editEmploy">
+                    <button class="edit-button js-edit-button" data-employ-id=${matchingEmploye.Id}>Edit</button>
+                    </a>
+                    <button class="History-button js-History-button" data-employ-id=${matchingEmploye.Id}>History</button>
+                    <a href="/deleteEmploy">
+                    <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
+                    </a>
+                </div>`;
+
+        
+        </div>
+    </div>
+     <div class="error-overlay">
+
+        <!-- Error Popup -->
+        <div class="error-popup">
+
+            <div class="error-icon">!</div>
+
+            <h2><%=message%></h2>
+
+            <p>
+                We couldn't complete your request.
+                Please try again.
+            </p>
+
+            <button class="try-again-btn">
+               <a href="/" style="color: aliceblue;">Try Again</a>             
+            </button>
+
+            <button class="close-btn">
+                <a href="/">Close</a>
+            </button>
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
