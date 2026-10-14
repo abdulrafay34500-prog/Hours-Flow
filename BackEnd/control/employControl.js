@@ -2,46 +2,41 @@ import employDatabase from '../model/employesDatabase.js'
 import  mongoose from 'mongoose'
 
 export const gettingEmploy= async (req,res)=>{
-    let employes=await employDatabase.find()   
-    res.render('home.ejs',{employes})
+    try{   
+        const allEmployes= await employDatabase.find()
+        res.json(allEmployes)
+        
+    }catch(error){
+             res.status(500).json({message:error.message})
+    }
 }
 
 export const SingleEmployDetail =async(req,res)=>{
 
-    if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-            return res.render('server404Erroe',{message : 'Invalid ID'})
-         }
-
     try{   
-         let singleEmploy=await employDatabase.findOne({_id:req.params.id})
-         if(singleEmploy){
-            return res.render('SingleEmploy',{singleEmploy})
-         }else{
-            return  res.render('server404Erroe',{message : 'No Match Found'})
-         }
+        const singleEmployeDetails= await employDatabase.findById(req.params.id)
+        res.json(allEmployes)
         
     }catch(error){
-           return  res.render('server404Erroe',{message : error})
+             res.status(500).json({message:error.message})
     }
-    
-    
-
-    
+      
 }
 
 export const addingNewEmploy=async(req,res)=>{
-    if(req.body.id !==''||req.body.name !==''||req.body.hourleyWage !==''||req.body.shiftType !==''){
-         return   res.render('updateERROR',{message : 'Add all Details To continue'})
+    try{   
+        const addedemploy= await employDatabase.create(req.body)
+        res.json(addedemploy)
+        
+    }catch(error){
+             res.status(500).json({message:error.message})
     }
-    await employDatabase.create(req.body)
-      return  res.redirect('/')
-   
 }
 
 export const updatingEmploy =async (req,res)=>{
 
         try{
-            await employDatabase.findOneAndUpdate(
+          let updatedEmploy=  await employDatabase.findOneAndUpdate(
                 {_id :req.params.id},
                 {    id: Number(req.body.id),
                     name: req.body.name,
@@ -49,7 +44,7 @@ export const updatingEmploy =async (req,res)=>{
                     shiftType: req.body.shiftType,
                 }
             )
-             res.redirect('/')
+           res.json(updatedEmploy)
         }catch(error){
            return res.render('server404Erroe',{message : error}) 
         }
@@ -57,21 +52,20 @@ export const updatingEmploy =async (req,res)=>{
 }
 
 export const showingEmployValue=async (req,res)=>{
-     let employINdB=mongoose.Types.ObjectId.isValid(req.params.id)
-
      try{
-        let editedEmploy=await employDatabase.findOne({_id : req.params.id})
-        if(!editedEmploy){
-             return res.render('server404Erroe',{message : 'Invalid ID'}) 
-        }
-        res.render('editEmploy.ejs' , {employ : editedEmploy })
+        let editingEmploy=await employDatabase.findOne({_id : req.params.id})      
+        res.json(editingEmploy)
      }catch(error){
-       return res.render('server404Erroe',{message : error}) 
+       res.status(500).json({message:error.message}) 
      }
       
 
 }
 export const deletingEmploy=async (req,res)=>{
-    await employDatabase.deleteOne({_id:req.params.id})
-    res.redirect('/')
+    try{
+        let deletedEmploy=await employDatabase.deleteOne({_id:req.params.id});
+        res.json(deletedEmploy)
+     }catch(error){
+       res.status(500).json({message:error.message}) 
+     }
 }

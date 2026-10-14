@@ -10,19 +10,22 @@ import {gettingEmploy,
         }
         from '../control/employControl.js'
 
+// Showing All Employes        
 router.get('/',gettingEmploy)
 
-router.get('/SingleEmploy/:id',SingleEmployDetail)
+// Sowing Single Employ
+router.get('/:id',SingleEmployDetail)
 
-router.get('/addemployPage',(req,res)=>{
-    res.render('addemployPage.ejs')
-})
-router.post('/addemployPage',addingNewEmploy)
+//Adding New Employ
+router.post('/',addingNewEmploy)
 
-router.post('/editEmploy/:id',updatingEmploy)
+//Updating  Employ
+router.put('/:id/update',updatingEmploy)
 
-router.get('/editEmploy/:id',showingEmployValue)
+//Showing employ details in edit page
+router.get('/:id/edit',showingEmployValue)
 
-router.get('/deleteEmploy/:id',deletingEmploy)
+//Deleting Employ
+router.delete('/:id/delete',deletingEmploy)
 
 export default router

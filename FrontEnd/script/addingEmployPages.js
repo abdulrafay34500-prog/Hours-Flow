@@ -1,5 +1,5 @@
 import { Employes , AddingEmploy,EmptyingInputs,updatingEmployInfo} from "../data/employes.js";
-import { renderEmployDetails ,TotalNumberOfEmployes } from "./addingEmploy.js";
+import { WaitingForBackend ,TotalNumberOfEmployes } from "./addingEmploy.js";
 import { singleEmployDetail } from "./singleEmployDetails.js";
 
 export function addingEmployPage(Heading ,matchingEmploye='') {
@@ -65,7 +65,7 @@ export function addingEmployPage(Heading ,matchingEmploye='') {
         main.classList.remove('show')
         EmptyingInputs()
     })
-    SaveOrUpdateButton.addEventListener('click' ,()=>{
+    SaveOrUpdateButton.addEventListener('click' ,async()=>{
 
         
         let employID=SaveOrUpdateButton.dataset.employId
@@ -75,7 +75,15 @@ export function addingEmployPage(Heading ,matchingEmploye='') {
         
         if(!employee){
             
-            AddingEmploy();
+          AddingEmploy();
+
+           
+            WaitingForBackend()
+            TotalNumberOfEmployes();
+                
+            let main =document.querySelector('.main-addingEmploy-page')
+            main.classList.remove('show')
+            
             
         }else {
           
@@ -84,8 +92,7 @@ export function addingEmployPage(Heading ,matchingEmploye='') {
         }
         
 
-        TotalNumberOfEmployes();
-        renderEmployDetails()
+        
         
 
         

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "Type": "commonjs",
   "dependencies": {
+    "cors": "^2.8.6",
     "ejs": "^7.0.1",
     "express": "^5.2.1",
     "mongoose": "^9.11.1"

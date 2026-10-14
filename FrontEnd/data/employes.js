@@ -1,11 +1,32 @@
 
+export const EmoloyFromBackend=async()=>{
+  try {
+        const response = await fetch('http://localhost:5500/api/employes');
 
-export let Employes =JSON.parse(localStorage.getItem('EmployDetails')) || [];
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
 
+        const employees = await response.json();
+        
+        return employees
 
+    } catch (error) {
+        console.error('Error fetching employees:', error);
+    }
+}
+ export let Employes=await EmoloyFromBackend()
+ console.log(Employes)
 
-export function AddingEmploy() {
+ export async function refreshEmployes() {
+    Employes = await EmoloyFromBackend();
+}
 
+export default Employes;
+
+export async function  AddingEmploy() {
+
+    
     let id=document.querySelector('.js-id-input')
     let Id =id.value
     let Name=document.querySelector('.js-name-input')
@@ -23,46 +44,37 @@ export function AddingEmploy() {
     let joiningDate=document.querySelector('.js-JoiningDate-input')
     let JoiningDate =joiningDate.value
 
+
+     const newEmploy ={
+      id:Number(Id),
+      name:name,
+      hourleyWage:Number(HourleyWage),
+      shiftType:ShiftType,
+      jobRole:JobRole,
+      email:Email,
+      PhoneNo:phoneNo,
+      joiningDate:JoiningDate,
+    }
+
      if (Id != '' && name != '' && ShiftType != '' && HourleyWage != ''){
 
-        let duplicateId;
+        try{
+            const responce=await fetch('http://localhost:5500/api/employes' , {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(newEmploy)
+            })
+        }catch(err){
+            console.log(err.message)
+        }
+      
+      
+       
+     }else{
 
-            Employes.forEach(employ => {
-                if(Id == employ.Id){
-                    duplicateId = Id
-                }
-            });
-            if(!duplicateId){
-                Employes.push({
-                    Id : Id,
-                    Name :name,
-                    ShiftType:ShiftType,
-                    HourleyWage:HourleyWage,
-                    JobRole:JobRole,
-                    Email:Email,
-                    PhoneNo:PhoneNo,
-                    JoiningDate:JoiningDate,
-
-                       Hours:{}
-                })
-
-                localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
-
-                EmptyingInputs()
-
-                let main =document.querySelector('.main-addingEmploy-page')
-                main.classList.remove('show')
-
-                
-            }else{
-                ShowingErrorFunction('This Id is already Taken ') 
-            }
-           
-
-
-     }  else{
-
-           ShowingErrorFunction('Enter all Details to continue') 
+           ShowingErrorFunction('Enter all Necessary Details to continue') 
      }
 }
 
@@ -171,4 +183,5 @@ export function updatingEmployInfo(employ) {
 
 
 }
+
 

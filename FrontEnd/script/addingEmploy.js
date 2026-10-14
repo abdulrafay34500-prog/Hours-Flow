@@ -1,25 +1,32 @@
-import { Employes , AddingEmploy,EmptyingInputs} from "../data/employes.js";
+import { Employes,EmoloyFromBackend, AddingEmploy,EmptyingInputs,refreshEmployes} from "../data/employes.js";
 import {singleEmployDetail} from "../script/singleEmployDetails.js";
 import {addingEmployPage} from "../script/addingEmployPages.js";
 
 
-renderEmployDetails()
+WaitingForBackend()
+
+export async function WaitingForBackend(params) {
+    await EmoloyFromBackend()
+     await refreshEmployes();
+    renderEmployDetails()
+}
+
 export function renderEmployDetails() {
     let EmployHTML='';
 
     Employes.forEach((employ)=>{
     EmployHTML+=` 
     <div class="employ-detail js-employ-detail-click"
-    data-employe-id=${employ.Id}
+    data-employe-id=${employ.id}
     >
         <div class="ID">
-            ${employ.Id}
+            ${employ.id}
         </div>
         <div class="Employ-name">
-            ${employ.Name}
+            ${employ.name}
         </div>
         <div class="shift-type">
-            ${employ.ShiftType}
+            ${employ.shiftType}
         </div>
     </div>`
     
@@ -64,3 +71,5 @@ export function TotalNumberOfEmployes() {
         EmployCount+=Number(Employes.length);
         totalEmploye.innerHTML=EmployCount;
 }
+
+

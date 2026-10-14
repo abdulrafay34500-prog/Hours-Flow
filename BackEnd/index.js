@@ -2,6 +2,7 @@ import  express from 'express'
 const app=express()
 import  mongoose from 'mongoose'
 import {dataBase} from './config/database.js'
+import cors from 'cors';
 
 
 import employRoute from './Routes/employes.Routes.js'
@@ -10,20 +11,23 @@ import employRoute from './Routes/employes.Routes.js'
 app.set('view engine' ,'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
+app.use(cors());
 
-
-//Database
-dataBase()
-
-// Setting EJS
-app.set('view engine' ,'ejs')
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: false }));
 
 // Server Running
-app.listen(3000,()=>{
-    console.log('Server started')
-})
+
+const startingServer= async ()=>{
+    try{
+       await dataBase()
+       app.listen(5500,()=>{
+            console.log('Server started')
+        })
+    }catch(err){
+        console.error('Failed to connect to database:', error.message);
+    }
+}
+startingServer()
 
 //Routes
-app.use(employRoute)
+app.use('/api/employes' , employRoute)
