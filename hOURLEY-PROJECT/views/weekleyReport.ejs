@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/header.css">
+         <link rel="stylesheet" href="/general.css">
+         <link rel="stylesheet" href="/sidebar.css">
+         <link rel="stylesheet" href="/weekley-overview.css">
+        <title>HourFlow</title>
+    </head>
+    <body>
+         <%- include('header.ejs')%>
+        <%- include('sidebar.ejs')%>
+        <main>
+            <div class="Weekley-overview-main-div">
+                    <div class="week-buttons-div">
+                        <button class="Previous-Next-button js-previous-button">Previous week</button>
+                        <p class="GoingMonth-Text jsGoingMonth-Text">
+                            September Report 
+                        </p>
+                        <button  class="Previous-Next-button js-Next-button">Next week</button>
+                    </div>
+                    <div class="Weekley-overview-header js-Weekley-overview-header">
+                        
+                    </div>
+                    <div class="Weekley-report-main-div  js-Weekley-report-main-div">
+
+
+                    </div>
+            </div>
+
+        </main>
+
+    </body>
+    <script src="script/weeklet-overview.js" type="module"></script>
+</html>

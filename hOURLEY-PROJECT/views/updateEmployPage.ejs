@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/header.css">
+         <link rel="stylesheet" href="/general.css">
+         <link rel="stylesheet" href="/sidebar.css">
+         <link rel="stylesheet" href="/weekley-overview.css">
+         <link rel="stylesheet" href="/employes.css">
+         <link rel="stylesheet" href="/addingemploypage.css">
+         <link rel="stylesheet" href="/singleEmployDetail.css">
+         <link rel="stylesheet" href="/historyPage.css">
+         <link rel="stylesheet" href="/blurr.css">
+        <title>Employes Details</title>
+    </head>
+    <body>
+        <%- include('header.ejs')%>
+        <%- include('sidebar.ejs')%>
+        <main class="main-addingEmploy-page">
+
+            <!-- Page Heading -->
+            <div class="page-heading">
+                <div>
+                    <a href="/" class="back-link">← Back to Employees</a>
+                    <h1>Employee Profile</h1>
+                    <p>View and manage employee information.</p>
+                </div>
+
+                <div class="top-actions">
+                    
+                    <a
+                        class="button button-history"
+                        href="/history/<%= employee._id %>"
+                    >
+                        <span>◷</span> History
+                    </a>
+                    <a
+                        class="button button-delete"
+                        href="/delete/<%= employee._id %>"
+                    >
+                        <span>◷</span> Delete Employ
+                    </a>
+                </div>
+            </div>
+
+            <!-- Employee Profile Card -->
+            <section class="profile-card">
+
+                <div class="profile-main">
+
+                    <div class="profile-avatar">
+                        
+                    </div>
+
+                    <div class="profile-identity">
+                        
+
+                        <p class="employee-job">
+                            
+                        </p>
+
+                        <div class="profile-meta">
+                            <span class="employee-id">
+                                ID: 
+                            </span>
+
+                            <span class="status-badge">
+                                <span class="status-dot"></span>
+                                Employee Record
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="profile-shift">
+                    <span class="meta-label">Assigned Shift</span>
+                    <span class="shift-badge">
+                        <%= employee.shiftType || 'Not assigned' %>
+                    </span>
+                </div>
+
+            </section>
+
+            <!-- Statistics Cards -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Hourly Rate</span>
+                        <span class="stat-icon purple">₨</span>
+                    </div>
+
+                    <h3>
+                        PKR <%= Number(employee.hourleyWage || 0).toLocaleString('en-PK') %>
+                    </h3>
+
+                    <p>Payment per working hour</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Hours This Month</span>
+                        <span class="stat-icon blue">◷</span>
+                    </div>
+
+                    <h3>
+                        <%= typeof monthlyHours !== 'undefined' ? monthlyHours : 0 %>
+                        <small>hrs</small>
+                    </h3>
+
+                    <p>Total recorded working hours</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-top">
+                        <span class="stat-label">Estimated Salary</span>
+                        <span class="stat-icon green">₨</span>
+                    </div>
+
+                    <h3>
+                        PKR <%= Number(
+                            typeof monthlySalary !== 'undefined'
+                                ? monthlySalary
+                                : 0
+                        ).toLocaleString('en-PK') %>
+                    </h3>
+
+                    <p>Based on recorded hours</p>
+                </div>
+
+            </section>
+
+            <!-- Employee Information -->
+            <section class="information-card">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Personal & Employment Information</h2>
+                        <p>Employee details saved in HourFlow.</p>
+                    </div>
+
+                    <a
+                        class="button button-secondary"
+                        href="/updateEmployPage/<%= employee._id %>"
+                    >
+                        ✎ Edit Details
+                    </a>
+                </div>
+
+                <div class="information-grid">
+
+                    <div class="information-item">
+                        <span class="information-label">Full Name</span>
+                        <p> Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Employee ID</span>
+                        <p>'Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Job Role</span>
+                        <p>Not provided></p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Email Address</span>
+                        <p>Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Phone Number</span>
+                        <p>Not provided</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Joining Date</span>
+                        <p>
+                            Not provided
+                            
+                        </p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Shift Type</span>
+                        <p>Not assigned</p>
+                    </div>
+
+                    <div class="information-item">
+                        <span class="information-label">Hourly Wage</span>
+                        <p>PKR </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+       
+        
+
+        </main>
+
+          <form method="post" action="/updateEmployPagePost/<%=employee._id%>" >
+                 <div class="adding-employ-div">
+                    <h1>Add Employ</h1>
+                    <div class="input-id-div">
+                        <h3>Enter Id :</h3>
+                        <input class="id-input js-id-input" type="number" name="id" value="<%=employee.id%>" >
+                    </div>
+                    <div class="input-name-div">
+                        <h3>Enter Name :</h3>
+                        <input class="name-input js-name-input" type="text" name="name"  value="<%=employee.name%>">
+                    </div>
+                    <div class="input-hourleyInput-div">
+                        <h3>Enter Hourley wage</h3>
+                        <input class="hourleyInput-input js-hourleyInput-input" type="number" name="hourleyWage"  value="<%=employee.hourleyWage%>" >
+                    </div>
+                    <div class="input-position-div">
+                        <h3>Enter Job Role</h3>
+                        <input class="jobRole-input js-jobRole-input" name="jobRole"  value="<%=employee.jobRole%>">
+                    </div>
+                    <div class="input-Email-div">
+                        <h3>Enter Email</h3>
+                        <input class="Email-input js-Email-input"name="email"  value="<%=employee.email%>">
+                    </div>
+                        <div class="input-Phonenumber-div">
+                        <h3>Enter Phone number</h3>
+                        <input class="Phonenumber-input js-Phonenumber-input"  name="PhoneNo"  value="<%=employee.PhoneNo%>"> 
+                    </div>
+                    <div class="input-JoiningDate-div">
+                        <h3>Enter Joining Date</h3>
+                        <input class="JoiningDate-input js-JoiningDate-input"  name="joiningDate" >
+                    </div>
+                    <div class="input-shift-div">
+                        <h3>Select Shift Type :</h3>
+                        <select class="Select-shift js-Select-shift" name="shiftType"  >
+                            <option <%=employee.shiftType == 'Morning' ? 'selected' :'' %>>Morning</option>
+                            <option <%=employee.shiftType == 'Evening' ? 'selected' :'' %>>Evening</option>
+                        </select>
+                    </div>
+                    
+                    <button class="Save-button js-save-update-button" type="submit">
+                        Save
+                    </button>
+                
+                    <a  class="Cross-sign js-Cross-sign" onclick="history.back()">
+                    ✖ 
+                    </a>                  
+                </div>
+                <div class="Error-notification">
+                    <p class="Error-Text">Error</p>
+                    <p class="Error-reason js-Error-reason"></p>
+                </div>
+          </form>
+
+
+    </body>
+    <script src="script/addingEmploy.js" type="module"></script>
+</html>
