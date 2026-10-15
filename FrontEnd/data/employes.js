@@ -21,13 +21,28 @@ export const EmoloyFromBackend=async()=>{
  export async function refreshEmployes() {
     Employes = await EmoloyFromBackend();
 }
- 
 export default Employes;
 
+
+let timeoutId;
+function ShowingErrorFunction(errorReason) {
+            let addingEmployPage=document.querySelector('.AddingEmploye-main-page')
+            let errorText =document.querySelector('.js-Error-reason')
+            addingEmployPage.classList.add('showingError')
+
+            errorText.innerHTML=errorReason
+            
+                clearTimeout(timeoutId)
+
+               timeoutId = setTimeout(()=>{
+                 clearTimeout(timeoutId)
+                  addingEmployPage.classList.remove('showingError')
+               },2000)
+
+}
+
 export async function  AddingEmploy() {
-  
-     
-    
+   
     let id=document.querySelector('.js-id-input')
     let Id =id.value
     let Name=document.querySelector('.js-name-input')
@@ -45,7 +60,6 @@ export async function  AddingEmploy() {
     let joiningDate=document.querySelector('.js-JoiningDate-input')
     let JoiningDate =joiningDate.value
 
-
      const newEmploy ={
       id:Number(Id),
       name:name,
@@ -60,20 +74,32 @@ export async function  AddingEmploy() {
      if (Id != '' && name != '' && ShiftType != '' && HourleyWage != ''){
 
         try{
-            const responce=await fetch('http://localhost:3000/api/employes' , {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify(newEmploy)
-            })
-        }catch(err){
-            
+            await refreshEmployes()
+
+            let matchingId= Employes.find((employee) => {
+               return employee.id == Id
+            });
+
+            if(!matchingId){
+                 const responce=await fetch('http://localhost:3000/api/employes' , {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(newEmploy)
+                })
+                 let main =document.querySelector('.main-addingEmploy-page')
+                 main.classList.remove('show')
+            }else{        
+                
+              ShowingErrorFunction('This Employ ID is already Taken') 
+            }
+          
+        }catch(err){      
             console.log(err.message)
         }
       
-          let main =document.querySelector('.main-addingEmploy-page')
-            main.classList.remove('show')
+         
       
        
      }else{
@@ -81,23 +107,6 @@ export async function  AddingEmploy() {
            ShowingErrorFunction('Enter all Necessary Details to continue') 
            
      }
-}
-
-let timeoutId;
-function ShowingErrorFunction(errorReason) {
-            let addingEmployPage=document.querySelector('.AddingEmploye-main-page')
-            let errorText =document.querySelector('.js-Error-reason')
-            addingEmployPage.classList.add('showingError')
-
-            errorText.innerHTML=errorReason
-            
-                clearTimeout(timeoutId)
-
-               timeoutId = setTimeout(()=>{
-                 clearTimeout(timeoutId)
-                  addingEmployPage.classList.remove('showingError')
-               },2000)
-
 }
 
 export function EmptyingInputs() {
