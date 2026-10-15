@@ -206,11 +206,11 @@ export function singleEmployDetail(employId) {
      EditEmployButton.addEventListener('click',()=>{
 
         let employId=deleteEmployButton.dataset.employId
-        let EditPageHeading=`Update ${matchingEmploye.Name} Info`
+        let EditPageHeading=`Update ${singleEmploye.Name} Info`
 
         let main =document.querySelector('.main-addingEmploy-page')
         main.classList.add('show')
-        addingEmployPage(EditPageHeading , matchingEmploye)
+        addingEmployPage(EditPageHeading , singleEmploye)
 
        
     })
