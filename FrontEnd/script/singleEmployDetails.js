@@ -1,5 +1,5 @@
 import { Employes , deletionEmploy ,EmoloyFromBackend ,refreshEmployes} from "../data/employes.js";
-import {renderEmployDetails} from "./addingEmploy.js";
+import {WaitingForBackend} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
 import {HistoryPageREnder} from "./historyPage.js";
 
@@ -197,12 +197,15 @@ export function singleEmployDetail(employId) {
     cancelDeleteButton.addEventListener('click',()=>{
         mainPage.classList.remove('clickingDelete')
     })
-    ConformDeleteButton.addEventListener('click',()=>{
+    ConformDeleteButton.addEventListener('click',async ()=>{
+
         let employId=ConformDeleteButton.dataset.employId
-        document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked') 
         deletionEmploy(employId)
-        renderEmployDetails()
         mainPage.classList.remove('clickingDelete')
+    
+        await WaitingForBackend()
+        document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.remove('after-Clicked') 
+
     })
 
      EditEmployButton.addEventListener('click',()=>{

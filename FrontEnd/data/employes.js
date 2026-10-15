@@ -113,19 +113,13 @@ export function EmptyingInputs() {
     shiftType.value=''
 }
 
-export function deletionEmploy(employId) {
+export async function deletionEmploy(employId) {
  
-    let newEmployArray=[]
-
-    Employes.forEach((employ)=>{
-       if (employId !=employ.Id){
-         newEmployArray.push(employ)
-       }
-    })
     
-    Employes=newEmployArray;
+    await fetch(`http://localhost:3000/api/employes/${employId}/delete` ,{
+                method: 'DELETE'
+            })
 
-    localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
 }
 export async function updatingEmployInfo(employ) {  
     let id=document.querySelector('.js-id-input')

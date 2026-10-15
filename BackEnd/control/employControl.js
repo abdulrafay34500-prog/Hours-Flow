@@ -57,7 +57,7 @@ export const updatingEmploy =async (req,res)=>{
 
 export const deletingEmploy=async (req,res)=>{
     try{
-        let deletedEmploy=await employDatabase.deleteOne({_id:req.params.id});
+        let deletedEmploy=await employDatabase.deleteOne({id:req.params.id});
         res.json(deletedEmploy)
      }catch(error){
        res.status(500).json({message:error.message}) 
