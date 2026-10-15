@@ -37,11 +37,15 @@ export const updatingEmploy =async (req,res)=>{
 
         try{
           let updatedEmploy=  await employDatabase.findOneAndUpdate(
-                {_id :req.params.id},
+                {id :req.params.id},
                 {    id: Number(req.body.id),
                     name: req.body.name,
                     hourleyWage:Number(req.body.hourleyWage),
                     shiftType: req.body.shiftType,
+                    jobRole:req.body.jobRole,
+                    email:req.body.email,
+                    PhoneNo:req.body.PhoneNo,
+                     joiningDate:req.body.joiningDate,                 
                 }
             )
            res.json(updatedEmploy)

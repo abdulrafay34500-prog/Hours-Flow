@@ -145,7 +145,7 @@ export async function updatingEmployInfo(employ) {
     let joiningDate=document.querySelector('.js-JoiningDate-input')
     let JoiningDate =joiningDate.value
 
-     const newEmploy ={
+     const updatedEmploy ={
       id:Number(Id),
       name:name,
       hourleyWage:Number(HourleyWage),
@@ -156,39 +156,43 @@ export async function updatingEmployInfo(employ) {
       joiningDate:JoiningDate,
      }
 
-    console.log('updateForm')
+  
 
     if (Id != '' && name != '' && ShiftType != '' && HourleyWage != ''){
 
-        await refreshEmployes
+        await refreshEmployes()
 
-        let AllemployIds=Employes.filter((employy)=>{ return employy.id !==employ.id})
+        let matchingId= Employes.find((employee) => {
+            return (
+                String(employee.id ?? employee.Id) === String(Id) &&
+                String(employee.id ?? employee.Id) !==
+                    String(employ.id ?? employ.Id)
+            );
+        });
          
-        let matchingId;
-
-        AllemployIds.forEach((employeee=>{              
-            if(Id==employeee.Id){
-               matchingId=employeee;
-            }                  
-        }))
-
-      
-
         
+        
+    
          if(!matchingId){
-            employ.Id= Id
-            employ.Name =name
-            employ.ShiftType=ShiftType
-            employ.HourleyWage=HourleyWage
-            employ.JobRole=JobRole
-            employ.Email=Email
-            employ.PhoneNo=PhoneNo
-            employ.JoiningDate=JoiningDate
+            
+            try{
+                let updatingBackend=await fetch(`http://localhost:3000/api/employes/${employ.id}/update` , {
+                method:'PUT',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(updatedEmploy)
+                })
 
-            localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
-
-            let main =document.querySelector('.main-addingEmploy-page')
+                let main =document.querySelector('.main-addingEmploy-page')
                 main.classList.remove('show')
+
+            }catch(err){
+                console.log(err.message)
+            }
+
+
+            
         }else{
             
             ShowingErrorFunction('This Employ ID is already Taken') 

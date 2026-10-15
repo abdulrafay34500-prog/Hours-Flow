@@ -3,6 +3,8 @@ import {renderEmployDetails} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
 import {HistoryPageREnder} from "./historyPage.js";
 
+
+
 // Getting Weekley dates
 let startingDate=new Date()
 let day=startingDate.getDay()
@@ -52,7 +54,7 @@ for (let day = 1; day <= numberOfDays; day++) {
   }
 
     let singleEmploye;
-    async function getitngSingleEmployBackend(employID) {
+    export async function getitngSingleEmployBackend(employID) {
         let responce = await fetch(`http://localhost:3000/api/employes/${employID}`)
 
         singleEmploye= await responce.json()

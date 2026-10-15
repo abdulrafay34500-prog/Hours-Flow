@@ -1,6 +1,6 @@
 import { Employes , AddingEmploy,EmptyingInputs,updatingEmployInfo , refreshEmployes} from "../data/employes.js";
 import { WaitingForBackend ,TotalNumberOfEmployes } from "./addingEmploy.js";
-import { singleEmployDetail } from "./singleEmployDetails.js";
+import { singleEmployDetail ,BackendWait} from "./singleEmployDetails.js";
 
 export function addingEmployPage(Heading ,matchingEmploye='') {
     let Html=`
@@ -78,12 +78,12 @@ export function addingEmployPage(Heading ,matchingEmploye='') {
           
            WaitingForBackend()
             TotalNumberOfEmployes();
-                
-          
-                      
+            
         }else {         
-             updatingEmployInfo(employee)
-             singleEmployDetail(employee.id)
+             updatingEmployInfo(employee)            
+            await WaitingForBackend()
+             BackendWait(employee.id)
+
         }
   
     })
