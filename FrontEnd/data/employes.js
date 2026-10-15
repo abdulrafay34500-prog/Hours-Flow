@@ -1,7 +1,7 @@
 
 export const EmoloyFromBackend=async()=>{
   try {
-        const response = await fetch('http://localhost:5500/api/employes');
+        const response = await fetch('http://localhost:3000/api/employes');
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -52,14 +52,14 @@ export async function  AddingEmploy() {
       shiftType:ShiftType,
       jobRole:JobRole,
       email:Email,
-      PhoneNo:phoneNo,
+      PhoneNo:PhoneNo,
       joiningDate:JoiningDate,
     }
 
      if (Id != '' && name != '' && ShiftType != '' && HourleyWage != ''){
 
         try{
-            const responce=await fetch('http://localhost:5500/api/employes' , {
+            const responce=await fetch('http://localhost:3000/api/employes' , {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -67,6 +67,7 @@ export async function  AddingEmploy() {
             body: JSON.stringify(newEmploy)
             })
         }catch(err){
+            
             console.log(err.message)
         }
       

@@ -1,4 +1,4 @@
-import { Employes , deletionEmploy} from "../data/employes.js";
+import { Employes , deletionEmploy ,EmoloyFromBackend ,refreshEmployes} from "../data/employes.js";
 import {renderEmployDetails} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
 import {HistoryPageREnder} from "./historyPage.js";
@@ -41,39 +41,55 @@ for (let day = 1; day <= numberOfDays; day++) {
 
   // Function Starting.
 
+
+
+   
+ 
+  
+  export async function BackendWait(employID) {
+     await getitngSingleEmployBackend(employID)
+     singleEmployDetail()
+  }
+
+    let singleEmploye;
+    async function getitngSingleEmployBackend(employID) {
+        let responce = await fetch(`http://localhost:3000/api/employes/${employID}`)
+
+        singleEmploye= await responce.json()
+    
+        console.log(singleEmploye)
+    }
+ 
+
 export function singleEmployDetail(employId) {
 
-    let matchingEmploye=''
   
-    Employes.forEach((employ) => {
-        if (employ.Id ==employId){
-            matchingEmploye=employ
-        }
-    });
+    
 
-    let name=matchingEmploye.Name
+    let name=singleEmploye.name
     
     let initials=name.split(" ")
     .map((word)=>{
        return word[0]
     }).join("")
    
-    // Calculating Weekley Hours
+    /* Calculating Weekley Hours
     let TotalWeekleyHours=0
     weekDays.forEach((days)=>{
         TotalWeekleyHours+=Number(matchingEmploye.Hours[days] || 0)      
-    })
+    })*/
 
-    // Calculating Monthly Hours
+    /* Calculating Monthly Hours
     let TotalMonthlyHours=0
      monthDays.forEach((days)=>{
         TotalMonthlyHours+=Number(matchingEmploye.Hours[days] || 0)      
-    })
+    })*/
 
-    // Calculating Monthly Salary
+    /* Calculating Monthly Salary
     let salary=0;
-    salary=TotalMonthlyHours * Number(matchingEmploye.HourleyWage)
-    
+    salary=TotalMonthlyHours * Number(matchingEmploye.HourleyWage)*/
+
+ 
     
    let singleEmployHtml=`                    
                     <button class="Cross-sign-button js-Cross-sign-button"
@@ -83,26 +99,26 @@ export function singleEmployDetail(employId) {
                         <div class="employee-avatar">${initials}</div>
 
                         <div class="employee-header-info">
-                            <h2>${matchingEmploye.Name}</h2>
-                            <p class="Employee-Id">Employee ID: <span>${matchingEmploye.Id}</span></p>
-                            <p class="Position">${matchingEmploye.JobRole}</p>
+                            <h2>${singleEmploye.name}</h2>
+                            <p class="Employee-Id">Employee ID: <span>${singleEmploye.id}</span></p>
+                            <p class="Position">${singleEmploye.jobRole}</p>
                         </div>
                     </div>
 
                     <div class="employee-hours">
                         <div class="hours-box">
                             <span class="hours-label">Hours This Week</span>
-                            <strong>${TotalWeekleyHours} <small>hrs</small></strong>
+                            <strong>${ 120} <small>hrs</small></strong>
                         </div>
 
                         <div class="hours-box">
                             <span class="hours-label">Hours This Month</span>
-                            <strong>${TotalMonthlyHours} <small>hrs</small></strong>
+                            <strong>${120} <small>hrs</small></strong>
                         </div>
                     </div>
                     <div class="salary-div">
                             <span class="Salary-label">This Month Salary so far</span>
-                            <strong>${salary} <small>PKR</small></strong>
+                            <strong>${50000} <small>PKR</small></strong>
                     </div>
 
                     <div class="employee-info-section">
@@ -110,34 +126,34 @@ export function singleEmployDetail(employId) {
 
                         <div class="info-row">
                             <span>Email</span>
-                            <strong>${matchingEmploye.Email}</strong>
+                            <strong>${singleEmploye.email}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Phone No</span>
-                            <strong>${matchingEmploye.PhoneNo}</strong>
+                            <strong>${singleEmploye.PhoneNo}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Date Joined</span>
-                            <strong>${matchingEmploye.JoiningDate}</strong>
+                            <strong>${singleEmploye.joiningDate}</strong>
                         </div>
 
                         <div class="info-row">
                             <span>Hourly Rate</span>
-                            <strong>PKR ${matchingEmploye.HourleyWage} / hour</strong>
+                            <strong>PKR ${singleEmploye.hourleyWage} / hour</strong>
                         </div>
                     </div>
 
                     <div class="edit-delete-button-div">
-                        <button class="edit-button js-edit-button" data-employ-id=${matchingEmploye.Id}>Edit</button>
-                        <button class="History-button js-History-button" data-employ-id=${matchingEmploye.Id}>History</button>
-                        <button class="delete-button js-delete-button" data-employ-id=${matchingEmploye.Id}>Delete</button>
+                        <button class="edit-button js-edit-button" data-employ-id=${singleEmploye.id}>Edit</button>
+                        <button class="History-button js-History-button" data-employ-id=${singleEmploye.id}>History</button>
+                        <button class="delete-button js-delete-button" data-employ-id=${singleEmploye.id}>Delete</button>
                     </div>`;
 
        let deletingPopUPHTML=`<div class="delete-popup-box">
                     <h2>Delete Employee?</h2>
-                    <p>Are you sure you want to Remove ${matchingEmploye.Name}?</p>
+                    <p>Are you sure you want to Remove ${singleEmploye.name}?</p>
                     <p class="delete-warning">
                         This action cannot be undone.
                     </p>
@@ -145,8 +161,8 @@ export function singleEmployDetail(employId) {
                         <button class="cancel-delete-button js-cancel-delete">
                             Cancel
                         </button>
-                        <button class="confirm-delete-button js-confirm-delete" data-employ-id=${matchingEmploye.Id}
-                        data-employ-name=${matchingEmploye.Name}
+                        <button class="confirm-delete-button js-confirm-delete" data-employ-id=${singleEmploye.id}
+                        data-employ-name=${singleEmploye.name}
                         >
                             Delete
                         </button>

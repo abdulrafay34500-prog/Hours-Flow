@@ -1,5 +1,5 @@
 import { Employes,EmoloyFromBackend, AddingEmploy,EmptyingInputs,refreshEmployes} from "../data/employes.js";
-import {singleEmployDetail} from "../script/singleEmployDetails.js";
+import {BackendWait} from "../script/singleEmployDetails.js";
 import {addingEmployPage} from "../script/addingEmployPages.js";
 
 
@@ -55,7 +55,7 @@ function ClickingButtons() {
     employClicked.addEventListener('click',()=>{
         let employId=employClicked.dataset.employeId
 
-        singleEmployDetail(employId)
+        BackendWait(employId)
         
         document.querySelector('.js-combining-AddingAndSingle-Employ-div').classList.add('after-Clicked')
         renderEmployDetails()

@@ -14,13 +14,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use(cors());
 
+//Routes
+app.use('/api/employes' , employRoute)
+
 
 // Server Running
 
 const startingServer= async ()=>{
     try{
        await dataBase()
-       app.listen(5500,()=>{
+       app.listen(3000,()=>{
             console.log('Server started')
         })
     }catch(err){
@@ -29,5 +32,3 @@ const startingServer= async ()=>{
 }
 startingServer()
 
-//Routes
-app.use('/api/employes' , employRoute)

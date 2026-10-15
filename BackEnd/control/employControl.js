@@ -14,8 +14,8 @@ export const gettingEmploy= async (req,res)=>{
 export const SingleEmployDetail =async(req,res)=>{
 
     try{   
-        const singleEmployeDetails= await employDatabase.findById(req.params.id)
-        res.json(allEmployes)
+        const singleEmployeDetails= await employDatabase.findOne({id:req.params.id})
+        res.json(singleEmployeDetails)
         
     }catch(error){
              res.status(500).json({message:error.message})
@@ -53,7 +53,7 @@ export const updatingEmploy =async (req,res)=>{
 
 export const showingEmployValue=async (req,res)=>{
      try{
-        let editingEmploy=await employDatabase.findOne({_id : req.params.id})      
+        let editingEmploy=await employDatabase.findOne({id : req.params.id})      
         res.json(editingEmploy)
      }catch(error){
        res.status(500).json({message:error.message}) 
