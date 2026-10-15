@@ -57,7 +57,7 @@ for (let day = 1; day <= numberOfDays; day++) {
 
         singleEmploye= await responce.json()
     
-        console.log(singleEmploye)
+        
     }
  
 
@@ -206,7 +206,7 @@ export function singleEmployDetail(employId) {
      EditEmployButton.addEventListener('click',()=>{
 
         let employId=deleteEmployButton.dataset.employId
-        let EditPageHeading=`Update ${singleEmploye.Name} Info`
+        let EditPageHeading=`Update ${singleEmploye.name} Info`
 
         let main =document.querySelector('.main-addingEmploy-page')
         main.classList.add('show')

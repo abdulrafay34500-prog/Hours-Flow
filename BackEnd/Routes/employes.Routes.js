@@ -5,7 +5,6 @@ import {gettingEmploy,
         SingleEmployDetail,
         addingNewEmploy,
         updatingEmploy  ,
-        showingEmployValue,
         deletingEmploy,
         }
         from '../control/employControl.js'
@@ -22,8 +21,6 @@ router.post('/',addingNewEmploy)
 //Updating  Employ
 router.put('/:id/update',updatingEmploy)
 
-//Showing employ details in edit page
-router.get('/:id/edit',showingEmployValue)
 
 //Deleting Employ
 router.delete('/:id/delete',deletingEmploy)

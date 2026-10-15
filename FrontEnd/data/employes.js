@@ -21,11 +21,12 @@ export const EmoloyFromBackend=async()=>{
  export async function refreshEmployes() {
     Employes = await EmoloyFromBackend();
 }
-
+ 
 export default Employes;
 
 export async function  AddingEmploy() {
-
+  
+     
     
     let id=document.querySelector('.js-id-input')
     let Id =id.value
@@ -71,11 +72,14 @@ export async function  AddingEmploy() {
             console.log(err.message)
         }
       
+          let main =document.querySelector('.main-addingEmploy-page')
+            main.classList.remove('show')
       
        
      }else{
 
            ShowingErrorFunction('Enter all Necessary Details to continue') 
+           
      }
 }
 
@@ -123,7 +127,7 @@ export function deletionEmploy(employId) {
 
     localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
 }
-export function updatingEmployInfo(employ) {  
+export async function updatingEmployInfo(employ) {  
     let id=document.querySelector('.js-id-input')
     let Id =id.value
     let Name=document.querySelector('.js-name-input')
@@ -141,14 +145,28 @@ export function updatingEmployInfo(employ) {
     let joiningDate=document.querySelector('.js-JoiningDate-input')
     let JoiningDate =joiningDate.value
 
+     const newEmploy ={
+      id:Number(Id),
+      name:name,
+      hourleyWage:Number(HourleyWage),
+      shiftType:ShiftType,
+      jobRole:JobRole,
+      email:Email,
+      PhoneNo:PhoneNo,
+      joiningDate:JoiningDate,
+     }
+
+    console.log('updateForm')
+
     if (Id != '' && name != '' && ShiftType != '' && HourleyWage != ''){
 
-        let AllemployIds=Employes.filter((employy)=>{ return employy.Id !==employ.Id})
+        await refreshEmployes
+
+        let AllemployIds=Employes.filter((employy)=>{ return employy.id !==employ.id})
          
         let matchingId;
 
-        AllemployIds.forEach((employeee=>{    
-            
+        AllemployIds.forEach((employeee=>{              
             if(Id==employeee.Id){
                matchingId=employeee;
             }                  
