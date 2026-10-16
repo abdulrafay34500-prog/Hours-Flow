@@ -1,8 +1,35 @@
-import{Employes}from"../data/employes.js"
+import{EmoloyFromBackend}from"../data/employes.js"
+import{HoursSheetFROMBackend}from"../data/timeSheet.js"
 
-export function HistoryPageREnder(employId) {
+export async function hoursBackEndHistory(employId) {
+   let Employes=await EmoloyFromBackend()
+   let hoursSheet=await HoursSheetFROMBackend()
 
-    let matchingEmploy=Employes.find((employ)=>employId==employ.Id)
+   let employWithHours=Employes.map((employ)=>{
+
+      let employHours={};
+
+      hoursSheet.forEach((hoursheet)=>{
+        if(employ.id==hoursheet.employID){
+            employHours[hoursheet.date]=hoursheet.hours
+        }
+      })
+
+      return {
+        ...employ,
+         Hours: employHours
+      }
+   })
+
+   console.log(employWithHours)
+
+ HistoryPageREnder(employId , employWithHours)
+
+}
+
+function HistoryPageREnder(employId ,employWithHours) {
+
+    let matchingEmploy=employWithHours.find((employ)=>employId==employ.id)
     
     let Html=`<div class="history-popup-overlay js-history-popup">
 
@@ -13,7 +40,7 @@ export function HistoryPageREnder(employId) {
 
                             <div>
                                 <p class="history-label">EMPLOYEE HISTORY</p>
-                                <h2>${matchingEmploy.Name}</h2>
+                                <h2>${matchingEmploy.name}</h2>
                                 <p class="history-subtitle">Last 6 months</p>
                             </div>
 
@@ -34,7 +61,7 @@ export function HistoryPageREnder(employId) {
                                 <span>SALARY</span>
                             </div>
 
-                          ${MonthlyDivs(employId)}
+                          ${MonthlyDivs(employId ,employWithHours)}
 
                         </div>
 
@@ -61,13 +88,18 @@ export function HistoryPageREnder(employId) {
 
 
 /// starting Function
-function MonthlyDivs(employId) {
+function MonthlyDivs(employId ,employWithHours) {
+
+   
+    
     let Html='';
 
     let curentMonth=new Date().getMonth()
     let curentYear=new Date().getFullYear()
 
-     let matchingEmploy=Employes.find((employ)=>employId==employ.Id)
+     let matchingEmploy=employWithHours.find((employ)=>employId==employ.id)
+
+     console.log(employWithHours.Hours)
    
     /// Making last 6 months Array
     let SixMonthsArray=[];
@@ -103,14 +135,14 @@ function MonthlyDivs(employId) {
          // Calcuting all Month Total hours
          let YearOFMonth='';
         let TotalMonthlyHours=0;      
-        monthlyDates.forEach((Dates)=>{
-            TotalMonthlyHours+=Number(matchingEmploy.Hours[Dates] || 0)
-            YearOFMonth=new Date(Dates).getFullYear();           
+        monthlyDates.forEach((date)=>{
+            TotalMonthlyHours+=Number(matchingEmploy.Hours?.[String(date)] || 0)
+            YearOFMonth=new Date(date).getFullYear();           
         })
 
         // Calcuting all Monthly salaries
         let MonthlySalary=0
-        MonthlySalary=TotalMonthlyHours*Number(matchingEmploy.HourleyWage)
+        MonthlySalary=TotalMonthlyHours*Number(matchingEmploy.hourleyWage)
         
        Html+=` 
          <div class="history-month-row">
@@ -134,5 +166,27 @@ function MonthlyDivs(employId) {
    
 
         return Html;
+    
 }
 
+/*
+db.timeSheet.insertMany([{
+    employID: 307,
+    date: '2026-09-01',
+    hours: 15
+  },{
+    employID: 307,
+    date: '2026-09-29',
+    hours: 15
+  },{
+    employID: 308,
+    date: '2026-09-01',
+    hours: 15
+  },{
+    employID: 308,
+    date: '2026-09-29',
+    hours: 15
+  }])
+    */
+
+ 

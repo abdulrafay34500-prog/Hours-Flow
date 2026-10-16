@@ -1,7 +1,7 @@
 import { Employes , deletionEmploy ,EmoloyFromBackend ,refreshEmployes} from "../data/employes.js";
 import {WaitingForBackend} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
-import {HistoryPageREnder} from "./historyPage.js";
+import {hoursBackEndHistory} from "./historyPage.js";
 
 
 
@@ -222,7 +222,7 @@ export function singleEmployDetail(employId) {
     HistoryButton.addEventListener('click',()=>{
         let employId=deleteEmployButton.dataset.employId
         mainPage.classList.add('clicking-history-button')
-         HistoryPageREnder(employId)
+         hoursBackEndHistory(employId)
     })
 
 }
