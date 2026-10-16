@@ -16,7 +16,7 @@ export const EmoloyFromBackend=async()=>{
     }
 }
  export let Employes=await EmoloyFromBackend()
- console.log(Employes)
+
 
  export async function refreshEmployes() {
     Employes = await EmoloyFromBackend();

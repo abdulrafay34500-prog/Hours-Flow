@@ -1,16 +1,37 @@
 import { Employes  , EmoloyFromBackend} from "../data/employes.js";
+import { hoursSheet  , HoursSheetFROMBackend} from "../data/timeSheet.js";
 
 waitingForBackrnd()
 async function waitingForBackrnd() {
-   await EmoloyFromBackend()
-   rendringWeekleyOverview()
+    // Fetch employees and timesheets separately
+        const employees = await EmoloyFromBackend();
+        const sheets = await HoursSheetFROMBackend();
+    
+   rendringWeekleyOverview(employees,sheets)
 }
 
 let WeekoffSet=0;
 
-function rendringWeekleyOverview() {
+ 
+function rendringWeekleyOverview(employees,sheets) {
+     let employWithHours=employees.map((employ)=>{
+      
+    let employHours={}
 
-    let startingDay=new Date()
+       sheets.forEach((sheet)=>{
+       
+        if(sheet.employID ==employ.id)
+           employHours[sheet.date]=sheet.hours
+       })
+
+        return {
+                ...employ,
+                Hours: employHours
+            };
+   })
+    console.log(employWithHours)
+
+   let startingDay=new Date()
 
     let day=startingDay.getDay()
 
@@ -68,7 +89,8 @@ function rendringWeekleyOverview() {
     })
     weekleyHeader+=weekDaysHTML
 
-    Employes.forEach((Employe ,index)=>{
+    
+    employWithHours.forEach((Employe ,index)=>{
 
         let TotalHours=0;
 
@@ -80,7 +102,7 @@ function rendringWeekleyOverview() {
 
     WeekleyReportHTML+=`
     <div class="Every-employ-details js-Every-employ-details-${Employe.Id}">
-        <div class="employ-name">${Employe.Name}</div>
+        <div class="employ-name">${Employe.name}</div>
         <input type="number" class="days-hours js-days-hours" data-day='0'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[0]] || 0}'>
         <input type="number"  class="days-hours js-days-hours" data-day='1' data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[1]] || 0}'>
         <input type="number"  class="days-hours js-days-hours" data-day='2' data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[2]] || 0}' >
@@ -121,7 +143,9 @@ function rendringWeekleyOverview() {
               rendringWeekleyOverview()
          })
     })
+        
 }
+
 
 let previousButton =document.querySelector('.js-previous-button')
 let NextButton =document.querySelector('.js-Next-button')
@@ -130,10 +154,13 @@ let NextButton =document.querySelector('.js-Next-button')
 previousButton.addEventListener('click' ,()=>{
     WeekoffSet--
    
-    rendringWeekleyOverview()
+    waitingForBackrnd()
 })
 NextButton.addEventListener('click' ,()=>{
     WeekoffSet++
     
-    rendringWeekleyOverview()
+    waitingForBackrnd()
 })
+    
+    
+ 
