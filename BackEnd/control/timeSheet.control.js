@@ -5,3 +5,26 @@ export const gettingAllHours=async(req,res)=>{
 
   res.json(allEmployHours)
 }
+
+export const updatingOrAddingHours=async(req,res)=>{
+  let allEmployHours=await employHoursSheet.findOneAndUpdate(
+      {
+        employID: Number(req.params.id),
+        date:req.body.date,
+      },
+      {
+          $set : {   
+          hours: Number(req.body.hours)
+          }
+      }
+    ,{
+        upsert: true, 
+        new: true,
+        runValidators: true
+      }
+  )
+
+  res.json(allEmployHours)
+}
+
+

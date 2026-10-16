@@ -103,13 +103,13 @@ function rendringWeekleyOverview(employees,sheets) {
     WeekleyReportHTML+=`
     <div class="Every-employ-details js-Every-employ-details-${Employe.Id}">
         <div class="employ-name">${Employe.name}</div>
-        <input type="number" class="days-hours js-days-hours" data-day='0'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[0]] || 0}'>
-        <input type="number"  class="days-hours js-days-hours" data-day='1' data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[1]] || 0}'>
-        <input type="number"  class="days-hours js-days-hours" data-day='2' data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[2]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='3'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[3]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='4'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[4]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='5'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[5]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='6'  data-employ-id='${Employe.Id}' value='${Employe.Hours[weekDays[6]] || 0}' >
+        <input type="number" class="days-hours js-days-hours" data-day='0'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[0]] || 0}'>
+        <input type="number"  class="days-hours js-days-hours" data-day='1' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[1]] || 0}'>
+        <input type="number"  class="days-hours js-days-hours" data-day='2' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[2]] || 0}' >
+        <input type="number" class="days-hours js-days-hours" data-day='3'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[3]] || 0}' >
+        <input type="number" class="days-hours js-days-hours" data-day='4'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[4]] || 0}' >
+        <input type="number" class="days-hours js-days-hours" data-day='5'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[5]] || 0}' >
+        <input type="number" class="days-hours js-days-hours" data-day='6'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[6]] || 0}' >
         <div>${TotalHours}</div>  
     </div>`
     })
@@ -132,15 +132,41 @@ function rendringWeekleyOverview(employees,sheets) {
              let dayIndex=SaveInput.dataset.day
              let date=weekDays[dayIndex]
              let hours = Number(SaveInput.value);
-             let employe=Employes.find((employ)=> employ.Id==EmployId)
+             
 
-             employe.Hours[date]=hours
+             updatingBackendHOURS(EmployId , date , hours)
+
+             async function updatingBackendHOURS(EmployId , date , hours) {
+                try{
+
+                    let HoursAndDate={
+                        date,hours
+                    }
+                   let response = await fetch(`http://localhost:3000/api/timeSheet/${EmployId}/updatingHours` , {
+                        method:'POST',
+                        headers:{
+                            'Content-Type':'application/json'
+                        },
+                        body:JSON.stringify(HoursAndDate)
+                    })
+
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
+
+                    waitingForBackrnd()
+                }catch(error){
+                    console.log(error.message)
+                }
+                
+             }
+
   
          
              
              localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
 
-              rendringWeekleyOverview()
+              
          })
     })
         
