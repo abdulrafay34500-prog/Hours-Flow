@@ -2,6 +2,7 @@ import { Employes , deletionEmploy ,EmoloyFromBackend ,refreshEmployes} from "..
 import {WaitingForBackend} from "./addingEmploy.js";
 import {addingEmployPage} from "./addingEmployPages.js";
 import {hoursBackEndHistory} from "./historyPage.js";
+import {HoursSheetFROMBackend} from "../data/timeSheet.js";
 
 
 
@@ -43,29 +44,35 @@ for (let day = 1; day <= numberOfDays; day++) {
 
   // Function Starting.
 
-
-
-   
- 
   
   export async function BackendWait(employID) {
-     await getitngSingleEmployBackend(employID)
-     singleEmployDetail()
+    let singleEmploye= await getitngSingleEmployBackend(employID)
+    let hoursSheet=await HoursSheetFROMBackend()
+
+    singleEmploye.Hours ??= {};
+
+        hoursSheet.forEach((hoursheet)=>{
+            if(singleEmploye.id==hoursheet.employID){
+                singleEmploye.Hours[hoursheet.date]=hoursheet.hours
+            }
+        })
+
+        console.log(singleEmploye)
+
+
+     singleEmployDetail(employID , singleEmploye)
   }
 
     let singleEmploye;
     export async function getitngSingleEmployBackend(employID) {
         let responce = await fetch(`http://localhost:3000/api/employes/${employID}`)
 
-        singleEmploye= await responce.json()
-    
-        
+        return responce.json()
+
     }
  
 
-export function singleEmployDetail(employId) {
-
-  
+export function singleEmployDetail(employId , singleEmploye) {
     
 
     let name=singleEmploye.name
@@ -75,21 +82,21 @@ export function singleEmployDetail(employId) {
        return word[0]
     }).join("")
    
-    /* Calculating Weekley Hours
+    // Calculating Weekley Hours
     let TotalWeekleyHours=0
     weekDays.forEach((days)=>{
-        TotalWeekleyHours+=Number(matchingEmploye.Hours[days] || 0)      
-    })*/
+        TotalWeekleyHours+=Number(singleEmploye.Hours[days] || 0)      
+    })
 
-    /* Calculating Monthly Hours
+    // Calculating Monthly Hours
     let TotalMonthlyHours=0
      monthDays.forEach((days)=>{
-        TotalMonthlyHours+=Number(matchingEmploye.Hours[days] || 0)      
-    })*/
+        TotalMonthlyHours+=Number(singleEmploye.Hours[days] || 0)      
+    })
 
-    /* Calculating Monthly Salary
+    // Calculating Monthly Salary
     let salary=0;
-    salary=TotalMonthlyHours * Number(matchingEmploye.HourleyWage)*/
+    salary=TotalMonthlyHours * Number(singleEmploye.hourleyWage)
 
  
     
@@ -110,17 +117,17 @@ export function singleEmployDetail(employId) {
                     <div class="employee-hours">
                         <div class="hours-box">
                             <span class="hours-label">Hours This Week</span>
-                            <strong>${ 120} <small>hrs</small></strong>
+                            <strong>${TotalWeekleyHours} <small>hrs</small></strong>
                         </div>
 
                         <div class="hours-box">
                             <span class="hours-label">Hours This Month</span>
-                            <strong>${120} <small>hrs</small></strong>
+                            <strong>${TotalMonthlyHours} <small>hrs</small></strong>
                         </div>
                     </div>
                     <div class="salary-div">
                             <span class="Salary-label">This Month Salary so far</span>
-                            <strong>${50000} <small>PKR</small></strong>
+                            <strong>${salary} <small>PKR</small></strong>
                     </div>
 
                     <div class="employee-info-section">
