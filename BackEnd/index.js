@@ -6,6 +6,7 @@ import cors from 'cors';
 
 
 import employRoute from './Routes/employes.Routes.js'
+import TimeSheetRoute from './Routes/timeSheet.routs.js'
 
 // Setting EJS
 app.set('view engine' ,'ejs')
@@ -16,6 +17,7 @@ app.use(cors());
 
 //Routes
 app.use('/api/employes' , employRoute)
+app.use('/api/timeSheet', TimeSheetRoute)
 
 
 // Server Running
@@ -27,7 +29,7 @@ const startingServer= async ()=>{
             console.log('Server started')
         })
     }catch(err){
-        console.error('Failed to connect to database:', error.message);
+        console.error('Failed to connect to database:', err.message);
     }
 }
 startingServer()

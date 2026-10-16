@@ -1,9 +1,13 @@
-import { Employes  } from "../data/employes.js";
+import { Employes  , EmoloyFromBackend} from "../data/employes.js";
 
-
+waitingForBackrnd()
+async function waitingForBackrnd() {
+   await EmoloyFromBackend()
+   rendringWeekleyOverview()
+}
 
 let WeekoffSet=0;
-rendringWeekleyOverview()
+
 function rendringWeekleyOverview() {
 
     let startingDay=new Date()

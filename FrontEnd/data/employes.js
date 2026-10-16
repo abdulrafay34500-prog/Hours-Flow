@@ -23,7 +23,6 @@ export const EmoloyFromBackend=async()=>{
 }
 export default Employes;
 
-
 let timeoutId;
 function ShowingErrorFunction(errorReason) {
             let addingEmployPage=document.querySelector('.AddingEmploye-main-page')

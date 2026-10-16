@@ -17,7 +17,7 @@ const employSchemaHoursSheet=new mongoose.Schema({
 })
 
 
-const employHoursSheet=mongoose.model('timeSheet',employSchemaHoursSheet)
+const employHoursSheet=mongoose.model('timeSheet',employSchemaHoursSheet , 'timeSheet')
 
 export default employHoursSheet ;
 
