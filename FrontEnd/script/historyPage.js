@@ -99,7 +99,7 @@ function MonthlyDivs(employId ,employWithHours) {
 
      let matchingEmploy=employWithHours.find((employ)=>employId==employ.id)
 
-     console.log(employWithHours.Hours)
+
    
     /// Making last 6 months Array
     let SixMonthsArray=[];
