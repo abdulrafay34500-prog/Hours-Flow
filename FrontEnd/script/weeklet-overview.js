@@ -29,7 +29,7 @@ function rendringWeekleyOverview(employees,sheets) {
                 Hours: employHours
             };
    })
-    console.log(employWithHours)
+
 
    let startingDay=new Date()
 
