@@ -4,7 +4,8 @@ import  mongoose from 'mongoose'
 const employSchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true
+        required: true,
+        unique:true
     },
     name: {
         type: String,

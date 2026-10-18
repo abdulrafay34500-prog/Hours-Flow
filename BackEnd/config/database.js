@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import 'dotenv/config';
 
 export function dataBase() {
-    mongoose.connect('mongodb://127.0.0.1:27017/Office')
+    mongoose.connect(process.env.MONGO_URL)
     .then(()=>{console.log('DataBase connected')})
 }
