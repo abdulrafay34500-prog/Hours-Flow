@@ -16,7 +16,7 @@ let WeekoffSet=0;
 function rendringWeekleyOverview(employees,sheets) {
      let employWithHours=employees.map((employ)=>{
       
-    let employHours={}
+        let employHours={}
 
        sheets.forEach((sheet)=>{
        
@@ -61,6 +61,7 @@ function rendringWeekleyOverview(employees,sheets) {
     let GoingMonth='';
 
     let weekleyHeader='<p class="Employ-header-text">Employess</p>';
+    let TotalHoursText='<p class="Employ-header-text">Weekley Total</p>';
 
     let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let months = [
@@ -85,9 +86,9 @@ function rendringWeekleyOverview(employees,sheets) {
          GoingMonth=`${months[date.getMonth()]} Report `
     
         
-    weekDaysHTML+=`<p>${dayNames[date.getDay()]} ${date.getDate()}</p> `
+         weekDaysHTML+=`<p>${dayNames[date.getDay()]} ${date.getDate()}</p> `
     })
-    weekleyHeader+=weekDaysHTML
+    weekleyHeader+=`${weekDaysHTML}  ${TotalHoursText}`
 
     
     employWithHours.forEach((Employe ,index)=>{

@@ -19,7 +19,6 @@ export const updatingOrAddingHours=async(req,res)=>{
       }
     ,{
         upsert: true, 
-        new: true,
         runValidators: true
       }
   )

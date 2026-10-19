@@ -57,7 +57,6 @@ for (let day = 1; day <= numberOfDays; day++) {
             }
         })
 
-        console.log(singleEmploye)
 
 
      singleEmployDetail(employID , singleEmploye)
