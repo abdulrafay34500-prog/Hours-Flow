@@ -63,6 +63,8 @@ function ClickingButtons() {
     })
 
      TotalNumberOfEmployes();
+     AllTotalMonthlyHours();
+     TotalPayroll();
 }
 
 export function TotalNumberOfEmployes() {
@@ -71,5 +73,21 @@ export function TotalNumberOfEmployes() {
         EmployCount+=Number(Employes.length);
         totalEmploye.innerHTML=EmployCount;
 }
+export async function AllTotalMonthlyHours() {
+    let totalMonthlyHours = document.querySelector('.js-Total-hours-numbers')
+        
+    let response = await fetch('http://localhost:3000/api/timeSheet/TotalMonthlyHours')
 
+    let hours=await response.json();
+
+    totalMonthlyHours.innerHTML=hours
+}
+export function TotalPayroll() {
+    let TotalPayroll = document.querySelector('.js-monthly-Payroll-Amount')
+        let hours=0;
+
+        
+
+        TotalPayroll.innerHTML=5000
+}
 
