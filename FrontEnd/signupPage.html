@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="CSS-files/sighnupPage.css">
+</head>
+<body>
+
+    <div class="signup-container">
+        <div class="signup-card">
+
+            <div class="logo"><img class="logo-img" src="logo/logo.png.png"></div>
+
+            <h1>Create Account On HourFlow</h1>
+            <p class="subtitle">
+                Join us today! Enter your details below.
+            </p>
+
+            <form action="#" method="post">
+
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                    <small>Use at least 8 characters.</small>
+                </div>
+
+                <button type="submit" class="signup-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="login-text">
+                Already have an account?
+                <a href="loginPage.html">Log in</a>
+            </p>
+
+            <p class="terms">
+                By signing up, you agree to our
+                <a href="#">Terms</a> and
+                <a href="#">Privacy Policy</a>.
+            </p>
+
+        </div>
+    </div>
+
+</body>
+</html>

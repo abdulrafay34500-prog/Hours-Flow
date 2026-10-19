@@ -1,8 +1,12 @@
 import express from 'express'
 let router =express.Router()
 
-import {usersFUN} from '../control/userControl.js'
+import {signup , login , logout} from '../control/userControl.js'
 
-router.get('/',usersFUN)
+router.post('/signup',signup)
+
+router.post('/login', login)
+
+router.post('/logout', logout)
 
 export default router;
