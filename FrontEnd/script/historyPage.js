@@ -169,24 +169,5 @@ function MonthlyDivs(employId ,employWithHours) {
     
 }
 
-/*
-db.timeSheet.insertMany([{
-    employID: 307,
-    date: '2026-09-01',
-    hours: 15
-  },{
-    employID: 307,
-    date: '2026-09-29',
-    hours: 15
-  },{
-    employID: 308,
-    date: '2026-09-01',
-    hours: 15
-  },{
-    employID: 308,
-    date: '2026-09-29',
-    hours: 15
-  }])
-    */
 
  

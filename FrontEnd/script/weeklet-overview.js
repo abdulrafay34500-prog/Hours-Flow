@@ -161,13 +161,7 @@ function rendringWeekleyOverview(employees,sheets) {
                 }
                 
              }
-
-  
-         
-             
-             localStorage.setItem('EmployDetails' , JSON.stringify(Employes))
-
-              
+            
          })
     })
         

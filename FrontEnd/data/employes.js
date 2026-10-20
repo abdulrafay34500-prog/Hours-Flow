@@ -128,6 +128,11 @@ export async function deletionEmploy(employId) {
                 method: 'DELETE'
             })
 
+    await fetch(`http://localhost:3000/api/timeSheet/${employId}/delete` ,{
+                method: 'DELETE'
+            })        
+
+
 }
 export async function updatingEmployInfo(employ) {  
     let id=document.querySelector('.js-id-input')

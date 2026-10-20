@@ -53,16 +53,12 @@ export const TotalMonthlyHours=async(req,res)=>{
 
   res.json(totalMonthlyHours[0]?.TotalHours?? 0)
 }
-/*
-export const TotalMonthlyPayroll=async(req,res)=>{
-  let monthlyPayroll = await employHoursSheet.aggregate([
-    {
-      $group:{
-        _id:null,
-        toalPay:{}
-      }
-    }
-  ])
-}
-*/
 
+export const deletingHoursHistory=async (req,res)=>{
+    try{
+        let deletedEmploy=await employHoursSheet.deleteMany({employID:req.params.id});
+        res.json(deletedEmploy)
+     }catch(error){
+       res.status(500).json({message:error.message}) 
+     }
+}
