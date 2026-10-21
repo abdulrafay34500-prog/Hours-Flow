@@ -26,6 +26,10 @@ app.use('/api/employes' , employRoute)
 app.use('/api/timeSheet', TimeSheetRoute)
 app.use('/api/user' , usersRoute )
 
+app.get('/', (req, res) => {
+    res.send('Hours-Flow server is working!');
+})
+
 
 // Server Running
 
