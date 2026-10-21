@@ -4,4 +4,7 @@ import 'dotenv/config';
 export function dataBase() {
     mongoose.connect(process.env.MONGO_URL)
     .then(()=>{console.log('DataBase connected')})
+    .catch((error) => {
+      console.log('Database connection failed:', error.message);
+    });
 }
