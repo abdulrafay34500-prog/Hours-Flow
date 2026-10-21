@@ -73,7 +73,7 @@ sighnupBTN.addEventListener('click' ,async (event)=>{
         }
 
         try{
-            let responce = await fetch('http://localhost:3000/api/user/signup' , {
+            let responce = await fetch('https://molasses-distorted-tiger.abasthan.app/api/user/signup' , {
                 method:'POST',
                 headers:{
                 'Content-Type':'application/json'
