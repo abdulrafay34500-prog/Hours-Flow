@@ -29,7 +29,7 @@ app.use('/api/user' , usersRoute )
 
 // Server Running
 
-let port=process.env.PORT
+let port=process.env.PORT || 3000
 
 
 const startingServer= async ()=>{
