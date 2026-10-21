@@ -61,7 +61,7 @@ loginBTN.addEventListener('click' ,async (event)=>{
         }
 
         try{
-            let responce = await fetch('http://localhost:3000/api/user/login' , {
+            let responce = await fetch('https://molasses-distorted-tiger.abasthan.app/api/user/login' , {
                 method:'POST',
                 headers:{
                 'Content-Type':'application/json'
