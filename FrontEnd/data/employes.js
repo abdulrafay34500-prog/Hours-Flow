@@ -1,7 +1,7 @@
 
 export const EmoloyFromBackend=async()=>{
   try {
-        const response = await fetch('http://localhost:3000/api/employes');
+        const response = await fetch('https://molasses-distorted-tiger.abasthan.app/api/employes');
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -80,7 +80,7 @@ export async function  AddingEmploy() {
             });
 
             if(!matchingId){
-                 const responce=await fetch('http://localhost:3000/api/employes' , {
+                 const responce=await fetch('https://molasses-distorted-tiger.abasthan.app/api/employes' , {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

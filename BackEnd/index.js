@@ -20,7 +20,6 @@ app.use(cors({
     credentials: true
 }));
 
-
 //Routes
 app.use('/api/employes' , employRoute)
 app.use('/api/timeSheet', TimeSheetRoute)
