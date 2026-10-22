@@ -1,7 +1,7 @@
 
 export const EmoloyFromBackend=async()=>{
   try {
-        const response = await fetch('https://molasses-distorted-tiger.abasthan.app/api/employes');
+        const response = await fetch('https://hours-flow-backend.vercel.app/api/employes');
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -16,9 +16,8 @@ export const EmoloyFromBackend=async()=>{
     }
 }
  export let Employes=await EmoloyFromBackend()
-
-
- export async function refreshEmployes() {
+ 
+export async function refreshEmployes() {
     Employes = await EmoloyFromBackend();
 }
 export default Employes;
@@ -80,7 +79,7 @@ export async function  AddingEmploy() {
             });
 
             if(!matchingId){
-                 const responce=await fetch('https://molasses-distorted-tiger.abasthan.app/api/employes' , {
+                 const responce=await fetch('https://hours-flow-backend.vercel.app/api/employes' , {
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -124,11 +123,11 @@ export function EmptyingInputs() {
 export async function deletionEmploy(employId) {
  
     
-    await fetch(`http://localhost:3000/api/employes/${employId}/delete` ,{
+    await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employId}/delete` ,{
                 method: 'DELETE'
             })
 
-    await fetch(`http://localhost:3000/api/timeSheet/${employId}/delete` ,{
+    await fetch(`https://hours-flow-backend.vercel.app/api/timeSheet/${employId}/delete` ,{
                 method: 'DELETE'
             })        
 
@@ -183,7 +182,7 @@ export async function updatingEmployInfo(employ) {
          if(!matchingId){
             
             try{
-                let updatingBackend=await fetch(`http://localhost:3000/api/employes/${employ.id}/update` , {
+                let updatingBackend=await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employ.id}/update` , {
                 method:'PUT',
                 headers:{
                     'Content-Type':'application/json'

@@ -1,7 +1,7 @@
 
 
 export async function HoursSheetFROMBackend(){
-    let hoursSheetJson= await fetch('https://molasses-distorted-tiger.abasthan.app/api/timeSheet')
+    let hoursSheetJson= await fetch('https://hours-flow-backend.vercel.app/api/timeSheet')
 
      let hoursSheet= await hoursSheetJson.json()
      return hoursSheet

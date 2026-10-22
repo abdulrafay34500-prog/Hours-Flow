@@ -143,7 +143,7 @@ function rendringWeekleyOverview(employees,sheets) {
                     let HoursAndDate={
                         date,hours
                     }
-                   let response = await fetch(`http://localhost:3000/api/timeSheet/${EmployId}/updatingHours` , {
+                   let response = await fetch(`https://hours-flow-backend.vercel.app/api/timeSheet/${EmployId}/updatingHours` , {
                         method:'POST',
                         headers:{
                             'Content-Type':'application/json'
