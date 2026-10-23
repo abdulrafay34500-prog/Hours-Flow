@@ -1,4 +1,6 @@
 import  express from 'express'
+import { authMiddleWare } from '../middleware/authMiddleware.js';
+
 const router=express.Router()
 
 import {gettingEmploy,
@@ -8,6 +10,8 @@ import {gettingEmploy,
         deletingEmploy,
         }
         from '../control/employControl.js'
+
+router.use(authMiddleWare);  
 
 // Showing All Employes        
 router.get('/',gettingEmploy)

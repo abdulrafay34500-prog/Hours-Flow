@@ -1,5 +1,6 @@
 import { Employes  , EmoloyFromBackend} from "../data/employes.js";
 import { hoursSheet  , HoursSheetFROMBackend} from "../data/timeSheet.js";
+import {sharingWeekleyHours} from "./shareWeekleyHours.js";
 
 waitingForBackrnd()
 async function waitingForBackrnd() {
@@ -170,6 +171,8 @@ function rendringWeekleyOverview(employees,sheets) {
 
 let previousButton =document.querySelector('.js-previous-button')
 let NextButton =document.querySelector('.js-Next-button')
+let shareButton=document.querySelector('.js-share-whatsapp')
+
 
 
 previousButton.addEventListener('click' ,()=>{
@@ -181,6 +184,9 @@ NextButton.addEventListener('click' ,()=>{
     WeekoffSet++
     
     waitingForBackrnd()
+})
+shareButton.addEventListener('click' ,()=>{
+    sharingWeekleyHours()
 })
     
     

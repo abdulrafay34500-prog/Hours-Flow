@@ -292,29 +292,43 @@
     
     width: 120px;
     height: 42px;
-
     border: none;
-
     border-radius: 9px;
-
     background-color: #2563eb;
-
     color: white;
-
     font-size: 15px;
-
     font-weight: 600;
-
     cursor: pointer;
-
 }
 .Previous-Next-button:hover{
     
     background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+}
+.share-button{
+      
+    width: 120px;
+    height: 42px;
+    border: none;
+    border-radius: 9px;
+    background-color: #07b83c;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+.share-button:hover{
+    background-color: #2be92b;
 
     transform: translateY(-2px);
 
-    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 6px 15px rgba(37, 235, 37, 0.25);
+}
+.share-button:active {
+
+    transform: translateY(0);
 }
 .Previous-Next-button:active {
 

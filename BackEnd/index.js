@@ -4,6 +4,7 @@ import  mongoose from 'mongoose'
 import {dataBase} from './config/database.js'
 import cors from 'cors';
 import 'dotenv/config'
+import cookieParser from 'cookie-parser';
 
 
 import employRoute from './Routes/employes.Routes.js'
@@ -15,6 +16,7 @@ app.set('view engine' ,'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
+app.use(cookieParser());
 app.use(cors({
     origin: [
         'http://127.0.0.1:5500',

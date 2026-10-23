@@ -1,7 +1,9 @@
 
 export const EmoloyFromBackend=async()=>{
   try {
-        const response = await fetch('https://hours-flow-backend.vercel.app/api/employes');
+        const response = await fetch('https://hours-flow-backend.vercel.app/api/employes',{
+               credentials: 'include'
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error: ${response.status}`);
@@ -84,6 +86,7 @@ export async function  AddingEmploy() {
                 headers:{
                     'Content-Type':'application/json'
                 },
+                 credentials: 'include',
                 body: JSON.stringify(newEmploy)
                 })
                  let main =document.querySelector('.main-addingEmploy-page')
@@ -124,11 +127,13 @@ export async function deletionEmploy(employId) {
  
     
     await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employId}/delete` ,{
-                method: 'DELETE'
+                method: 'DELETE',
+                 credentials: 'include'
             })
 
     await fetch(`https://hours-flow-backend.vercel.app/api/timeSheet/${employId}/delete` ,{
-                method: 'DELETE'
+                method: 'DELETE',
+                 credentials: 'include'
             })        
 
 
@@ -187,6 +192,7 @@ export async function updatingEmployInfo(employ) {
                 headers:{
                     'Content-Type':'application/json'
                 },
+                 credentials: 'include',
                 body: JSON.stringify(updatedEmploy)
                 })
 

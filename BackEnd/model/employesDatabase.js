@@ -2,6 +2,11 @@ import  mongoose from 'mongoose'
 
 
 const employSchema = new mongoose.Schema({
+    owner:{
+       type:mongoose.Schema.Types.ObjectId,
+       ref:'user',
+       required:true
+    },
     id: {
         type: Number,
         required: true,
