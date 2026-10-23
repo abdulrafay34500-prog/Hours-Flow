@@ -1,64 +1,95 @@
-import employHoursSheet from '../model/empluyHoursDatabase.js'
 
-export const gettingAllHours=async(req,res)=>{
-  let allEmployHours=await employHoursSheet.find()
+import mongoose from 'mongoose';
+import employHoursSheet from '../model/empluyHoursDatabase.js';
 
-  res.json(allEmployHours)
-}
+export const gettingAllHours = async (req, res) => {
+  try {
+    const allEmployHours = await employHoursSheet.find({
+      owner: req.userId
+    });
 
-export const updatingOrAddingHours=async(req,res)=>{
-  let allEmployHours=await employHoursSheet.findOneAndUpdate(
+    res.json(allEmployHours);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const updatingOrAddingHours = async (req, res) => {
+  try {
+    const employID = Number(req.params.id);
+    const date = req.body.date;
+    const hours = Number(req.body.hours);
+
+    const allEmployHours = await employHoursSheet.findOneAndUpdate(
       {
-        employID: Number(req.params.id),
-        date:req.body.date,
+        owner: req.userId,
+        employID,
+        date
       },
       {
-          $set : {   
-          hours: Number(req.body.hours)
-          }
-      }
-    ,{
-        upsert: true, 
+        $set: { hours },
+        $setOnInsert: {
+          owner: req.userId,
+          employID,
+          date
+        }
+      },
+      {
+        upsert: true,
+        new: true,
         runValidators: true
       }
-  )
+    );
 
-  res.json(allEmployHours)
-}
+    res.json(allEmployHours);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-export const TotalMonthlyHours=async(req,res)=>{
-  let now = new Date()
-  let year = now.getFullYear()
-  let month = String(now.getMonth()+1).padStart(2 , 0)
-  let thismonthstart = `${year}-${month}-01`
-  let nextMonth=new Date(year,now.getMonth()+1 , 1)
-  let thisMonthEnd =nextMonth.toISOString().slice(0,10)
+export const TotalMonthlyHours = async (req, res) => {
+  try {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
 
-  let totalMonthlyHours = await employHoursSheet.aggregate([
-     {
-      $match:{
-        date:{
-          $gte:thismonthstart,
-          $lt:thisMonthEnd
+    const thisMonthStart = `${year}-${month}-01`;
+    const nextMonth = new Date(year, now.getMonth() + 1, 1);
+    const thisMonthEnd = nextMonth.toISOString().slice(0, 10);
+
+    const totalMonthlyHours = await employHoursSheet.aggregate([
+      {
+        $match: {
+          owner: new mongoose.Types.ObjectId(req.userId),
+          date: {
+            $gte: thisMonthStart,
+            $lt: thisMonthEnd
+          }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          TotalHours: { $sum: '$hours' }
         }
       }
-     },
-      { 
-        $group:{
-          _id:null,
-          TotalHours:{$sum: "$hours"}
-        }
-      }
-  ])
+    ]);
 
-  res.json(totalMonthlyHours[0]?.TotalHours?? 0)
-}
+    res.json(totalMonthlyHours[0]?.TotalHours ?? 0);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-export const deletingHoursHistory=async (req,res)=>{
-    try{
-        let deletedEmploy=await employHoursSheet.deleteMany({employID:req.params.id});
-        res.json(deletedEmploy)
-     }catch(error){
-       res.status(500).json({message:error.message}) 
-     }
-}
+export const deletingHoursHistory = async (req, res) => {
+  try {
+    const deletedEmploy = await employHoursSheet.deleteMany({
+      owner: req.userId,
+      employID: Number(req.params.id)
+    });
+
+    res.json(deletedEmploy);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

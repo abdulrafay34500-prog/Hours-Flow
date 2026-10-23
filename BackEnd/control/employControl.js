@@ -75,27 +75,42 @@ export const addingNewEmploy = async (req, res) => {
     }
 };
 
-export const updatingEmploy =async (req,res)=>{
 
-        try{
-          let updatedEmploy=  await employDatabase.findOneAndUpdate(
-                {id :req.params.id},
-                {    id: Number(req.body.id),
-                    name: req.body.name,
-                    hourleyWage:Number(req.body.hourleyWage),
-                    shiftType: req.body.shiftType,
-                    jobRole:req.body.jobRole,
-                    email:req.body.email,
-                    PhoneNo:req.body.PhoneNo,
-                     joiningDate:req.body.joiningDate,                 
-                }
-            )
-           res.json(updatedEmploy)
-        }catch(error){
-           return res.render('server404Erroe',{message : error}) 
+export const updatingEmploy = async (req, res) => {
+    try {
+        const updatedEmploy = await employDatabase.findOneAndUpdate(
+            {
+                id: Number(req.params.id),
+                owner: req.userId
+            },
+            {
+                id: Number(req.body.id),
+                name: req.body.name,
+                hourleyWage: Number(req.body.hourleyWage),
+                shiftType: req.body.shiftType,
+                jobRole: req.body.jobRole,
+                email: req.body.email,
+                PhoneNo: req.body.PhoneNo,
+                joiningDate: req.body.joiningDate
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedEmploy) {
+            return res.status(404).json({
+                message: 'Employee not found'
+            });
         }
 
-}
+        res.json(updatedEmploy);
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
 
 export const deletingEmploy = async (req, res) => {
     try {

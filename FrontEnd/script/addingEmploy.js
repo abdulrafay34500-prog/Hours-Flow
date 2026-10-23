@@ -79,7 +79,11 @@ export function TotalNumberOfEmployes() {
 export async function AllTotalMonthlyHours() {
     let totalMonthlyHours = document.querySelector('.js-Total-hours-numbers')
         
-    let response = await fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours')
+    let response = await fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours',
+        {
+            credentials: 'include'
+        }
+    )
 
     let hours=await response.json();
 

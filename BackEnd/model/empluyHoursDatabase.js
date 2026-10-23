@@ -2,6 +2,11 @@ import  mongoose from 'mongoose'
 
 
 const employSchemaHoursSheet=new mongoose.Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true
+   },
   employID:{
     type:Number,
     required:true

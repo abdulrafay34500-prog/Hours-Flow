@@ -64,7 +64,11 @@ for (let day = 1; day <= numberOfDays; day++) {
 
     let singleEmploye;
     export async function getitngSingleEmployBackend(employID) {
-        let responce = await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employID}`)
+        let responce = await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employID}`,
+            {
+                 credentials: 'include'
+            }
+        )
 
         return responce.json()
 
