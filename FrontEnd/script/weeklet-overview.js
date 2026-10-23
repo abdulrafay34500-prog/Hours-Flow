@@ -149,6 +149,7 @@ function rendringWeekleyOverview(employees,sheets) {
                         headers:{
                             'Content-Type':'application/json'
                         },
+                        credentials: 'include',
                         body:JSON.stringify(HoursAndDate)
                     })
 
