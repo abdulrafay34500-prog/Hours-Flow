@@ -2,6 +2,7 @@ import { Employes  , EmoloyFromBackend} from "../data/employes.js";
 import { hoursSheet  , HoursSheetFROMBackend} from "../data/timeSheet.js";
 import {sharingWeekleyHours} from "./shareWeekleyHours.js";
 
+
 waitingForBackrnd()
 async function waitingForBackrnd() {
     // Fetch employees and timesheets separately
@@ -102,19 +103,23 @@ function rendringWeekleyOverview(employees,sheets) {
         
        
 
-    WeekleyReportHTML+=`
-    <div class="Every-employ-details js-Every-employ-details-${Employe.Id}">
-        <div class="employ-name">${Employe.name}</div>
-        <input type="number" class="days-hours js-days-hours" data-day='0'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[0]] || 0}'>
-        <input type="number"  class="days-hours js-days-hours" data-day='1' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[1]] || 0}'>
-        <input type="number"  class="days-hours js-days-hours" data-day='2' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[2]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='3'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[3]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='4'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[4]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='5'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[5]] || 0}' >
-        <input type="number" class="days-hours js-days-hours" data-day='6'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[6]] || 0}' >
-        <div>${TotalHours}</div>  
-    </div>`
+        WeekleyReportHTML+=`
+        <div class="Every-employ-details js-Every-employ-details-${Employe.Id}">
+            <div class="employ-name">${Employe.name}</div>
+            <input type="number" class="days-hours js-days-hours" data-day='0'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[0]] || 0}'>
+            <input type="number"  class="days-hours js-days-hours" data-day='1' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[1]] || 0}'>
+            <input type="number"  class="days-hours js-days-hours" data-day='2' data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[2]] || 0}' >
+            <input type="number" class="days-hours js-days-hours" data-day='3'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[3]] || 0}' >
+            <input type="number" class="days-hours js-days-hours" data-day='4'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[4]] || 0}' >
+            <input type="number" class="days-hours js-days-hours" data-day='5'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[5]] || 0}' >
+            <input type="number" class="days-hours js-days-hours" data-day='6'  data-employ-id='${Employe.id}' value='${Employe.Hours[weekDays[6]] || 0}' >
+            <div>${TotalHours}</div>  
+        </div>`
+
+       
+       
     })
+    sharingWeekleyHours(employWithHours , weekDays)
 
     document.querySelector('.js-Weekley-report-main-div')
     .innerHTML=WeekleyReportHTML;
@@ -172,9 +177,10 @@ function rendringWeekleyOverview(employees,sheets) {
 
 let previousButton =document.querySelector('.js-previous-button')
 let NextButton =document.querySelector('.js-Next-button')
-let shareButton=document.querySelector('.js-share-whatsapp')
-
-
+let weekleyReport=document.querySelector('.js-WeekeyReport-Button')
+const threeDots = document.querySelector('.three-dots');
+const dropdown = document.querySelector('.dropdown-menu');
+const body=document.body
 
 previousButton.addEventListener('click' ,()=>{
     WeekoffSet--
@@ -186,9 +192,20 @@ NextButton.addEventListener('click' ,()=>{
     
     waitingForBackrnd()
 })
-shareButton.addEventListener('click' ,()=>{
-    sharingWeekleyHours()
+threeDots.addEventListener('click', (event) => {
+    event.stopPropagation();
+     dropdown.classList.toggle('show');
+});
+body.addEventListener('click' ,()=>{
+    dropdown.classList.remove('show');
 })
+weekleyReport.addEventListener('click' ,()=>{
+    document.querySelector('.Weekley-overview-main-div')
+    .classList.add('cross-clicked')
+   
+})
+
+
     
     
  

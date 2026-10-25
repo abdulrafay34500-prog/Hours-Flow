@@ -7,14 +7,12 @@
     max-width: 1200px;
     min-height: 650px;
 
-    margin: 30px auto;
+    margin: 80px auto;
     padding: 25px;
-
     background-color: #f8fafc;
-
     border-radius: 20px;
-
     box-sizing: border-box;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -306,33 +304,53 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
 }
-.share-button{
-      
-    width: 120px;
-    height: 42px;
-    border: none;
-    border-radius: 9px;
-    background-color: #07b83c;
-    color: white;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
 
-}
-.share-button:hover{
-    background-color: #2be92b;
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 6px 15px rgba(37, 235, 37, 0.25);
-}
-.share-button:active {
-
-    transform: translateY(0);
-}
 .Previous-Next-button:active {
 
     transform: translateY(0);
+}
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.three-dots {
+  background: none;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+    border-radius: 8px;
+}
+
+.dropdown-menu button:hover {
+  background: #314df1;
+  color: white;
+}
+
+.dropdown-menu.show {
+  display: block;
 }
 /* ========================================
    MOBILE

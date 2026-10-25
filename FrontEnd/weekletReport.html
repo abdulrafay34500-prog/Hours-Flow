@@ -7,6 +7,7 @@
          <link rel="stylesheet" href="CSS-files/general.css">
          <link rel="stylesheet" href="CSS-files/sidebar.css">
          <link rel="stylesheet" href="CSS-files/weekley-overview.css">
+         <link rel="stylesheet" href="./CSS-files/shareWeekletreport.css">
         <title>HourFlow</title>
     </head>
     <body>
@@ -62,9 +63,15 @@
                         <p class="GoingMonth-Text jsGoingMonth-Text">
                             September Report 
                         </p>
-                        <button class="js-share-whatsapp share-button">
-                            Share on WhatsApp
-                        </button>
+                        <div class="menu-container">
+                            <button class="three-dots">⋮</button>
+
+                            <div class="dropdown-menu">
+                                <button class="js-WeekeyReport-Button">Make Weekley Report</button>
+                                <button>View Details</button>
+                                <button>Delete</button>
+                            </div>
+                        </div>
                        
                     </div>
                     <div class="Weekley-overview-header js-Weekley-overview-header">
@@ -74,6 +81,16 @@
 
 
                     </div>
+                    
+                    <div class="shared-weekley-report-background">
+                            <div class="report-container js-sharing-weekley-report-container">
+
+                                
+
+                            </div>                
+                    </div>
+                
+
             </div>
 
         </main>
@@ -81,4 +98,5 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="script/weeklet-overview.js" type="module"></script>
+    <script src="script/shareWeekleyHours.js" type="module"></script>
 </html>
