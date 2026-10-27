@@ -1,12 +1,31 @@
 
 export function sharingWeekleyHours(employWithHours , weekDays) {
+      let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+     ];
   
     let html='';
+    
+    let weekFirstdate=new Date(weekDays[0])
+     let weekLastdate=new Date(weekDays[6])
 
     html+=`<div class="report-header">
       <div>
         <h1>Weekly Shift Assignment</h1>
-        <p>19 October - 25 October 2026</p>
+        <p>${weekFirstdate.getDate()} ${months[weekFirstdate.getMonth()]} - 
+             ${weekLastdate.getDate()} ${months[weekLastdate.getMonth()]}</p>
       </div>
 
       <div class="brand">HOURS FLOW</div>
@@ -18,21 +37,14 @@ export function sharingWeekleyHours(employWithHours , weekDays) {
         <thead>
           <tr>
             <th>Employees</th>
-            <th>Mon 19</th>
-            <th>Tue 20</th>
-            <th>Wed 21</th>
-            <th>Thu 22</th>
-            <th>Fri 23</th>
-            <th>Sat 24</th>
-            <th>Sun 25</th>
-            <th>Total</th>
+            ${datesHeader(weekDays , dayNames , months) }          
           </tr>
         </thead>
 
         <tbody>
 
         
-          ${showingEmployHours(employWithHours)}
+          ${showingEmployHours(employWithHours , weekDays)}
 
          
         </tbody>
@@ -60,48 +72,110 @@ export function sharingWeekleyHours(employWithHours , weekDays) {
 
 } 
 
-function showingEmployHours(employWithHours) {
+function showingEmployHours(employWithHours , weekDays) {
   let hoursHTML=''
-  employWithHours.forEach(()=>{
+
+  employWithHours.forEach((employ)=>{
+
     hoursHTML+=`<tr>
-            <td class="employee-name">Alina</td>
+            <td class="employee-name">${employ.name}</td>
 
             <td>
-              <div class="shift">
-                <span>3 AM - 3 PM</span>
-                <small>12 hrs</small>
+              <div class="${employ.Hours[weekDays[0]] ? 'shift' : 'off'}">
+                <span>${employ.Hours[weekDays[0]]
+                   ? asigningShiftHours(employ ,0 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+                <small>${employ.Hours[weekDays[0]] ? `${employ.Hours[weekDays[0]]} hrs`: 'Off'}</small>
               </div>
             </td>
 
             <td>
-              <div class="shift">
-                <span>3 AM - 3 PM</span>
-                <small>12 hrs</small>
-              </div>
-            </td>
-
-            <td><div class="off">OFF</div></td>
-
-            <td>
-              <div class="shift">
-                <span>3 AM - 3 PM</span>
-                <small>12 hrs</small>
+              <div class="${employ.Hours[weekDays[1]] ? 'shift' : 'off'}">
+                <span>${employ.Hours[weekDays[1]]
+                   ? asigningShiftHours(employ ,1 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+                <small>${employ.Hours[weekDays[1]] ? `${employ.Hours[weekDays[1]]} hrs`: 'Off'}</small>
               </div>
             </td>
 
             <td>
-              <div class="shift">
-                <span>3 AM - 3 PM</span>
-                <small>12 hrs</small>
+              <div class="${employ.Hours[weekDays[2]] ? 'shift' : 'off'}">
+              <span>${employ.Hours[weekDays[2]]
+                   ? asigningShiftHours(employ ,2 , weekDays) || 'Hours not set '
+                   : ''}</span>
+               <small>${employ.Hours[weekDays[2]] ? `${employ.Hours[weekDays[2]]} hrs`: 'Off'}</small>
               </div>
             </td>
 
-            <td><div class="off">OFF</div></td>
-            <td><div class="off">OFF</div></td>
+            <td>
+              <div class="${employ.Hours[weekDays[3]] ? 'shift' : 'off'}">
+                <span>${employ.Hours[weekDays[3]]
+                   ? asigningShiftHours(employ ,3 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+                <small>${employ.Hours[weekDays[3]] ? `${employ.Hours[weekDays[3]]} hrs`: 'Off'}</small>
+              </div>
+            </td>
 
-            <td class="total-hours">48 hrs</td>
+            <td>
+              <div class="${employ.Hours[weekDays[4]] ? 'shift' : 'off'}">
+                <span>${employ.Hours[weekDays[4]]
+                   ? asigningShiftHours(employ ,4 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+                <small>${employ.Hours[weekDays[4]] ? `${employ.Hours[weekDays[4]]} hrs`: 'Off'} </small>
+              </div>
+            </td>
+
+            <td>
+              <div class="${employ.Hours[weekDays[5]] ? 'shift' : 'off'}">
+              <span>${employ.Hours[weekDays[5]]
+                   ? asigningShiftHours(employ ,5 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+               <small>${employ.Hours[weekDays[5]] ? `${employ.Hours[weekDays[5]]} hrs`: 'Off'} </small>
+              </div>
+            </td>
+
+            <td>
+              <div class="${employ.Hours[weekDays[6]] ? 'shift' : 'off'}">
+              <span>${employ.Hours[weekDays[6]]
+                   ? asigningShiftHours(employ ,6 , weekDays)|| 'Hours not set '
+                   : ''}</span>
+               <small>${employ.Hours[weekDays[6]] ? `${employ.Hours[weekDays[6]]} hrs` : 'Off' }</small>
+              </div>
+            </td>
+
+            
                </tr>`
   })
 
   return hoursHTML
+}
+
+function asigningShiftHours(employ , index , weekDays){
+  let morningshift12hrs='3am - 3pm'
+  let morningshift9hrs='6am - 3pm'
+  let eveningshift12hrs='3pm - 3am'
+  let eveningshift9hrs='3pm - 12am'
+
+  if(employ.shiftType === 'Morning' && employ.Hours[weekDays[index]] == 12){
+    return  morningshift12hrs
+  }else  if(employ.shiftType === 'Morning' && employ.Hours[weekDays[index]] == 9){
+    return  morningshift9hrs
+  }else if(employ.shiftType === 'Evening' && employ.Hours[weekDays[index]] == 12){
+    return  eveningshift12hrs
+  }else  if(employ.shiftType === 'Evening' && employ.Hours[weekDays[index]] == 9){
+    return  eveningshift9hrs
+  }
+ 
+}
+
+function datesHeader(weekDays , dayNames , months){
+  let html=''
+  weekDays.forEach((days)=>{
+      let date=new Date(days)
+     html+= `<th>
+        ${dayNames[date.getDay()]} ${date.getDate()}
+      </th>`
+  })
+
+  return html;
 }

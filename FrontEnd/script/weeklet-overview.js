@@ -81,12 +81,13 @@ function rendringWeekleyOverview(employees,sheets) {
     "December"
      ];
     
+     // geting going month
+     let date=new Date(weekDays[0])
+     GoingMonth=`${months[date.getMonth()]} Report `
      
+     // generating dates and day html for header
     weekDays.forEach((days ,i)=>{
         let date=new Date(days)
-        
-         GoingMonth=`${months[date.getMonth()]} Report `
-    
         
          weekDaysHTML+=`<p>${dayNames[date.getDay()]} ${date.getDate()}</p> `
     })
