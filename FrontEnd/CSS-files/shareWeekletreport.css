@@ -27,7 +27,7 @@ body {
 }
 .report-container {
   background: rgb(255, 255, 255);
-  padding: 55px;
+  padding: 25px;
   border-radius: 16px;
   max-width: 1500px;
   position: relative;
@@ -35,7 +35,7 @@ body {
 }
 .weekley-cross-sighn{
   position: absolute;
-  top: 10px;
+  top: 7px;
   right: 20px;
   font-size: 30px;
   background-color: #f6f6f8;
@@ -102,7 +102,7 @@ body {
 
 .shift-table td {
   background: #f8fafc;
-  padding: 11px 8px;
+  padding: 6px 8px;
   font-size: 13px;
 }
 
@@ -129,7 +129,7 @@ body {
   background: #eff6ff;
   border: 1px solid #dbeafe;
   border-radius: 8px;
-  padding: 10px 5px;
+  padding: 4px 5px;
 
   display: flex;
   flex-direction: column;
@@ -181,22 +181,6 @@ body {
 
 /* Share Button */
 
-.share-btn {
-  display: block;
-  margin: 25px auto;
-  padding: 13px 28px;
-  border: none;
-  border-radius: 9px;
-  background: #2563eb;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.share-btn:hover {
-  background: #1d4ed8;
-}
 
 .js-share-whatsapp {
     display: flex;
@@ -209,8 +193,8 @@ body {
     border-radius: 8px;
     cursor: pointer;
     position: absolute;
-    bottom: 10px;
-    right: 55px;
+    bottom: 65px;
+    right: 32px;
 }
 
 .js-share-whatsapp svg {

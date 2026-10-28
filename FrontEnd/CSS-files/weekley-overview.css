@@ -7,7 +7,7 @@
     max-width: 1200px;
     min-height: 650px;
 
-    margin: 80px auto;
+    margin: 10px auto;
     padding: 25px;
     background-color: #f8fafc;
     border-radius: 20px;
@@ -84,24 +84,15 @@
 .Every-employ-details {
 
     width: 100%;
-    min-height: 70px;
-
+    min-height: 60px;
     display: grid;
-
     grid-template-columns: 2.5fr repeat(8, 1fr);
-
     align-items: center;
-
     background-color: white;
-
     border-radius: 14px;
-
-    margin-bottom: 10px;
-
-    padding: 8px 0;
-
+    margin-bottom: 0px;
+    padding: 1px 0;
     box-sizing: border-box;
-
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 
     transition: transform 0.2s ease,
@@ -140,41 +131,26 @@
 ======================================== */
 
 .days-hours {
-
     width: 55px;
     height: 38px;
-
     margin: auto;
-
     text-align: center;
-
     font-size: 15px;
-
     font-weight: 500;
-
     color: #1e293b;
-
     background-color: #f8fafc;
-
     border: 1px solid #e2e8f0;
-
     border-radius: 9px;
-
     outline: none;
-
     box-sizing: border-box;
-
     transition: 0.2s;
 }
-
 
 /* Remove browser arrows */
 
 .days-hours::-webkit-inner-spin-button,
 .days-hours::-webkit-outer-spin-button {
-
     -webkit-appearance: none;
-
     margin: 0;
 }
 
@@ -182,11 +158,8 @@
 /* Input focus */
 
 .days-hours:focus {
-
     background-color: white;
-
     border-color: #3b82f6;
-
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
 }
 
@@ -194,7 +167,6 @@
 /* Input hover */
 
 .days-hours:hover {
-
     border-color: #94a3b8;
 }
 
@@ -207,23 +179,14 @@
 
     width: 55px;
     height: 38px;
-
     margin: auto;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     background-color: #eff6ff;
-
     color: #2563eb;
-
     border-radius: 9px;
-
     font-size: 15px;
-
     font-weight: 700;
 }
 
@@ -235,25 +198,15 @@
 .Weekley-report-main-div {
 
     width: 100%;
-
     min-height: 500px;
-
     padding: 0;
-
     box-sizing: border-box;
-
     background-color: transparent;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: stretch;
-
     justify-content: flex-start;
-
-    row-gap: 10px;
-
+    row-gap: 5px;
     overflow-y: auto;
 }
 
