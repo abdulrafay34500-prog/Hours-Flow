@@ -93,7 +93,10 @@ function rendringWeekleyOverview(employees,sheets) {
     })
     weekleyHeader+=`${weekDaysHTML}  ${TotalHoursText}`
 
-    
+     employWithHours.sort((a , b)=>{
+       return a.shiftType=='Morning'?-1 : 1
+    })
+
     employWithHours.forEach((Employe ,index)=>{
 
         let TotalHours=0;
