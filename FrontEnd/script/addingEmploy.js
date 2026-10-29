@@ -14,6 +14,9 @@ export async function WaitingForBackend(params) {
 
 export function renderEmployDetails() {
     let EmployHTML='';
+    Employes.sort((a , b)=>{
+       return a.shiftType=='Morning'?-1 : 1
+    })
 
     Employes.forEach((employ)=>{
     EmployHTML+=` 
