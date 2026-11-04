@@ -3,20 +3,34 @@ import employImg from './logo&Img/employ.png'
 import clockImg from './logo&Img/clock.png'
 import currencyImg from './logo&Img/rupee.png'
 import { useState ,useEffect  } from 'react'
+import Header from './components/Header'
+import SideBar from './components/SideBar'
 function EmployeePage() {
     let [employes ,setEmployes]=useState([])
+    let [totalMonthlyHours , setTotalMonthlyHours]=useState(0)
 
     useEffect(()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
                credentials: 'include'
-        }).then((responce)=>{ return responce.json})
+        }).then((responce)=>{ return responce.json()})
         .then((json)=>{setEmployes(json)})
+
+        fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours',
+        {
+            credentials: 'include'
+        }).then((responce)=>responce.json())
+        .then((json)=>{setTotalMonthlyHours(json)})
+    })
+    employes.sort((a)=>{
+        return a.shiftType=='Morning'?-1 : 1
     })
 
-    console.log(employes)
 
     return(
-        <main class="main-addingEmploy-page">
+        <>
+        <Header />
+        <SideBar />
+        <main className="main-addingEmploy-page">
 
             <div className="combining-AddingAndSingle-Employ-div  js-combining-AddingAndSingle-Employ-div">
                 <div className="Adding-Employe-main-div">
@@ -34,12 +48,12 @@ function EmployeePage() {
                         <div className="Total-employ-div">
                             <img className="employ-icon" src={employImg}/>
                             <p className="total-employ-text">Total Employes</p>
-                            <p className="Employe-numbers js-Employe-numbers">0</p>
+                            <p className="Employe-numbers js-Employe-numbers">{employes.length || 0}</p>
                         </div>
                         <div className="Total-Hours-div">
                             <img className="clock-icon" src={clockImg}/>
                             <p className="total-Hours-text">Total Hours (This Month)</p>
-                            <p className="Total-hours-numbers js-Total-hours-numbers">0</p>
+                            <p className="Total-hours-numbers js-Total-hours-numbers">{totalMonthlyHours}</p>
                         </div>
                         <div className="Total-Payroll-div">
                             <img className="currency-icon" src={currencyImg}/>
@@ -54,17 +68,20 @@ function EmployeePage() {
                             <p className="Employ-ShiftTypee">Shift Type</p>
                         </div>
                         <div className="added-Employes-details js-added-Employes-details">
-                                <div class="employ-detail js-employ-detail-click">
-                                    <div class="ID">
-                                        307
+                            {employes.map((employ)=>(
+                                 <div key={employ.id} className="employ-detail js-employ-detail-click">
+                                    <div className="ID">
+                                        {employ.id}
                                     </div>
-                                    <div class="Employ-name">
-                                        Rafay
+                                    <div className="Employ-name">
+                                        {employ.name}
                                     </div>
-                                    <div class="shift-type">
-                                        Morning
+                                    <div className="shift-type">
+                                        {employ.shiftType}
                                     </div>
                                 </div>
+                            ))}
+
                         </div>
 
                     </div>
@@ -91,6 +108,7 @@ function EmployeePage() {
             </div>
 
         </main>
+        </>
     )
 }
 

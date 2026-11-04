@@ -1,16 +1,13 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route, } from "react-router-dom"
 import EmployeePage from "./EmployeePage"
-import Header from './components/Header'
-import SideBar from './components/SideBar'
-
+import Login from './LoginPage'
 function App() {
  
   return (
     <BrowserRouter>
-      <Header />
-      <SideBar />
       <Routes>
-        <Route path="/" element={<EmployeePage />} />
+        <Route path="/employesPage" element={<EmployeePage />} />
+        <Route path="/"  element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

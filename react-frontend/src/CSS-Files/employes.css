@@ -10,13 +10,10 @@
     margin-left: 30px;
 }
 .Adding-Employe-main-div {
-    width: calc(100% - 50px);
-    max-width: 1200px;
-
+    width: 100%;
     min-height: 700px;
-
-    margin: 30px auto;
-
+    margin-top: 130px;
+    margin-left: 220px;
     padding: 0;
 
     box-sizing: border-box;

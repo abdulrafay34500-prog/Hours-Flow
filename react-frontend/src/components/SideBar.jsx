@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 import '../CSS-Files/sidebar.css'
 function SideBar() {
     return(
-        <sidebar>
+        <div>
             <div className="middle-sidebar">
                 <div className="Dashboard-div">
                     <img className="dashboard-image" src={dashbordImg} alt="My Image"/>
@@ -27,7 +27,7 @@ function SideBar() {
                 </a>
 
             </div>
-        </sidebar>
+        </div>
     )
 }
 
