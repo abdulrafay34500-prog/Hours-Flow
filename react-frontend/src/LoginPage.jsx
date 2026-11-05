@@ -1,6 +1,7 @@
 import {  useState } from 'react'
 import './CSS-Files/loginpage.css'
 import componyLogo from './logo&Img/logo.png.png'
+import {Link} from 'react-router-dom'
 function Login() {
     let [email ,setEmail]=useState('')
     let [password ,setPassword]=useState('')
@@ -87,7 +88,7 @@ function Login() {
 
             <p className="signup-text">
                 Don't have an account?
-                <a href="signupPage.html">Sign up</a>
+                <Link to="/Sighnuppage">Sign up</Link>
             </p>
 
             <p className="terms">
