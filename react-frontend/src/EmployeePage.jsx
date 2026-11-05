@@ -5,6 +5,7 @@ import currencyImg from './logo&Img/rupee.png'
 import { useState ,useEffect  } from 'react'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
+import { Link } from 'react-router-dom'
 function EmployeePage() {
     let [employes ,setEmployes]=useState([])
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0)
@@ -40,9 +41,11 @@ function EmployeePage() {
                             <p className="manage-team-text">Manage your team members and their details</p>
 
                         </div>
-                        <button className="add-button js-add-employ-button">
+                        <Link to='/addingEmploypage'>
+                           <button className="add-button js-add-employ-button">
                             + Add Employe 
-                        </button>
+                          </button>
+                        </Link>                  
                     </div>
                     <div className="employ-hours-payroll-div">
                         <div className="Total-employ-div">
@@ -95,9 +98,7 @@ function EmployeePage() {
 
             </div>
 
-            <div className="AddingEmploye-main-page js-AddingEmploye-main-page">
-                    
-            </div>
+            
            
             <div className="delete-popup js-delete-popup">
 
