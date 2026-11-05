@@ -8,6 +8,7 @@ const employSchema = new mongoose.Schema({
        required:true
     },
     id: {
+        type: String,
         required: true,
     },
     name: {
