@@ -19,7 +19,7 @@ function AddingEmploy() {
             credentials: 'include'
         }).then((responce)=>{ return responce.json()})
         .then((json)=>{setEmployes(json)})
-    });
+    },[]);
     let savingUsestate=(e)=>{
        let {name , value}=e.target
        setEmployForm({
@@ -43,7 +43,7 @@ function AddingEmploy() {
             credentials: 'include',
             body:JSON.stringify(employFrom)
            })
-             let data=await responce;
+             let data=await responce.json();
 
           if(responce.ok && data){
             window.location.href='/employesPage'
