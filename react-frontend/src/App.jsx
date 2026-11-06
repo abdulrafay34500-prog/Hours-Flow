@@ -3,6 +3,8 @@ import EmployeePage from "./EmployeePage"
 import Login from './LoginPage'
 import AddingEmploy from './components/AddingEmploy'
 import SighnupPage from './SighnupPage'
+import EditEmploy from './components/EditEmploy'
+
 
 function App() {
  
@@ -13,6 +15,8 @@ function App() {
         <Route path="/employesPage" element={<EmployeePage />} />
         <Route path="/addingEmploypage"  element={<AddingEmploy />} />
         <Route path='/Sighnuppage'  element={<SighnupPage />}/>
+        <Route path='/editemploy'  element={<EditEmploy />}/>
+        editEmploy
       </Routes>
     </BrowserRouter>
   )

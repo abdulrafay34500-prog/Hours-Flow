@@ -6,9 +6,14 @@ import { useState ,useEffect  } from 'react'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
 import { Link } from 'react-router-dom'
+import SingleemployDetail from './components/SingleemployDetail'
+
 function EmployeePage() {
-    let [employes ,setEmployes]=useState([])
-    let [totalMonthlyHours , setTotalMonthlyHours]=useState(0)
+    let [employes ,setEmployes]=useState([]);
+    let [employTimeSheet ,setEmployTimeSheet]=useState([]);
+    let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
+    let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
+     let [ selectEmploy , setSelectEmploy]=useState(null);
 
     useEffect(()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -21,11 +26,19 @@ function EmployeePage() {
             credentials: 'include'
         }).then((responce)=>responce.json())
         .then((json)=>{setTotalMonthlyHours(json)})
-    })
+
+        fetch('https://hours-flow-backend.vercel.app/api/timeSheet',
+        {
+            credentials: 'include'
+        }).then((responce)=>responce.json())
+        .then((json)=>{setEmployTimeSheet(json)})
+    },[]);
+
+
+
     employes.sort((a)=>{
         return a.shiftType=='Morning'?-1 : 1
-    })
-
+    });
 
     return(
         <>
@@ -72,7 +85,9 @@ function EmployeePage() {
                         </div>
                         <div className="added-Employes-details js-added-Employes-details">
                             {employes.map((employ)=>(
-                                 <div key={employ.id} className="employ-detail js-employ-detail-click">
+                                 <div key={employ.id} className="employ-detail js-employ-detail-click"
+                                  onClick={()=>{setSingleEmployPopup(true) ; setSelectEmploy(employ)}}
+                                 >
                                     <div className="ID">
                                         {employ.id}
                                     </div>
@@ -90,11 +105,9 @@ function EmployeePage() {
                     </div>
                 </div>
                
-                <div className="Single-employ-detail js-Single-employ-detail">
-
-
-
-                </div>
+                {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
+                 employ={selectEmploy} hoursSheet={employTimeSheet}
+                />}
 
             </div>
 

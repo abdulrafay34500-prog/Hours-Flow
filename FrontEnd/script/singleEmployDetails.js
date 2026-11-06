@@ -77,7 +77,7 @@ for (let day = 1; day <= numberOfDays; day++) {
 
 export function singleEmployDetail(employId , singleEmploye) {
     
-
+  console.log(singleEmploye)
     let name=singleEmploye.name
     
     let initials=name.split(" ")

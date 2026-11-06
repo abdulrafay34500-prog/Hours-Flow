@@ -338,33 +338,18 @@
 
 
 .Error-notification {
-
     position: fixed;
-
     bottom: 100px;
     right: 50px;
-
     width: 330px;
-
     min-height: 90px;
-
     padding: 18px 20px;
-
     box-sizing: border-box;
-
     background-color: white;
-
     border-radius: 12px;
-
     /* Red line on left */
     border-left: 4px solid #ef4444;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-
-    display: none;
-
     animation: moveErrorBox 0.3s ease;
-
     z-index: 3000;
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
 import { Link } from 'react-router-dom'
 
@@ -13,13 +13,20 @@ function AddingEmploy() {
         joiningDate:'N/A',
         shiftType:'Morning',
     });
+
     let [employes ,setEmployes]=useState([]);
+    let [error ,setError]=useState({
+        exist:false,
+        reason:''
+    });
+
     useEffect(()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
             credentials: 'include'
         }).then((responce)=>{ return responce.json()})
         .then((json)=>{setEmployes(json)})
     },[]);
+
     let savingUsestate=(e)=>{
        let {name , value}=e.target
        setEmployForm({
@@ -29,8 +36,10 @@ function AddingEmploy() {
        )
     };
 
+    let timeOut = useRef(null);
     let SavingEmploy=async(e)=>{
         e.preventDefault()
+        clearTimeout(timeOut.current)
         let matchingEmploy=employes.find((emp)=>emp.id == employFrom.id)
         
         if(Object.values(employFrom).every(Boolean) && !matchingEmploy){
@@ -52,27 +61,28 @@ function AddingEmploy() {
             console.log(err.message)
           }
         }else if(matchingEmploy){
-            ShowingErrorFunction('This employee ID is already taken')
+            setError({
+                exist:true,
+                reason:'This employee ID is already taken'
+            })
         }else{
-            ShowingErrorFunction('Please Enter all Details')
+             setError({
+                exist:true,
+                reason:'Please Enter all Details'
+            })
         }
+
+        timeOut.current=setTimeout(()=>{
+            setError({
+                exist:false,
+                reason:''
+            })
+        },2000)
         
     };
-    let timeoutId;
-    function ShowingErrorFunction(errorReason) {
-            let addingEmployPage=document.querySelector('.AddingEmploye-main-page')
-            let errorText =document.querySelector('.js-Error-reason')
-            addingEmployPage.classList.add('showingError')
 
-            errorText.innerHTML=errorReason
-            
-                clearTimeout(timeoutId)
-
-               timeoutId = setTimeout(()=>{
-                 clearTimeout(timeoutId)
-                  addingEmployPage.classList.remove('showingError')
-               },2000)
-    };
+    
+   
     return(
     <form className="AddingEmploye-main-page js-AddingEmploye-main-page" onSubmit={SavingEmploy}>
         <div className="adding-employ-div">
@@ -137,10 +147,13 @@ function AddingEmploy() {
                 ✖         
             </Link>                  
         </div>
-        <div className="Error-notification">
+        {error.exist &&
+           <div className="Error-notification">
             <p className="Error-Text">Error</p>
-            <p className="Error-reason js-Error-reason"></p>
-        </div>         
+            <p className="Error-reason js-Error-reason">{error.reason}</p>
+          </div>  
+        }
+              
     </form>
     )
 }

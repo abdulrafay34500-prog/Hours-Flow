@@ -32,7 +32,7 @@ function SighnupPage(params) {
             let data =await responce.json()
 
             if(responce.ok && data.success){
-                 window.location.href='./employesPage'
+                 window.location.href='/'
             }else{
                 alert(data.message)
             }
