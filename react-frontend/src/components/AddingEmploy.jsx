@@ -1,8 +1,7 @@
 import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
-import { Link } from 'react-router-dom'
 
-function AddingEmploy() {
+function AddingEmploy({setAddingEmployPage}) {
     let [employFrom ,setEmployForm]=useState({
         id: '',
         name: '',
@@ -143,9 +142,11 @@ function AddingEmploy() {
             <button className="Save-button js-save-update-button">
                 Save
             </button>
-            <Link to="/employesPage" className="Cross-sign js-Cross-sign">              
+            <div className="Cross-sign js-Cross-sign"
+            onClick={()=>setAddingEmployPage(false)}
+            >              
                 ✖         
-            </Link>                  
+            </div>                  
         </div>
         {error.exist &&
            <div className="Error-notification">

@@ -1,6 +1,5 @@
-import { useEffect, useState , useRef } from 'react'
+import { useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
-import { Link , useLocation} from 'react-router-dom'
 
 function EditEmploy({setEditEmployPage , SingleEmploy}) {
     let [employFrom ,setEmployForm]=useState({
@@ -14,7 +13,6 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
         shiftType:'Morning',
     });
 
-    let [employes ,setEmployes]=useState([]);
     let [error ,setError]=useState({
         exist:false,
         reason:''
@@ -29,7 +27,6 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
        )
     };
 
-    console.log(employFrom)
 
     let timeOut = useRef(null);
     let SavingEmploy=async(e)=>{
@@ -75,10 +72,6 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
         },2000)
         
     };
-
-    let location=useLocation()
-    
-    const employ =location.state?.employ
    
     return(
     <form className="AddingEmploye-main-page js-AddingEmploye-main-page" onSubmit={SavingEmploy}>
@@ -140,9 +133,9 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
             <button className="Save-button js-save-update-button">
                 Save
             </button>
-            <Link  className="Cross-sign" onClick={()=>setEditEmployPage(false)}>              
+            <div  className="Cross-sign" onClick={()=>setEditEmployPage(false)}>              
                 ✖         
-            </Link>                  
+            </div>                  
         </div>
         {error.exist &&
            <div className="Error-notification">

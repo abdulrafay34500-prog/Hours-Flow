@@ -5,15 +5,16 @@ import currencyImg from './logo&Img/rupee.png'
 import { useState ,useEffect  } from 'react'
 import Header from './components/Header'
 import SideBar from './components/SideBar'
-import { Link } from 'react-router-dom'
 import SingleemployDetail from './components/SingleemployDetail'
+import AddingEmploy from './components/AddingEmploy'
 
 function EmployeePage() {
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
-     let [ selectEmploy , setSelectEmploy]=useState(null);
+    let [ selectEmploy , setSelectEmploy]=useState(null);
+    let [addingEmployPage ,setAddingEmployPage]=useState(false)
 
     useEffect(()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -53,12 +54,12 @@ function EmployeePage() {
                             <p className="employes-text">Employees</p>
                             <p className="manage-team-text">Manage your team members and their details</p>
 
-                        </div>
-                        <Link to='/addingEmploypage'>
-                           <button className="add-button js-add-employ-button">
+                        </div>                       
+                           <button className="add-button js-add-employ-button"
+                           onClick={()=>setAddingEmployPage(true)}
+                           >
                             + Add Employe 
-                          </button>
-                        </Link>                  
+                          </button>                                      
                     </div>
                     <div className="employ-hours-payroll-div">
                         <div className="Total-employ-div">
@@ -108,15 +109,12 @@ function EmployeePage() {
                 {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
                  employ={selectEmploy} hoursSheet={employTimeSheet}
                 />}
+                {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
+                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} />
+                </div>
+                }
 
-            </div>
-
-            
-           
-            <div className="delete-popup js-delete-popup">
-
-            </div>
-           
+            </div> 
             <div  className="js-history-page-popup">
                 
             </div>

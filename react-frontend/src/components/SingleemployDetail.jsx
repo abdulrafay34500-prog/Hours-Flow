@@ -2,7 +2,6 @@ import { useState } from 'react';
 import '../CSS-Files/singleEmployDetail.css'
 import weekDays from '../commonFun/gettingWeekleyDates'
 import monthDays from '../commonFun/gettingMonthlydates'
-import { Link , useNavigate } from 'react-router-dom'
 import EditEmploy from './EditEmploy'
 
 
@@ -90,37 +89,18 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
 
             <div className="info-row">
                 <span>Hourly Rate</span>
-                <strong>PKR ${employ.hourleyWage} / hour</strong>
+                <strong>PKR {employ.hourleyWage} / hour</strong>
             </div>
         </div>
 
         <div className="edit-delete-button-div">
-            <Link onClick={()=>setEditEmployPage(true)}>
-             <button className="edit-button js-edit-button">Edit</button>
-            </Link>
+             <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
             <button className="History-button js-History-button" >History</button>
-            <button className="delete-button js-delete-button">Delete</button>
+            <button className="delete-button js-delete-button" onClick={()=>setDeletePop(true)}>Delete</button>
         </div>`;
 
         {
-        deletePop &&     
-            <div className="delete-popup-box">
-                <h2>Delete Employee?</h2>
-                <p>Are you sure you want to Remove ?</p>
-                <p className="delete-warning">
-                    This action cannot be undone.
-                </p>
-                <div className="delete-popup-buttons">
-                    <button className="cancel-delete-button js-cancel-delete">
-                        Cancel
-                    </button>
-                    <button className="confirm-delete-button js-confirm-delete" 
-                
-                    >
-                        Delete
-                    </button>
-                </div>
-        </div>
+        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     
         }
 
          <div style={{ display: editEmployPage ? 'block' : 'none' }}>
@@ -130,5 +110,46 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
     </div>
    )
 }
+function DeletePopUp({setDeletePop ,employ}) {
+   let deleteEmployFun=async()=>{
+        try{
+            let responce =await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employ.id}/delete` ,{
+                        method: 'DELETE',
+                        credentials: 'include'
+                    })
 
+            await fetch(`https://hours-flow-backend.vercel.app/api/timeSheet/${employ.id}/delete` ,{
+                        method: 'DELETE',
+                        credentials: 'include'
+                    }) 
+            console.log(responce.status)   
+            console.log(await responce.json())      
+        }catch(err){
+           console.log(err.message)
+        }
+   }
+    return(
+        <div className="delete-popup js-delete-popup">
+            <div className="delete-popup-box">
+                <h2>Delete Employee?</h2>
+                <p>Are you sure you want to Remove {employ.name} ?</p>
+                <p className="delete-warning">
+                    This action cannot be undone.
+                </p>
+                <div className="delete-popup-buttons">
+                    <button className="cancel-delete-button js-cancel-delete"
+                    onClick={()=>setDeletePop(false)}
+                    >
+                        Cancel
+                    </button>
+                    <button className="confirm-delete-button js-confirm-delete" 
+                     onClick={()=>deleteEmployFun()}
+                    >
+                        Delete
+                    </button>
+                </div>
+           </div>
+        </div>
+    )
+}
 export default SingleemployDetail;

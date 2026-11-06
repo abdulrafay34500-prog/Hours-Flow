@@ -116,6 +116,8 @@ export const deletingEmploy = async (req, res) => {
     try {
 
         // Delete only if employee ID and logged-in owner match
+        console.log("Logged-in user:", req.userId);
+console.log("Employee ID:", req.params.id);
         const deletedEmploy = await employDatabase.deleteOne({
             id: Number(req.params.id),
             owner: req.userId

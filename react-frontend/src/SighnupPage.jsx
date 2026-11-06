@@ -1,7 +1,7 @@
 import componyLogo from './logo&Img/logo.png.png'
 import './CSS-Files/sighnupPage.css'
 import { useState } from 'react'
-function SighnupPage(params) {
+function SighnupPage() {
     let [sighnupForm ,setSighnupForm] =useState({
         email:'',
         name:'',
