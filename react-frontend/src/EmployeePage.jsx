@@ -15,6 +15,7 @@ function EmployeePage() {
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
+     let [backendStatus ,setBackendStatus]=useState(false)
 
     useEffect(()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -113,6 +114,12 @@ function EmployeePage() {
                     <AddingEmploy setAddingEmployPage={setAddingEmployPage} />
                 </div>
                 }
+                
+                {backendStatus &&<div class="success-popup">
+                    <span class="success-icon">✓</span>
+                    <span>Employee Added Successfully!</span>
+                </div>}
+
 
             </div> 
             <div  className="js-history-page-popup">

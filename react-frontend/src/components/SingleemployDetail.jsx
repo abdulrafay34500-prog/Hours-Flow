@@ -3,11 +3,13 @@ import '../CSS-Files/singleEmployDetail.css'
 import weekDays from '../commonFun/gettingWeekleyDates'
 import monthDays from '../commonFun/gettingMonthlydates'
 import EditEmploy from './EditEmploy'
+import MonthlyHistory from './MonthlyHistory'
 
 
 function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
+     let [monthlyHistory , setMonthlyHistory]=useState(false)
 
     let name=employ.name
 
@@ -95,9 +97,11 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
 
         <div className="edit-delete-button-div">
              <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
-            <button className="History-button js-History-button" >History</button>
+            <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >History</button>
             <button className="delete-button js-delete-button" onClick={()=>setDeletePop(true)}>Delete</button>
-        </div>`;
+        </div>`; 
+
+        {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} />}
 
         {
         deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     
@@ -122,8 +126,11 @@ function DeletePopUp({setDeletePop ,employ}) {
                         method: 'DELETE',
                         credentials: 'include'
                     }) 
-            console.log(responce.status)   
-            console.log(await responce.json())      
+            console.log(responce.status)  
+            if(responce.status== 200){
+               window.location.href='/employesPage'
+            } 
+     
         }catch(err){
            console.log(err.message)
         }

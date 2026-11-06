@@ -40,7 +40,8 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
     let SavingEmploy=async(e)=>{
         e.preventDefault()
         clearTimeout(timeOut.current)
-        let matchingEmploy=employes.find((emp)=>emp.id == employFrom.id)
+        let employIdsExceptthis =employes.filter((emp)=> emp.id != SingleEmploy.id )
+        let matchingEmploy=employIdsExceptthis.find((emp)=>emp.id == employFrom.id)
         
         if(Object.values(employFrom).every(Boolean) && !matchingEmploy){
           try{
@@ -52,14 +53,14 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
                  credentials: 'include',
                 body: JSON.stringify(employFrom)
             })
-             let data=await updatingBackend.json();
+            let data=await updatingBackend.json();
 
-          if(updatingBackend.ok && data){
-            window.location.href='/employesPage'
-          }
-          }catch(err){
-            console.log(err.message)
-          }
+            if(updatingBackend.ok && data){
+                window.location.href='/employesPage'
+            }
+            }catch(err){
+                console.log(err.message)
+            }
         }else if(matchingEmploy){
             setError({
                 exist:true,

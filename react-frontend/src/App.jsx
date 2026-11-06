@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, } from "react-router-dom"
 import EmployeePage from "./EmployeePage"
 import Login from './LoginPage'
-import AddingEmploy from './components/AddingEmploy'
 import SighnupPage from './SighnupPage'
 
 
