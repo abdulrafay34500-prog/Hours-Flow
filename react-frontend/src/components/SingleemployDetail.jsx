@@ -2,11 +2,13 @@ import { useState } from 'react';
 import '../CSS-Files/singleEmployDetail.css'
 import weekDays from '../commonFun/gettingWeekleyDates'
 import monthDays from '../commonFun/gettingMonthlydates'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
+import EditEmploy from './EditEmploy'
 
 
 function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
     let [deletePop , setDeletePop]=useState(false)
+    let [editEmployPage , setEditEmployPage]=useState(false)
 
     let name=employ.name
 
@@ -35,7 +37,6 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
     monthDays.forEach((days)=>{
        totalMonthlyHours+=employ.Hours[days]  || 0
     });
- 
 
     return(
     <div className="Single-employ-detail js-Single-employ-detail">
@@ -94,7 +95,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
         </div>
 
         <div className="edit-delete-button-div">
-            <Link to="/editemploy" >
+            <Link onClick={()=>setEditEmployPage(true)}>
              <button className="edit-button js-edit-button">Edit</button>
             </Link>
             <button className="History-button js-History-button" >History</button>
@@ -122,8 +123,9 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
         </div>
         }
 
-
-
+         <div style={{ display: editEmployPage ? 'block' : 'none' }}>
+            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}/>
+        </div>
 
     </div>
    )

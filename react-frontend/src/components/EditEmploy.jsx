@@ -1,8 +1,8 @@
 import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
-import { Link } from 'react-router-dom'
+import { Link , useLocation} from 'react-router-dom'
 
-function EditEmploy() {
+function EditEmploy({setEditEmployPage , SingleEmploy}) {
     let [employFrom ,setEmployForm]=useState({
         id: '',
         name: '',
@@ -20,13 +20,6 @@ function EditEmploy() {
         reason:''
     });
 
-    useEffect(()=>{
-        fetch('https://hours-flow-backend.vercel.app/api/employes',{
-            credentials: 'include'
-        }).then((responce)=>{ return responce.json()})
-        .then((json)=>{setEmployes(json)})
-    },[]);
-
     let savingUsestate=(e)=>{
        let {name , value}=e.target
        setEmployForm({
@@ -35,6 +28,8 @@ function EditEmploy() {
         }
        )
     };
+
+    console.log(employFrom)
 
     let timeOut = useRef(null);
     let SavingEmploy=async(e)=>{
@@ -81,60 +76,62 @@ function EditEmploy() {
         
     };
 
+    let location=useLocation()
     
+    const employ =location.state?.employ
    
     return(
     <form className="AddingEmploye-main-page js-AddingEmploye-main-page" onSubmit={SavingEmploy}>
         <div className="adding-employ-div">
-            <h1>Add employee</h1>
+            <h1>Edit employee</h1>
             <div className="input-id-div">
                 <h3>Enter Id :</h3>
-                <input className="id-input js-id-input" type="number" value={employFrom.id} name='id'
+                <input className="id-input js-id-input" type="number" value={SingleEmploy.id} name='id'
                  onChange={savingUsestate}
                 />
             </div>
             <div className="input-name-div">
                 <h3>Enter Name :</h3>
-                <input className="name-input js-name-input" type="text" value={employFrom.name} name='name'
+                <input className="name-input js-name-input" type="text" value={SingleEmploy.name} name='name'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-hourleyInput-div">
                 <h3>Enter Hourley wage</h3>
                 <input className="hourleyInput-input js-hourleyInput-input" type="number" 
-                value={employFrom.hourleyWage}
+                value={SingleEmploy.hourleyWage}
                 name='hourleyWage'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-position-div">
                 <h3>Enter Job Role</h3>
-                <input className="jobRole-input js-jobRole-input" value={employFrom.jobRole} name='jobRole'
+                <input className="jobRole-input js-jobRole-input" value={SingleEmploy.jobRole} name='jobRole'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-Email-div">
                 <h3>Enter Email</h3>
-                <input className="Email-input js-Email-input" value={employFrom.email} name='email' 
+                <input className="Email-input js-Email-input" value={SingleEmploy.email} name='email' 
                 onChange={savingUsestate}
                 />
             </div>
                 <div className="input-Phonenumber-div">
                 <h3>Enter Phone number</h3>
-                <input className="Phonenumber-input js-Phonenumber-input"  value={employFrom.PhoneNo} name='PhoneNo'
+                <input className="Phonenumber-input js-Phonenumber-input"  value={SingleEmploy.PhoneNo} name='PhoneNo'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-JoiningDate-div">
                 <h3>Enter Joining Date</h3>
-                <input className="JoiningDate-input js-JoiningDate-input" value={employFrom.joiningDate} name='joiningDate' 
+                <input className="JoiningDate-input js-JoiningDate-input" value={SingleEmploy.joiningDate} name='joiningDate' 
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-shift-div">
                 <h3>Select Shift Type :</h3>
                 <select className="Select-shift js-Select-shift" name='shiftType' onChange={savingUsestate}
-                value={employFrom.shiftType}
+                value={SingleEmploy.shiftType}
                 >
                     <option>Morning</option>
                     <option>Evening</option>
@@ -143,7 +140,7 @@ function EditEmploy() {
             <button className="Save-button js-save-update-button">
                 Save
             </button>
-            <Link to="/employesPage" className="Cross-sign js-Cross-sign">              
+            <Link  className="Cross-sign" onClick={()=>setEditEmployPage(false)}>              
                 ✖         
             </Link>                  
         </div>
