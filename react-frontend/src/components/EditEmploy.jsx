@@ -1,17 +1,24 @@
-import { useState , useRef } from 'react'
+import { useState , useRef ,useEffect } from 'react'
 import '../CSS-Files/addingemploypage.css'
 
 function EditEmploy({setEditEmployPage , SingleEmploy}) {
     let [employFrom ,setEmployForm]=useState({
-        id: '',
-        name: '',
-        hourleyWage:'',
-        jobRole: 'Customer-Support-representative',
-        email:'N/A',
-        PhoneNo:'N/A',
-        joiningDate:'N/A',
-        shiftType:'Morning',
+        id: SingleEmploy.id,
+        name: SingleEmploy.name,
+        hourleyWage:SingleEmploy.hourleyWage,
+        jobRole: SingleEmploy.jobRole,
+        email:SingleEmploy.email,
+        PhoneNo:SingleEmploy.PhoneNo,
+        joiningDate:SingleEmploy.joiningDate,
+        shiftType:SingleEmploy.shiftType,
     });
+    let [employes ,setEmployes]=useState([]);
+    useEffect(()=>{
+            fetch('https://hours-flow-backend.vercel.app/api/employes',{
+                credentials: 'include'
+            }).then((responce)=>{ return responce.json()})
+            .then((json)=>{setEmployes(json)})
+    },[]);
 
     let [error ,setError]=useState({
         exist:false,
@@ -26,7 +33,8 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
         }
        )
     };
-
+   
+  //  console.log(employFrom)
 
     let timeOut = useRef(null);
     let SavingEmploy=async(e)=>{
@@ -36,17 +44,17 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
         
         if(Object.values(employFrom).every(Boolean) && !matchingEmploy){
           try{
-             let responce=await fetch('https://hours-flow-backend.vercel.app/api/employes',{
-            method:'POST',
-            headers:{
+            let updatingBackend=await fetch(`https://hours-flow-backend.vercel.app/api/employes/${SingleEmploy.id}/update` , {
+                method:'PUT',
+                headers:{
                     'Content-Type':'application/json'
                 },
-            credentials: 'include',
-            body:JSON.stringify(employFrom)
-           })
-             let data=await responce.json();
+                 credentials: 'include',
+                body: JSON.stringify(employFrom)
+            })
+             let data=await updatingBackend.json();
 
-          if(responce.ok && data){
+          if(updatingBackend.ok && data){
             window.location.href='/employesPage'
           }
           }catch(err){
@@ -79,52 +87,52 @@ function EditEmploy({setEditEmployPage , SingleEmploy}) {
             <h1>Edit employee</h1>
             <div className="input-id-div">
                 <h3>Enter Id :</h3>
-                <input className="id-input js-id-input" type="number" value={SingleEmploy.id} name='id'
+                <input className="id-input js-id-input" type="number" value={employFrom.id} name='id'
                  onChange={savingUsestate}
                 />
             </div>
             <div className="input-name-div">
                 <h3>Enter Name :</h3>
-                <input className="name-input js-name-input" type="text" value={SingleEmploy.name} name='name'
+                <input className="name-input js-name-input" type="text" value={employFrom.name} name='name'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-hourleyInput-div">
                 <h3>Enter Hourley wage</h3>
                 <input className="hourleyInput-input js-hourleyInput-input" type="number" 
-                value={SingleEmploy.hourleyWage}
+                value={employFrom.hourleyWage}
                 name='hourleyWage'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-position-div">
                 <h3>Enter Job Role</h3>
-                <input className="jobRole-input js-jobRole-input" value={SingleEmploy.jobRole} name='jobRole'
+                <input className="jobRole-input js-jobRole-input" value={employFrom.jobRole} name='jobRole'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-Email-div">
                 <h3>Enter Email</h3>
-                <input className="Email-input js-Email-input" value={SingleEmploy.email} name='email' 
+                <input className="Email-input js-Email-input" value={employFrom.email} name='email' 
                 onChange={savingUsestate}
                 />
             </div>
                 <div className="input-Phonenumber-div">
                 <h3>Enter Phone number</h3>
-                <input className="Phonenumber-input js-Phonenumber-input"  value={SingleEmploy.PhoneNo} name='PhoneNo'
+                <input className="Phonenumber-input js-Phonenumber-input"  value={employFrom.PhoneNo} name='PhoneNo'
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-JoiningDate-div">
                 <h3>Enter Joining Date</h3>
-                <input className="JoiningDate-input js-JoiningDate-input" value={SingleEmploy.joiningDate} name='joiningDate' 
+                <input className="JoiningDate-input js-JoiningDate-input" value={employFrom.joiningDate} name='joiningDate' 
                 onChange={savingUsestate}
                 />
             </div>
             <div className="input-shift-div">
                 <h3>Select Shift Type :</h3>
                 <select className="Select-shift js-Select-shift" name='shiftType' onChange={savingUsestate}
-                value={SingleEmploy.shiftType}
+                value={employFrom.shiftType}
                 >
                     <option>Morning</option>
                     <option>Evening</option>

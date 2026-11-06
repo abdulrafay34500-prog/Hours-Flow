@@ -103,9 +103,9 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
         deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     
         }
 
-         <div style={{ display: editEmployPage ? 'block' : 'none' }}>
+         {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
             <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}/>
-        </div>
+        </div>}
 
     </div>
    )
