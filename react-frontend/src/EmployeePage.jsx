@@ -122,9 +122,6 @@ function EmployeePage() {
 
 
             </div> 
-            <div  className="js-history-page-popup">
-                
-            </div>
 
         </main>
         </>

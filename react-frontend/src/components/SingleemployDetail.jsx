@@ -99,9 +99,9 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
              <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
             <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >History</button>
             <button className="delete-button js-delete-button" onClick={()=>setDeletePop(true)}>Delete</button>
-        </div>`; 
+        </div>
 
-        {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} />}
+        {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} employ={employ} />}
 
         {
         deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     

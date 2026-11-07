@@ -13,7 +13,9 @@ function SideBar() {
                     <img className="dashboard-image" src={dashbordImg} alt="My Image"/>
                     <p className="dashboard-text">Dashboard</p>
                 </div>
-                <Link to="/" className="employes-div">
+                <Link to="/employesPage" className="employes-div"
+                 style={{textDecoration : 'none' }}
+                >
                     <img className="employes-logo" src={employImg}/>
                     <p className="employ-text">Employes</p>
                 </Link>
@@ -21,10 +23,12 @@ function SideBar() {
                     <img className="setting-image" src={settingImg}/>
                     <p className="setting-text">Settings</p>
                 </div>
-                <a href="weekletReport.html" className="WeekLey=report-div setting-div">
+                <Link to="/weekleyReport" className="WeekLey=report-div setting-div"
+                style={{textDecoration : 'none' }}
+                >
                     <img className="setting-image" src={weekleyicon}/>
                     <p className="setting-text"> Weekley Report</p>
-                </a>
+                </Link>
 
             </div>
         </div>

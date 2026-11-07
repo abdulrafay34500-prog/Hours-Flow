@@ -1,6 +1,7 @@
 import '../CSS-Files/historyPage.css'
 
-function MonthlyHistory({setMonthlyHistory}) {
+function MonthlyHistory({setMonthlyHistory , employ}) {
+   
     return(
         <div  className="js-history-page-popup">
             <div className="history-popup-overlay js-history-popup">
@@ -11,7 +12,7 @@ function MonthlyHistory({setMonthlyHistory}) {
 
                             <div>
                                 <p className="history-label">EMPLOYEE HISTORY</p>
-                                <h2>$</h2>
+                                <h2>{employ.name}</h2>
                                 <p className="history-subtitle">Last 6 months</p>
                             </div>
 
@@ -34,7 +35,7 @@ function MonthlyHistory({setMonthlyHistory}) {
                                 <span>SALARY</span>
                             </div>
 
-                          ${<LastSixMonths />}
+                          {<LastSixMonths employ={employ} />}
 
                         </div>
 
@@ -44,25 +45,84 @@ function MonthlyHistory({setMonthlyHistory}) {
         </div>
     )
 }
-function  LastSixMonths () {
+function  LastSixMonths ({employ}) {
+
+    let months = ["January","February","March","April","May","June","July","August","September",
+        "October","November","December"
+     ];
+
+    // creating last 6 months names
+    let curentMonth=new Date().getMonth()
+    let curentYear=new Date().getFullYear()
+    let SixMonthsArray=[];
+    for (let i = 1; i <= 6 ; i++) {
+        let month=new Date(curentYear , curentMonth-i)
+        let formatedDate=months[month.getMonth()]
+
+        SixMonthsArray.push(formatedDate)
+    };
+
+    // making dates of every month
+    console.log(SixMonthsArray)
+    
+    let monthlyDaysNUM=1
+
      return(
-         <div className="history-month-row">
+        <>
+        {
+          SixMonthsArray.map((Month)=>{
+            monthlyDaysNUM--
+            
+            /// MAking all dates in a month 
 
-            <div className="month-info">
-                <strong>Month</strong>
-                <span>$YearOFMonth</span>
-            </div>
+            let monthlyDays=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getDate()
+            let month=new Date(curentYear,curentMonth+monthlyDaysNUM ,0).getMonth()
 
-            <div className="hours-info">
-                <strong>$TotalMonthlyHours</strong>
-                <span>hrs</span>
-            </div>
+            let monthlyDates=[];
+            for (let i = 1; i <= monthlyDays; i++) {
+                const date =new Date(curentYear,month,i)
+                let formatedDate=date.getFullYear() + '-' +
+                    String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(date.getDate()).padStart(2, '0');
 
-            <div className="salary-info">
-                <strong>PKR $MonthlySalary</strong>
-            </div>
+                monthlyDates.push(formatedDate)   
+            }
+        
 
-        </div>
+            // Calcuting all Month Total hours
+            let YearOFMonth='';
+            let TotalMonthlyHours=0;      
+            monthlyDates.forEach((date)=>{
+                TotalMonthlyHours+=Number(employ.Hours?.[String(date)] || 0)
+                YearOFMonth=new Date(date).getFullYear();           
+            })
+
+            // Calcuting all Monthly salaries
+           let MonthlySalary=TotalMonthlyHours*Number(employ.hourleyWage)
+            
+                return(
+                    <div class="history-month-row">
+
+                        <div class="month-info">
+                            <strong>{Month}</strong>
+                            <span>{YearOFMonth}</span>
+                        </div>
+
+                        <div class="hours-info">
+                            <strong>{TotalMonthlyHours}</strong>
+                            <span>hrs</span>
+                        </div>
+
+                        <div class="salary-info">
+                            <strong>PKR {MonthlySalary} </strong>
+                        </div>
+
+                    </div>
+                )
+           })
+        }
+        </>
+         
      )
 }
 
