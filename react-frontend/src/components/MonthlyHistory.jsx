@@ -63,7 +63,7 @@ function  LastSixMonths ({employ}) {
     };
 
     // making dates of every month
-    console.log(SixMonthsArray)
+   
     
     let monthlyDaysNUM=1
 
@@ -101,19 +101,19 @@ function  LastSixMonths ({employ}) {
            let MonthlySalary=TotalMonthlyHours*Number(employ.hourleyWage)
             
                 return(
-                    <div class="history-month-row">
+                    <div className="history-month-row">
 
-                        <div class="month-info">
+                        <div className="month-info">
                             <strong>{Month}</strong>
                             <span>{YearOFMonth}</span>
                         </div>
 
-                        <div class="hours-info">
+                        <div className="hours-info">
                             <strong>{TotalMonthlyHours}</strong>
                             <span>hrs</span>
                         </div>
 
-                        <div class="salary-info">
+                        <div className="salary-info">
                             <strong>PKR {MonthlySalary} </strong>
                         </div>
 
