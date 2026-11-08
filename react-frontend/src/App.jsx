@@ -7,7 +7,7 @@ import WeekleyReport from './WeekleyReport'
 function App() {
  
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Hours-Flow">
       <Routes>
         <Route path="/"  element={<Login />} />
         <Route path="/employesPage" element={<EmployeePage />} />
