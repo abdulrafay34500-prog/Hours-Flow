@@ -119,13 +119,18 @@ function WeekleyReport() {
                         </p>
                         <div className="menu-container">
                             <button className="three-dots"  
-                             onMouseEnter={() => setOptionsButton(true)}
+                             onClick={() => setOptionsButton(true)}
                              >⋮</button>
 
                            {optionsButton && <div className="dropdown-menu" 
                                onMouseLeave={() => setOptionsButton(false)}
                            >
-                                <button onClick={()=>setWeekleyReport(true)}>Make Weekley Report</button>
+                                <button onClick={()=>{
+                                    FetchingData().then(()=>{
+                                        setWeekleyReport(true)
+                                    })           
+                                }
+                                }>Make Weekley Report</button>
                             </div>}
                         </div>
                        
@@ -166,11 +171,11 @@ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
 
     useEffect(() => {
     setCurrentEmployHours(employ.Hours);
-    }, [employ]);
+    }, [employ.Hours]);
 
     let TotalHours=0
     weekDays.forEach((dates)=>{
-          TotalHours+=Number(employ.Hours[dates] ?? 0)
+          TotalHours+=Number(currentEmployHours[dates] ?? 0)
     })
     let SubmitingHours=async(employ ,dayIndex ,e )=>{
        let date=weekDays[dayIndex] 
@@ -178,6 +183,7 @@ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
             ...prev,
             [date]: e.target.value
         })); 
+
     }
 
     let SavingToBackend=async(employ , dayIndex)=>{
@@ -206,7 +212,7 @@ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
             console.log(error.message)
         }
 
-        fetchingData()
+        
     }
  
 return(  

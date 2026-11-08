@@ -1,4 +1,6 @@
 import '../CSS-Files/shareWeekletreport.css'
+import html2canvas from 'html2canvas';
+
 function ShareWeekleyReport({employes , weekDays , months , dayNames , crossWeekleyReport}) {
      let weekFirstdate=new Date(weekDays[0])
      let weekLastdate=new Date(weekDays[6])
@@ -51,7 +53,7 @@ function ShareWeekleyReport({employes , weekDays , months , dayNames , crossWeek
                     <div className="weekley-cross-sighn" onClick={()=>crossWeekleyReport(false)}> 
                          ✖  
                     </div>
-                    <button className="js-share-whatsapp">
+                    <button className="js-share-whatsapp" onClick={()=>shareReportFun()}>
                         <i data-lucide="share-2"></i>
                         Share Report
                     </button>
@@ -92,6 +94,8 @@ function asigningShiftHours(employ , weekday){
   let morningshift9hrs='6am - 3pm'
   let eveningshift12hrs='3pm - 3am'
   let eveningshift9hrs='3pm - 12am'
+  let eveningshift11hrs='3pm - 2am'
+
 
   if(employ.shiftType === 'Morning' && employ.Hours[weekday] == 12){
     return  morningshift12hrs
@@ -101,6 +105,8 @@ function asigningShiftHours(employ , weekday){
     return  eveningshift12hrs
   }else  if(employ.shiftType === 'Evening' && employ.Hours[weekday] == 9){
     return  eveningshift9hrs
+  }else  if(employ.shiftType === 'Evening' && employ.Hours[weekday] == 11){
+    return  eveningshift11hrs
   }
  
 }
@@ -132,5 +138,54 @@ function gettingWeekleyTotal(employWithHours,weekDays) {
   })
   
   return totalHours;
-}   
+} 
+async function shareReportFun() {
+
+    const report = document.querySelector(
+        '.js-sharing-weekley-report-container'
+    );
+
+    const canvas = await html2canvas(report, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+
+        ignoreElements: (element) =>
+            element.classList.contains('js-share-whatsapp') ||
+            element.classList.contains('js-weekley-cross-sighn')
+    });
+
+    // Convert canvas to Blob
+    canvas.toBlob(async (blob) => {
+
+        if (!blob) return;
+
+        // Create image file
+        const file = new File(
+            [blob],
+            'WeeklyReport.png',
+            { type: 'image/png' }
+        );
+
+        // Share image
+        if (navigator.canShare?.({ files: [file] })) {
+
+            try {
+                await navigator.share({
+                    files: [file],
+                    title: 'HourFlow Weekly Report'
+                });
+            } catch (error) {
+                console.log(error);
+            }
+
+        } else {
+            // Download if sharing isn't supported
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'WeeklyReport.png';
+            link.click();
+        }
+
+    }, 'image/png');
+}  
 export default ShareWeekleyReport
