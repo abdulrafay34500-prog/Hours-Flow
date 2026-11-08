@@ -26,18 +26,35 @@ function WeekleyReport() {
     let [optionsButton , setOptionsButton]=useState(false)
     let [weekleyReport , setWeekleyReport]=useState(false)
 
-    useEffect(()=>{
-       fetch('https://hours-flow-backend.vercel.app/api/employes',{
-               credentials: 'include'
-        }).then((responce)=>{ return responce.json()})
-        .then((json)=>{setEmployes(json)});
+     let FetchingData = async () => {
+     try {
+        let employResponse = await fetch(
+            'https://hours-flow-backend.vercel.app/api/employes',
+            { credentials: 'include' }
+        );
 
-        fetch('https://hours-flow-backend.vercel.app/api/timeSheet',
-        {
-            credentials: 'include'
-        }).then((responce)=>responce.json())
-        .then((json)=>{setEmployTimeSheet(json)})
+        let employData = await employResponse.json();
+
+        let hoursResponse = await fetch(
+            'https://hours-flow-backend.vercel.app/api/timeSheet',
+            { credentials: 'include' }
+        );
+
+        let hoursData = await hoursResponse.json();
+
+        setEmployes(employData);
+        setEmployTimeSheet(hoursData);
+
+        } catch (error) {
+            console.log(error);
+        }
+     };
+    useEffect(()=>{
+       FetchingData()
     },[])
+    employes.sort((a)=>{
+       return a.shiftType == 'Morning' ?-1:1
+    })
 
     // Getting Current WeekDays
     let startingDay=new Date()
@@ -66,14 +83,12 @@ function WeekleyReport() {
     let employWithHours=employes.map((employ)=>{
        let employHours={}
 
-
        employTimeSheet.forEach((hoursSheet)=>{
          if(employ.id== hoursSheet.employID){
             employHours[hoursSheet.date]=hoursSheet.hours
          }
 
        })
-
         return{
             ...employ,
             Hours: employHours
@@ -103,7 +118,9 @@ function WeekleyReport() {
                             {GoingMonth}
                         </p>
                         <div className="menu-container">
-                            <button className="three-dots"   onMouseEnter={() => setOptionsButton(true)}>⋮</button>
+                            <button className="three-dots"  
+                             onMouseEnter={() => setOptionsButton(true)}
+                             >⋮</button>
 
                            {optionsButton && <div className="dropdown-menu" 
                                onMouseLeave={() => setOptionsButton(false)}
@@ -128,7 +145,7 @@ function WeekleyReport() {
 
                          {employWithHours.map((employ)=>(
                                   <div  key={employ.id}  >
-                                     <HoursInWeekleyReport employ={employ} weekDays={weekDays}/>
+                                     <HoursInWeekleyReport employ={employ} weekDays={weekDays} fetchingData={FetchingData}/>
                                   </div>
                                ))
                         }
@@ -143,17 +160,17 @@ function WeekleyReport() {
     )
 }
 
-function HoursInWeekleyReport({employ , weekDays}) {
+function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
 
-    let [currentEmployHours ,setCurrentEmployHours]=useState(employ.Hours)
+    let [currentEmployHours ,setCurrentEmployHours]=useState(employ.Hours ?? {})
 
     useEffect(() => {
     setCurrentEmployHours(employ.Hours);
-    }, [employ.Hours]);
+    }, [employ]);
 
     let TotalHours=0
     weekDays.forEach((dates)=>{
-          TotalHours+=Number(currentEmployHours[dates] ?? 0)
+          TotalHours+=Number(employ.Hours[dates] ?? 0)
     })
     let SubmitingHours=async(employ ,dayIndex ,e )=>{
        let date=weekDays[dayIndex] 
@@ -162,8 +179,6 @@ function HoursInWeekleyReport({employ , weekDays}) {
             [date]: e.target.value
         })); 
     }
-
-    
 
     let SavingToBackend=async(employ , dayIndex)=>{
        let date=weekDays[dayIndex]
@@ -190,11 +205,11 @@ function HoursInWeekleyReport({employ , weekDays}) {
         }catch(error){
             console.log(error.message)
         }
-    }
 
-    
-return(
-    
+        fetchingData()
+    }
+ 
+return(  
 <div className="Every-employ-details js-Every-employ-details-${Employe.Id}">
     <div className="employ-name">{employ.name}</div>
         {weekDays.map((date, index) => (
@@ -203,10 +218,8 @@ return(
                 type="number"
                 className="days-hours"
                 onChange={(e) =>{ SubmitingHours(employ, index, e)}}
-                onBlur={() => {SavingToBackend(employ , index , )}}
-                value={
-                   currentEmployHours[date] ?? ''
-                }
+                onBlur={() => {SavingToBackend(employ , index  )}}
+                placeholder={employ.Hours [date] ?? ''}
             />
         ))}
     <div>{TotalHours}</div>  

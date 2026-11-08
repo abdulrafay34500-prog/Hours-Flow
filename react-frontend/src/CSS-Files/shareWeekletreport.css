@@ -125,7 +125,7 @@ body {
 /* Shift Time Box */
 
 .shift {
-  background: #eff6ff;
+  background: #effaff;
   border: 1px solid #dbeafe;
   border-radius: 8px;
   padding: 4px 5px;
@@ -192,7 +192,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     position: absolute;
-    bottom: 65px;
+    bottom: 15px;
     right: 32px;
 }
 
@@ -205,4 +205,8 @@ body {
 }
 .js-share-whatsapp:active{
   transform: scale(1);
+}
+.Year-Text{
+  margin: 0px;
+  font-size: 20px;
 }
