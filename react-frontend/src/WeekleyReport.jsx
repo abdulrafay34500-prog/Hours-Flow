@@ -2,6 +2,7 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 import './CSS-Files/weekley-overview.css'
 import { useEffect ,useState } from 'react'
+import ShareWeekleyReport from './components/ShareWeekleyReport'
 let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let months = [
 "January",
@@ -22,6 +23,8 @@ function WeekleyReport() {
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [goingWeek , setGoingWeek]=useState(0)
+    let [optionsButton , setOptionsButton]=useState(false)
+    let [weekleyReport , setWeekleyReport]=useState(false)
 
     useEffect(()=>{
        fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -100,13 +103,13 @@ function WeekleyReport() {
                             {GoingMonth}
                         </p>
                         <div className="menu-container">
-                            <button className="three-dots">⋮</button>
+                            <button className="three-dots"   onMouseEnter={() => setOptionsButton(true)}>⋮</button>
 
-                            <div className="dropdown-menu">
-                                <button className="js-WeekeyReport-Button">Make Weekley Report</button>
-                                <button>View Details</button>
-                                <button>Delete</button>
-                            </div>
+                           {optionsButton && <div className="dropdown-menu" 
+                               onMouseLeave={() => setOptionsButton(false)}
+                           >
+                                <button onClick={()=>setWeekleyReport(true)}>Make Weekley Report</button>
+                            </div>}
                         </div>
                        
                     </div>
@@ -131,13 +134,9 @@ function WeekleyReport() {
                         }
                     </div>
                     
-                    <div className="shared-weekley-report-background">
-                            <div className="report-container js-sharing-weekley-report-container">
-                               
-                                 
-
-                            </div>                
-                    </div> 
+                    {weekleyReport && <ShareWeekleyReport employes={employWithHours} weekDays={weekDays} 
+                      months={months} dayNames={dayNames} crossWeekleyReport={setWeekleyReport}
+                    />}
 
             </div>
         </>
