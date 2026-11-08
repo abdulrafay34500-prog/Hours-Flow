@@ -46,7 +46,7 @@ function Login() {
 
             <div className="logo"><img className="logo-img" src={componyLogo} /></div>
 
-            <h1>Welcome Backk!</h1>
+            <h1>Welcome Back!</h1>
             <p className="subtitle">
                 Please enter your details to log in.
             </p>
