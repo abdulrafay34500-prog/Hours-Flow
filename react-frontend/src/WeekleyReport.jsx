@@ -52,9 +52,11 @@ function WeekleyReport() {
     useEffect(()=>{
        FetchingData()
     },[])
-    employes.sort((a)=>{
-       return a.shiftType == 'Morning' ?-1:1
-    })
+   employes.sort((a, b) => {
+        if (a.shiftType === b.shiftType) return 0;
+
+        return a.shiftType === 'Morning' ? -1 : 1;
+    });
 
     // Getting Current WeekDays
     let startingDay=new Date()
