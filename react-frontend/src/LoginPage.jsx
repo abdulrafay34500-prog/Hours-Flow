@@ -1,8 +1,10 @@
 import {  useState } from 'react'
 import './CSS-Files/loginpage.css'
 import componyLogo from './logo&Img/logo.png.png'
-import {Link} from 'react-router-dom'
+import {Link , useNavigate} from 'react-router-dom'
 function Login() {
+    const navigate = useNavigate()
+
     let [email ,setEmail]=useState('')
     let [password ,setPassword]=useState('')
 
@@ -29,7 +31,7 @@ function Login() {
 
           let data=await responce.json()
            if(responce.ok && data.success){
-                window.location.href='./employesPage'
+                navigate('/employesPage')
             }else {
                 alert(data.message);
             }
