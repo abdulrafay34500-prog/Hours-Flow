@@ -16,10 +16,10 @@ function EmployeePage() {
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
      let [backendStatus ,setBackendStatus]=useState(false)
-
-    useEffect(()=>{
+ 
+     let fetchFromBackend=async()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
-               credentials: 'include'
+        credentials: 'include'
         }).then((responce)=>{ return responce.json()})
         .then((json)=>{setEmployes(json)})
 
@@ -34,6 +34,9 @@ function EmployeePage() {
             credentials: 'include'
         }).then((responce)=>responce.json())
         .then((json)=>{setEmployTimeSheet(json)})
+     }
+    useEffect(()=>{
+      fetchFromBackend()
     },[]);
 
 
@@ -111,7 +114,7 @@ function EmployeePage() {
                  employ={selectEmploy} hoursSheet={employTimeSheet}
                 />}
                 {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
-                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} />
+                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} fetchFromBackend={fetchFromBackend} />
                 </div>
                 }
                 
