@@ -1,7 +1,9 @@
 import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
+import { useNavigate } from 'react-router-dom'
 
 function AddingEmploy({setAddingEmployPage}) {
+    const navigate = useNavigate()
     let [employFrom ,setEmployForm]=useState({
         id: '',
         name: '',
@@ -54,7 +56,7 @@ function AddingEmploy({setAddingEmployPage}) {
              let data=await responce.json();
 
           if(responce.ok && data){
-            window.location.href='/employesPage'
+            navigate('/employesPage')
           }
           }catch(err){
             console.log(err.message)
