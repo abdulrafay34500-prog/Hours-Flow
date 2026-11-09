@@ -176,9 +176,9 @@ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
     }, [employ.Hours]);
 
     let TotalHours=0
-    weekDays.forEach((dates)=>{
-          TotalHours+=Number(currentEmployHours[dates] ?? 0)
-    })
+    weekDays.forEach((date) => {
+        TotalHours += Number(currentEmployHours[date] ?? 0);
+    });
     let SubmitingHours=async(employ ,dayIndex ,e )=>{
        let date=weekDays[dayIndex] 
        setCurrentEmployHours((prev) => ({

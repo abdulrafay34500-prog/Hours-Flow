@@ -2,7 +2,7 @@ import { useState , useRef ,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../CSS-Files/addingemploypage.css'
 
-function EditEmploy({setEditEmployPage , SingleEmploy , fetchFromBackend , setSingleEmployPopup}) {
+function EditEmploy({setEditEmployPage , SingleEmploy , fetchFromBackend,setSingleEmployPopup}) {
     const navigate = useNavigate()
     let [employFrom ,setEmployForm]=useState({
         id: SingleEmploy.id,
@@ -58,10 +58,10 @@ function EditEmploy({setEditEmployPage , SingleEmploy , fetchFromBackend , setSi
             let data=await updatingBackend.json();
 
             if(updatingBackend.ok && data){
-                
+                fetchFromBackend().then(()=>{
                     setEditEmployPage(false)
                     setSingleEmployPopup(false)
-                
+                })
                
             }
             }catch(err){
