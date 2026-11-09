@@ -151,7 +151,7 @@ async function shareReportFun() {
 
         ignoreElements: (element) =>
             element.classList.contains('js-share-whatsapp') ||
-            element.classList.contains('js-weekley-cross-sighn')
+            element.classList.contains('weekley-cross-sighn')
     });
 
     // Convert canvas to Blob
