@@ -44,7 +44,8 @@ function EmployeePage() {
 
     return(
         <>
-        
+        <Header />
+        <SideBar />
         <main className="main-addingEmploy-page">
 
             <div className="combining-AddingAndSingle-Employ-div  js-combining-AddingAndSingle-Employ-div">
@@ -106,8 +107,13 @@ function EmployeePage() {
                     </div>
                 </div>
                
-                
-               
+                {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
+                 employ={selectEmploy} hoursSheet={employTimeSheet}
+                />}
+                {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
+                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} />
+                </div>
+                }
                 
                 {backendStatus &&<div class="success-popup">
                     <span class="success-icon">✓</span>
