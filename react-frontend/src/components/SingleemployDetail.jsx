@@ -4,9 +4,11 @@ import weekDays from '../commonFun/gettingWeekleyDates'
 import monthDays from '../commonFun/gettingMonthlydates'
 import EditEmploy from './EditEmploy'
 import MonthlyHistory from './MonthlyHistory'
+import { useNavigate } from 'react-router-dom'
 
 
 function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
+    const navigate = useNavigate()
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
      let [monthlyHistory , setMonthlyHistory]=useState(false)
@@ -128,7 +130,7 @@ function DeletePopUp({setDeletePop ,employ}) {
                     }) 
             console.log(responce.status)  
             if(responce.status== 200){
-               window.location.href='/employesPage'
+              navigate('/employesPage')
             } 
      
         }catch(err){
