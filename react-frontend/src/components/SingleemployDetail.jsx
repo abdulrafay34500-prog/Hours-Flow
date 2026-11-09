@@ -115,18 +115,20 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
         {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} employ={employ} />}
 
         {
-        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} fetchFromBackend={fetchFromBackend} />     
+        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} fetchFromBackend={fetchFromBackend} 
+        setSingleEmployPopup={setSingleEmployPopup}
+        />     
         }
 
          {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
             <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}
-             fetchFromBackend={fetchFromBackend} />
+             fetchFromBackend={fetchFromBackend} setSingleEmployPopup={setSingleEmployPopup} />
         </div>}
 
     </div>
    )
 }
-function DeletePopUp({setDeletePop ,employ ,fetchFromBackend}) {
+function DeletePopUp({setDeletePop ,employ ,fetchFromBackend , setSingleEmployPopup}) {
     const navigate = useNavigate()
    let deleteEmployFun=async()=>{
         try{
@@ -143,6 +145,7 @@ function DeletePopUp({setDeletePop ,employ ,fetchFromBackend}) {
             if(responce.status== 200){
                 fetchFromBackend().then(()=>{
                     setDeletePop(false)
+                    setSingleEmployPopup(false)
                 })
               navigate('/employesPage')
             } 
