@@ -12,6 +12,7 @@ function EmployeePage() {
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
+     let [totalPayroll , setTotalPayroll]=useState(0);
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
@@ -39,7 +40,44 @@ function EmployeePage() {
       fetchFromBackend()
     },[]);
 
+    // Calculating Total Monthly Pay Role
+    let employWithHours=employes.map((employ)=>{
+        let employHours={}
+        employTimeSheet.forEach((hoursSheet)=>{
+            if(hoursSheet.employID==employ.id){
+                employHours[hoursSheet.date]=hoursSheet.hours
+            }
+        })
+        return{
+            ...employ,
+            hours:employHours
+        }
+    })
 
+    let Today=new Date()
+    let year=Today.getFullYear()
+    let month=Today.getMonth()
+
+    let numberOfDays=new Date(year,month+1 , 0).getDate()
+
+    let monthDays=[]
+    for (let day = 1; day <= numberOfDays; day++) {
+        let date=new Date(year ,month ,day)
+        let formatedDate=date.getFullYear() + '-' +
+            String(date.getMonth() + 1).padStart(2, '0') + '-' +
+            String(date.getDate()).padStart(2, '0');   
+        monthDays.push(formatedDate)
+    }       
+    
+    employWithHours.forEach((employ)=>{
+        let totalHourThisMonth=0
+        
+        monthDays.forEach((dates)=>{
+            totalHourThisMonth += employ.hours[dates]  || 0             
+        })
+        totalPayroll=totalHourThisMonth*Number(employ.hourleyWage)
+    })
+    //////////////////////    
 
     employes.sort((a)=>{
         return a.shiftType=='Morning'?-1 : 1
@@ -79,7 +117,7 @@ function EmployeePage() {
                         <div className="Total-Payroll-div">
                             <img className="currency-icon" src={currencyImg}/>
                             <p className="total-Payroll-text">Total Payroll (This Month)</p>
-                            <p className="monthly-Payroll-Amount js-monthly-Payroll-Amount">0</p>
+                            <p className="monthly-Payroll-Amount js-monthly-Payroll-Amount">{totalPayroll}</p>
                         </div>
                     </div>
                     <div className="Employe-Details-main-div">

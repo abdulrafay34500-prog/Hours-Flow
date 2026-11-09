@@ -101,7 +101,7 @@ function  LastSixMonths ({employ}) {
            let MonthlySalary=TotalMonthlyHours*Number(employ.hourleyWage)
             
                 return(
-                    <div className="history-month-row">
+                    <div className="history-month-row" key={Month}>
 
                         <div className="month-info">
                             <strong>{Month}</strong>
