@@ -117,6 +117,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
    )
 }
 function DeletePopUp({setDeletePop ,employ}) {
+    const navigate = useNavigate()
    let deleteEmployFun=async()=>{
         try{
             let responce =await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employ.id}/delete` ,{
