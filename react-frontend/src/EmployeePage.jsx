@@ -7,6 +7,7 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 import SingleemployDetail from './components/SingleemployDetail'
 import AddingEmploy from './components/AddingEmploy'
+import {Link , useNavigate} from 'react-router-dom'
 
 function EmployeePage() {
     let [employes ,setEmployes]=useState([]);
