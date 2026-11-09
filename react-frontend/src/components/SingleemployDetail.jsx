@@ -99,7 +99,9 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
 
         <div className="edit-delete-button-div">
              <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
-            <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >History</button>
+            <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >
+                History
+            </button>
             <button className="delete-button js-delete-button" onClick={()=>setDeletePop(true)}>Delete</button>
         </div>
 
@@ -110,7 +112,8 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
         }
 
          {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
-            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}/>
+            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}
+             fetchFromBackend={fetchFromBackend} />
         </div>}
 
     </div>
