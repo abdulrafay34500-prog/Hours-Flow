@@ -41,42 +41,49 @@ function EmployeePage() {
     },[]);
 
     // Calculating Total Monthly Pay Role
-    let employWithHours=employes.map((employ)=>{
-        let employHours={}
-        employTimeSheet.forEach((hoursSheet)=>{
-            if(hoursSheet.employID==employ.id){
-                employHours[hoursSheet.date]=hoursSheet.hours
-            }
-        })
-        return{
-            ...employ,
-            hours:employHours
-        }
-    })
-
-    let Today=new Date()
-    let year=Today.getFullYear()
-    let month=Today.getMonth()
-
-    let numberOfDays=new Date(year,month+1 , 0).getDate()
-
-    let monthDays=[]
-    for (let day = 1; day <= numberOfDays; day++) {
-        let date=new Date(year ,month ,day)
-        let formatedDate=date.getFullYear() + '-' +
-            String(date.getMonth() + 1).padStart(2, '0') + '-' +
-            String(date.getDate()).padStart(2, '0');   
-        monthDays.push(formatedDate)
-    }       
     
-    employWithHours.forEach((employ)=>{
-        let totalHourThisMonth=0
-        
-        monthDays.forEach((dates)=>{
-            totalHourThisMonth += employ.hours[dates]  || 0             
-        })
-        totalPayroll=totalHourThisMonth*Number(employ.hourleyWage)
-    })
+    useEffect(() => {
+        let salary = 0;
+
+        let Today = new Date();
+        let year = Today.getFullYear();
+        let month = Today.getMonth();
+
+        let numberOfDays = new Date(year, month + 1, 0).getDate();
+
+        let monthDays = [];
+
+        for (let day = 1; day <= numberOfDays; day++) {
+            let date = new Date(year, month, day);
+
+            let formattedDate =
+                date.getFullYear() + '-' +
+                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                String(date.getDate()).padStart(2, '0');
+
+            monthDays.push(formattedDate);
+        }
+
+        employes.forEach((employ) => {
+            let totalHours = 0;
+
+            employTimeSheet.forEach((hoursSheet) => {
+                if (
+                    hoursSheet.employID == employ.id &&
+                    monthDays.includes(hoursSheet.date)
+                ) {
+                    totalHours += Number(hoursSheet.hours) || 0;
+                }
+            });
+
+            salary += totalHours * Number(employ.hourleyWage);
+        });
+
+        setTotalPayroll(salary);
+
+    }, [employes, employTimeSheet]);
+
+
     //////////////////////    
 
     employes.sort((a)=>{

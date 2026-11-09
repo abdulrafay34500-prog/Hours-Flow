@@ -98,7 +98,13 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
         </div>
 
         <div className="edit-delete-button-div">
-             <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
+             <button className="edit-button js-edit-button" 
+            onClick={async()=>{ 
+                await fetchFromBackend();
+               setEditEmployPage(true);}
+            }>
+                Edit
+            </button>          
             <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >
                 History
             </button>
