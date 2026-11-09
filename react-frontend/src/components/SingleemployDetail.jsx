@@ -7,7 +7,7 @@ import MonthlyHistory from './MonthlyHistory'
 import { useNavigate } from 'react-router-dom'
 
 
-function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
+function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchFromBackend}) {
     const navigate = useNavigate()
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
@@ -106,7 +106,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
         {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} employ={employ} />}
 
         {
-        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     
+        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} fetchFromBackend={fetchFromBackend} />     
         }
 
          {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
@@ -116,7 +116,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
     </div>
    )
 }
-function DeletePopUp({setDeletePop ,employ}) {
+function DeletePopUp({setDeletePop ,employ ,fetchFromBackend}) {
     const navigate = useNavigate()
    let deleteEmployFun=async()=>{
         try{
@@ -131,6 +131,9 @@ function DeletePopUp({setDeletePop ,employ}) {
                     }) 
             console.log(responce.status)  
             if(responce.status== 200){
+                fetchFromBackend().then(()=>{
+                    setDeletePop(false)
+                })
               navigate('/employesPage')
             } 
      

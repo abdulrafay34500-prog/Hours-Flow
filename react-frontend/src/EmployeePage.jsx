@@ -111,7 +111,7 @@ function EmployeePage() {
                 </div>
                
                 {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
-                 employ={selectEmploy} hoursSheet={employTimeSheet}
+                 employ={selectEmploy} hoursSheet={employTimeSheet}  fetchFromBackend={fetchFromBackend}
                 />}
                 {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
                     <AddingEmploy setAddingEmployPage={setAddingEmployPage} fetchFromBackend={fetchFromBackend} />
