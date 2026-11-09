@@ -12,6 +12,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
      let [monthlyHistory , setMonthlyHistory]=useState(false)
+     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0)
 
     let name=employ.name
 
@@ -36,7 +37,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
  
 
      // getting weekley total Hours
-    let totalMonthlyHours=0;
+    let totalMonthlyHour=0;
     monthDays.forEach((days)=>{
        totalMonthlyHours+=employ.Hours[days]  || 0
     });
