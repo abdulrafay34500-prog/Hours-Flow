@@ -4,16 +4,18 @@ import { useNavigate } from 'react-router-dom'
 
 function AddingEmploy({setAddingEmployPage , fetchFromBackend}) {
     const navigate = useNavigate()
-    let [employFrom ,setEmployForm]=useState({
-        id: '',
-        name: '',
-        hourleyWage:'',
-        jobRole: 'Customer-Support-representative',
-        email:'N/A',
-        PhoneNo:'N/A',
-        joiningDate:'N/A',
-        shiftType:'Morning',
-    });
+    const initialForm = {
+    id: '',
+    name: '',
+    hourleyWage: '',
+    jobRole: 'Customer-Support-representative',
+    email: 'N/A',
+    PhoneNo: 'N/A',
+    joiningDate: 'N/A',
+    shiftType: 'Morning',
+};
+    let [employFrom ,setEmployForm]=useState(initialForm);
+
 
     let [employes ,setEmployes]=useState([]);
     let [error ,setError]=useState({
@@ -56,9 +58,10 @@ function AddingEmploy({setAddingEmployPage , fetchFromBackend}) {
              let data=await responce.json();
 
           if(responce.ok && data){
-            fetchFromBackend().then(()=>{
+               await fetchFromBackend()
+               setEmployForm(initialForm)
                setAddingEmployPage(false)
-            })
+            
           }
           }catch(err){
             console.log(err.message)
