@@ -51,10 +51,10 @@ function WeekleyReport() {
      };
     useEffect(()=>{
        FetchingData()
+       console.log('useEffect')
     },[])
-   employes.sort((a, b) => {
+    employes.sort((a, b) => {
         if (a.shiftType === b.shiftType) return 0;
-
         return a.shiftType === 'Morning' ? -1 : 1;
     });
 
@@ -116,7 +116,7 @@ function WeekleyReport() {
                            </button>
                         </div>
                         
-                        <p className="GoingMonth-Text jsGoingMonth-Text">
+                        <p className="GoingMonth-Text">
                             {GoingMonth}
                         </p>
                         <div className="menu-container">
@@ -167,17 +167,18 @@ function WeekleyReport() {
     )
 }
 
-function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
+ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
 
     let [currentEmployHours ,setCurrentEmployHours]=useState(employ.Hours ?? {})
 
     useEffect(() => {
-    setCurrentEmployHours(employ.Hours);
+    setCurrentEmployHours(employ.Hours ?? {});
     }, [employ.Hours]);
 
     let TotalHours=0
     weekDays.forEach((date) => {
-        TotalHours += Number(currentEmployHours[date] ?? 0);
+           TotalHours += Number(currentEmployHours[date] ?? 0);
+ 
     });
     let SubmitingHours=async(employ ,dayIndex ,e )=>{
        let date=weekDays[dayIndex] 
@@ -213,8 +214,8 @@ function HoursInWeekleyReport({employ , weekDays , fetchingData}) {
         }catch(error){
             console.log(error.message)
         }
-
-        
+ 
+        await fetchingData()
     }
  
 return(  
@@ -226,7 +227,7 @@ return(
                 type="number"
                 className="days-hours"
                 onChange={(e) =>{ SubmitingHours(employ, index, e)}}
-                onBlur={() => {SavingToBackend(employ , index  )}}
+                onBlur={async() => { await SavingToBackend(employ , index  )}}
                 placeholder={employ.Hours [date] ?? ''}
             />
         ))}
