@@ -7,8 +7,14 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 import SingleemployDetail from './components/SingleemployDetail'
 import AddingEmploy from './components/AddingEmploy'
+import { useLocation } from 'react-router-dom'
+
 
 function EmployeePage() {
+    const location = useLocation()
+    let userEmail=location.state?.email
+    console.log(userEmail)
+
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
@@ -17,6 +23,7 @@ function EmployeePage() {
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
      let [backendStatus ,setBackendStatus]=useState(false)
+
  
      let fetchFromBackend=async()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -92,7 +99,7 @@ function EmployeePage() {
 
     return(
         <>
-        <Header />
+        <Header userEmail={userEmail} />
         <SideBar />
         <main className="main-addingEmploy-page">
 

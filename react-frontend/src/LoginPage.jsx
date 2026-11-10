@@ -31,7 +31,9 @@ function Login() {
 
           let data=await responce.json()
            if(responce.ok && data.success){
-                navigate('/employesPage')
+                navigate('/employesPage',{
+                    state:{email}
+                })
             }else {
                 alert(data.message);
             }
