@@ -215,7 +215,6 @@ function WeekleyReport() {
             console.log(error.message)
         }
  
-        await fetchingData()
     }
  
 return(  
