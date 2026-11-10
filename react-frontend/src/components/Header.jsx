@@ -15,7 +15,7 @@ function Header({ userEmail }) {
         }
     },[userEmail])
 
-    let employEmail=localStorage.getItem('email') || 'Loading...'
+    let employEmail=userEmail || localStorage.getItem('email') || 'Loading...'
 
     return (
         <header className="main-header">
