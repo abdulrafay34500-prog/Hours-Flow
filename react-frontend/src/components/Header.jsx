@@ -17,6 +17,9 @@ function Header({ userEmail }) {
 
     let employEmail=userEmail || localStorage.getItem('email') || 'Loading...'
 
+    let emailInitial=employEmail.split('')[0]
+    console.log(emailInitial)
+
     return (
         <header className="main-header">
 
@@ -53,9 +56,8 @@ function Header({ userEmail }) {
                 <div className="header-user">
 
                     <div className="profile-pic-div">
-                        <div className="profile-image">
-                            
-                            
+                        <div className="profile-image">                    
+                            {emailInitial.toUpperCase()}
                         </div>
                     </div>
 

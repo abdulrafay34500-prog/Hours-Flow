@@ -13,7 +13,6 @@ import { useLocation } from 'react-router-dom'
 function EmployeePage() {
     const location = useLocation()
     let userEmail=location.state?.email
-    console.log(userEmail)
 
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
