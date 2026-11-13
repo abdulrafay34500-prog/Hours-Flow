@@ -207,6 +207,7 @@
     justify-content: flex-start;
     row-gap: 5px;
     overflow-y: auto;
+    position: relative;
 }
 
 
@@ -341,4 +342,38 @@
         min-width: 850px;
     }
 
+}
+.weekley-noEmployFound-Text{
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+    left: 40%;
+}
+..selects {
+    display: flex;
+    gap: 8px;
+}
+
+.selects select {
+    width: 90px;
+    padding: 6px 8px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    outline: none;
+}
+
+
+.selects {
+    width: 140px;
+    padding: 7px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+    margin-right: 20px;
 }

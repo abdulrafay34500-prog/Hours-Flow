@@ -5,9 +5,11 @@ import { useEffect } from 'react'
 
 import '../CSS-Files/header.css'
 
-function Header({ userEmail }) {
+function Header({ userEmail ,setSearch }) {
 
 
+
+    
     useEffect(()=>{
         if(userEmail){
             localStorage.setItem('email' , userEmail)
@@ -35,10 +37,8 @@ function Header({ userEmail }) {
                 <input
                     className="Search-bar"
                     placeholder="Search employees..."
+                    onChange={(e)=>setSearch(e.target.value)}
                 />
-                <button className="search-button">
-                    Search
-                </button>
             </div>
 
             <div className="right-header">

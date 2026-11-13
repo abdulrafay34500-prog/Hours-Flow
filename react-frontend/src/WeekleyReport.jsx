@@ -25,6 +25,9 @@ function WeekleyReport() {
     let [goingWeek , setGoingWeek]=useState(0)
     let [optionsButton , setOptionsButton]=useState(false)
     let [weekleyReport , setWeekleyReport]=useState(false)
+    let [search ,setSearch]=useState('')
+    let [selectedShift ,setSelectedShift]=useState('')
+
 
      let FetchingData = async () => {
      try {
@@ -51,7 +54,6 @@ function WeekleyReport() {
      };
     useEffect(()=>{
        FetchingData()
-       console.log('useEffect')
     },[])
     employes.sort((a, b) => {
         if (a.shiftType === b.shiftType) return 0;
@@ -98,9 +100,14 @@ function WeekleyReport() {
 
     })
 
+    let searchedEmploy=employWithHours.filter((employ)=>
+       employ.name.toLowerCase().includes(search.toLowerCase()) &&
+       employ.shiftType.includes(selectedShift)
+    )
+
     return(
         <>
-        <Header />
+        <Header setSearch={setSearch} />
         <SideBar />
          <div className="Weekley-overview-main-div">
                     <div className="week-buttons-div">
@@ -120,13 +127,19 @@ function WeekleyReport() {
                             {GoingMonth}
                         </p>
                         <div className="menu-container">
+                             <select className="selects" onChange={(e)=>setSelectedShift(e.target.value)}>
+                                <option value="">All Employees</option>
+                                <option value="Morning">Morning Employees</option>
+                                <option value="Evening">Evening Employees</option>
+                            </select>
                             <button className="three-dots"  
-                             onClick={() => setOptionsButton(true)}
-                             >⋮</button>
-
-                           {optionsButton && <div className="dropdown-menu" 
-                               onMouseLeave={() => setOptionsButton(false)}
-                           >
+                                onClick={() => setOptionsButton(true)}>
+                                ⋮
+                             </button>
+                             
+                           {optionsButton && 
+                           <div className="dropdown-menu" 
+                               onMouseLeave={() => setOptionsButton(false)}>
                                 <button onClick={()=>{
                                     FetchingData().then(()=>{
                                         setWeekleyReport(true)
@@ -148,13 +161,14 @@ function WeekleyReport() {
                          })}
                         <p>Total Hours</p>
                     </div>
-                    <div className="Weekley-report-main-div  js-Weekley-report-main-div">
-
-                         {employWithHours.map((employ)=>(
+                    <div className="Weekley-report-main-div">
+                         {searchedEmploy.length == 0 &&
+                             <p className='weekley-noEmployFound-Text'>No employ found</p>}
+                         {searchedEmploy.map((employ)=>(
                                   <div  key={employ.id}  >
                                      <HoursInWeekleyReport employ={employ} weekDays={weekDays} fetchingData={FetchingData}/>
                                   </div>
-                               ))
+                            ))
                         }
                     </div>
                     

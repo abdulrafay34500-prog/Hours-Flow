@@ -21,6 +21,7 @@ function EmployeePage() {
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
+    let [search ,setSearch]=useState('')
      let [successPopup , setSuccessPopup]=useState({
         bolean:false,
         textMessage :''
@@ -100,7 +101,12 @@ function EmployeePage() {
 
     }, [employes, employTimeSheet]);
 
+    // Searching Specific Employ
 
+    let searchedEmploy=employes.filter((employ)=>
+        employ.name.toLowerCase().includes(search.toLowerCase()) ||
+        employ.id.includes(search)
+    )
     //////////////////////    
 
     employes.sort((a)=>{
@@ -109,7 +115,7 @@ function EmployeePage() {
 
     return(
         <>
-        <Header userEmail={userEmail} />
+        <Header userEmail={userEmail} setSearch={setSearch}/>
         <SideBar />
         <main className="main-addingEmploy-page">
 
@@ -150,8 +156,12 @@ function EmployeePage() {
                             <p className="Employ-namee">Employ Name</p>
                             <p className="Employ-ShiftTypee">Shift Type</p>
                         </div>
-                        <div className="added-Employes-details js-added-Employes-details">
-                            {employes.map((employ)=>(
+                        <div className="added-Employes-details">
+                            
+                            {searchedEmploy.length == 0 &&
+                              <p className='noEmployFound-Text'>No Employee Found</p>                           
+                             }
+                            {searchedEmploy.map((employ)=>(
                                  <div key={employ.id} className="employ-detail js-employ-detail-click"
                                   onClick={()=>{setSingleEmployPopup(true) ; setSelectEmploy(employ)}}
                                  >
