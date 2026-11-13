@@ -183,7 +183,7 @@ function EmployeePage() {
                 </div>
                 }
                 
-                {successPopup.bolean &&<div class="success-popup">
+                {successPopup.bolean &&<div className="success-popup">
                     <span className="success-icon">✓</span>
                     <span>{successPopup.textMessage}</span>
                 </div>}
