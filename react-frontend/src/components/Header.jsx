@@ -1,7 +1,6 @@
 import logo from '../logo&Img/logo.png.png'
 import searchIcon from '../logo&Img/searchIcon.png'
 import notification from '../logo&Img/notification.png'
-import profilePic from '../logo&Img/employ.png'
 import { useEffect } from 'react'
 
 import '../CSS-Files/header.css'
@@ -18,7 +17,7 @@ function Header({ userEmail }) {
     let employEmail=userEmail || localStorage.getItem('email') || 'Loading...'
 
     let emailInitial=employEmail.split('')[0]
-    console.log(emailInitial)
+
 
     return (
         <header className="main-header">

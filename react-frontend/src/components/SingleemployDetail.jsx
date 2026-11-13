@@ -7,7 +7,7 @@ import MonthlyHistory from './MonthlyHistory'
 import { useNavigate } from 'react-router-dom'
 
 
-function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchFromBackend}) {
+function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchFromBackend ,setSuccessPopup}) {
     const navigate = useNavigate()
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
@@ -116,19 +116,19 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchF
 
         {
         deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} fetchFromBackend={fetchFromBackend} 
-        setSingleEmployPopup={setSingleEmployPopup}
+        setSingleEmployPopup={setSingleEmployPopup} setSuccessPopup={setSuccessPopup}
         />     
         }
 
          {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
-            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}
+            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ} setSuccessPopup={setSuccessPopup}
              fetchFromBackend={fetchFromBackend} setSingleEmployPopup={setSingleEmployPopup} />
         </div>}
 
     </div>
    )
 }
-function DeletePopUp({setDeletePop ,employ ,fetchFromBackend , setSingleEmployPopup}) {
+function DeletePopUp({setDeletePop ,employ ,fetchFromBackend , setSingleEmployPopup ,setSuccessPopup}) {
     const navigate = useNavigate()
    let deleteEmployFun=async()=>{
         try{
@@ -148,6 +148,10 @@ function DeletePopUp({setDeletePop ,employ ,fetchFromBackend , setSingleEmployPo
                     setSingleEmployPopup(false)
                 })
               navigate('/employesPage')
+              setSuccessPopup({
+                    bolean:true,
+                    textMessage :'Employee deleted successfully'
+                })
             } 
      
         }catch(err){

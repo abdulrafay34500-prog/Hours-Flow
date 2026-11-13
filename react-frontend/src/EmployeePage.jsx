@@ -21,7 +21,10 @@ function EmployeePage() {
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
-     let [backendStatus ,setBackendStatus]=useState(false)
+     let [successPopup , setSuccessPopup]=useState({
+        bolean:false,
+        textMessage :''
+     })
 
  
      let fetchFromBackend=async()=>{
@@ -43,8 +46,16 @@ function EmployeePage() {
         .then((json)=>{setEmployTimeSheet(json)})
      }
     useEffect(()=>{
-      fetchFromBackend()
-    },[]);
+      let timeOut=fetchFromBackend()
+      setTimeout(()=>{
+         setSuccessPopup({
+            bolean:false,
+            textMessage :''
+         })
+      },2200)
+
+      return ()=> clearTimeout(timeOut)
+    },[successPopup.bolean]);
 
     // Calculating Total Monthly Pay Role
     
@@ -163,15 +174,18 @@ function EmployeePage() {
                
                 {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
                  employ={selectEmploy} hoursSheet={employTimeSheet}  fetchFromBackend={fetchFromBackend}
+                 setSuccessPopup={setSuccessPopup}
                 />}
                 {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
-                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} fetchFromBackend={fetchFromBackend} />
+                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} fetchFromBackend={fetchFromBackend}
+                      setSuccessPopup={setSuccessPopup}
+                    />
                 </div>
                 }
                 
-                {backendStatus &&<div class="success-popup">
-                    <span class="success-icon">✓</span>
-                    <span>Employee Added Successfully!</span>
+                {successPopup.bolean &&<div class="success-popup">
+                    <span className="success-icon">✓</span>
+                    <span>{successPopup.textMessage}</span>
                 </div>}
 
 

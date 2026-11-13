@@ -1,9 +1,7 @@
 import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
-import { useNavigate } from 'react-router-dom'
 
-function AddingEmploy({setAddingEmployPage , fetchFromBackend}) {
-    const navigate = useNavigate()
+function AddingEmploy({setAddingEmployPage , fetchFromBackend , setSuccessPopup}) {
     const initialForm = {
     id: '',
     name: '',
@@ -61,7 +59,10 @@ function AddingEmploy({setAddingEmployPage , fetchFromBackend}) {
                await fetchFromBackend()
                setEmployForm(initialForm)
                setAddingEmployPage(false)
-            
+               setSuccessPopup({
+                    bolean:true,
+                    textMessage :'Employee Added Successfully!'
+                })
           }
           }catch(err){
             console.log(err.message)
