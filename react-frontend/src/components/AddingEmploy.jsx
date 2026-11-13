@@ -1,17 +1,21 @@
 import { useEffect, useState , useRef } from 'react'
 import '../CSS-Files/addingemploypage.css'
+import { useNavigate } from 'react-router-dom'
 
-function AddingEmploy({setAddingEmployPage}) {
-    let [employFrom ,setEmployForm]=useState({
-        id: '',
-        name: '',
-        hourleyWage:'',
-        jobRole: 'Customer-Support-representative',
-        email:'N/A',
-        PhoneNo:'N/A',
-        joiningDate:'N/A',
-        shiftType:'Morning',
-    });
+function AddingEmploy({setAddingEmployPage , fetchFromBackend}) {
+    const navigate = useNavigate()
+    const initialForm = {
+    id: '',
+    name: '',
+    hourleyWage: '',
+    jobRole: 'Customer-Support-representative',
+    email: 'N/A',
+    PhoneNo: 'N/A',
+    joiningDate: 'N/A',
+    shiftType: 'Morning',
+};
+    let [employFrom ,setEmployForm]=useState(initialForm);
+
 
     let [employes ,setEmployes]=useState([]);
     let [error ,setError]=useState({
@@ -54,7 +58,10 @@ function AddingEmploy({setAddingEmployPage}) {
              let data=await responce.json();
 
           if(responce.ok && data){
-            window.location.href='/employesPage'
+               await fetchFromBackend()
+               setEmployForm(initialForm)
+               setAddingEmployPage(false)
+            
           }
           }catch(err){
             console.log(err.message)

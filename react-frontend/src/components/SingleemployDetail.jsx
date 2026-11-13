@@ -4,12 +4,15 @@ import weekDays from '../commonFun/gettingWeekleyDates'
 import monthDays from '../commonFun/gettingMonthlydates'
 import EditEmploy from './EditEmploy'
 import MonthlyHistory from './MonthlyHistory'
+import { useNavigate } from 'react-router-dom'
 
 
-function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
+function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet , fetchFromBackend}) {
+    const navigate = useNavigate()
     let [deletePop , setDeletePop]=useState(false)
     let [editEmployPage , setEditEmployPage]=useState(false)
      let [monthlyHistory , setMonthlyHistory]=useState(false)
+     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0)
 
     let name=employ.name
 
@@ -34,7 +37,7 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
  
 
      // getting weekley total Hours
-    let totalMonthlyHours=0;
+    let totalMonthlyHour=0;
     monthDays.forEach((days)=>{
        totalMonthlyHours+=employ.Hours[days]  || 0
     });
@@ -96,25 +99,37 @@ function SingleemployDetail({setSingleEmployPopup , employ , hoursSheet}) {
         </div>
 
         <div className="edit-delete-button-div">
-             <button className="edit-button js-edit-button" onClick={()=>setEditEmployPage(true)}>Edit</button>          
-            <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >History</button>
+             <button className="edit-button js-edit-button" 
+            onClick={async()=>{ 
+                await fetchFromBackend();
+               setEditEmployPage(true);}
+            }>
+                Edit
+            </button>          
+            <button className="History-button js-History-button" onClick={()=>setMonthlyHistory(true)} >
+                History
+            </button>
             <button className="delete-button js-delete-button" onClick={()=>setDeletePop(true)}>Delete</button>
         </div>
 
         {monthlyHistory && <MonthlyHistory setMonthlyHistory={setMonthlyHistory} employ={employ} />}
 
         {
-        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} />     
+        deletePop && <DeletePopUp setDeletePop={setDeletePop} employ={employ} fetchFromBackend={fetchFromBackend} 
+        setSingleEmployPopup={setSingleEmployPopup}
+        />     
         }
 
          {editEmployPage && <div style={{ display: editEmployPage ? 'block' : 'none' }}>
-            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}/>
+            <EditEmploy setEditEmployPage={setEditEmployPage} SingleEmploy={employ}
+             fetchFromBackend={fetchFromBackend} setSingleEmployPopup={setSingleEmployPopup} />
         </div>}
 
     </div>
    )
 }
-function DeletePopUp({setDeletePop ,employ}) {
+function DeletePopUp({setDeletePop ,employ ,fetchFromBackend , setSingleEmployPopup}) {
+    const navigate = useNavigate()
    let deleteEmployFun=async()=>{
         try{
             let responce =await fetch(`https://hours-flow-backend.vercel.app/api/employes/${employ.id}/delete` ,{
@@ -128,7 +143,11 @@ function DeletePopUp({setDeletePop ,employ}) {
                     }) 
             console.log(responce.status)  
             if(responce.status== 200){
-               window.location.href='/employesPage'
+                fetchFromBackend().then(()=>{
+                    setDeletePop(false)
+                    setSingleEmployPopup(false)
+                })
+              navigate('/employesPage')
             } 
      
         }catch(err){

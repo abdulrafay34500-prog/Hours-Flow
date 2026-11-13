@@ -1,7 +1,11 @@
 import componyLogo from './logo&Img/logo.png.png'
 import './CSS-Files/sighnupPage.css'
 import { useState } from 'react'
+import {Link , useNavigate} from 'react-router-dom'
+
 function SighnupPage() {
+    let navigate=useNavigate()
+
     let [sighnupForm ,setSighnupForm] =useState({
         email:'',
         name:'',
@@ -32,7 +36,7 @@ function SighnupPage() {
             let data =await responce.json()
 
             if(responce.ok && data.success){
-                 window.location.href='/'
+                 navigate('/')
             }else{
                 alert(data.message)
             }

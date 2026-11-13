@@ -2,30 +2,78 @@ import logo from '../logo&Img/logo.png.png'
 import searchIcon from '../logo&Img/searchIcon.png'
 import notification from '../logo&Img/notification.png'
 import profilePic from '../logo&Img/employ.png'
+import { useEffect } from 'react'
 
 import '../CSS-Files/header.css'
-function Header (){
-    return(
-        <header>
-            <div className="left-header">
-                <img className="logo" src={logo}/>
 
+function Header({ userEmail }) {
+
+
+    useEffect(()=>{
+        if(userEmail){
+            localStorage.setItem('email' , userEmail)
+        }
+    },[userEmail])
+
+    let employEmail=userEmail || localStorage.getItem('email') || 'Loading...'
+
+    let emailInitial=employEmail.split('')[0]
+    console.log(emailInitial)
+
+    return (
+        <header className="main-header">
+
+            <div className="left-header">
+                <img className="logo" src={logo} alt="HoursFlow" />
             </div>
+
             <div className="middle-header">
-               <input className="Search-bar" placeholder="Search by employ name" />
+                <img
+                    className="search-icon"
+                    src={searchIcon}
+                    alt=""
+                />
+                <input
+                    className="Search-bar"
+                    placeholder="Search employees..."
+                />
                 <button className="search-button">
-                    <img className="search-icon" src={searchIcon}/>
+                    Search
                 </button>
             </div>
+
             <div className="right-header">
-                <img className="notification-img" src={notification}/>
-                <div className="profile-pic-div">
-                    <img className="profile-image" src={profilePic} /> 
+
+                <button className="notification-button">
+                    <img
+                        className="notification-img"
+                        src={notification}
+                        alt="Notifications"
+                    />
+                    <span className="notification-dot"></span>
+                </button>
+
+                <div className="header-user">
+
+                    <div className="profile-pic-div">
+                        <div className="profile-image">                    
+                            {emailInitial.toUpperCase()}
+                        </div>
+                    </div>
+
+                    <div className="user-info">
+                        <span className="user-name">Account</span>
+                        <span className="user-email">
+                            {employEmail}
+                        </span>
+                    </div>
+
                 </div>
+
             </div>
 
         </header>
     )
 }
 
-export default Header;
+export default Header

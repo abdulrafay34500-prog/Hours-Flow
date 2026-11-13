@@ -7,19 +7,26 @@ import Header from './components/Header'
 import SideBar from './components/SideBar'
 import SingleemployDetail from './components/SingleemployDetail'
 import AddingEmploy from './components/AddingEmploy'
+import { useLocation } from 'react-router-dom'
+
 
 function EmployeePage() {
+    const location = useLocation()
+    let userEmail=location.state?.email
+
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
+     let [totalPayroll , setTotalPayroll]=useState(0);
     let [ singleEmployPopup , setSingleEmployPopup ]=useState(false);
     let [ selectEmploy , setSelectEmploy]=useState(null);
     let [addingEmployPage ,setAddingEmployPage]=useState(false)
      let [backendStatus ,setBackendStatus]=useState(false)
 
-    useEffect(()=>{
+ 
+     let fetchFromBackend=async()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
-               credentials: 'include'
+        credentials: 'include'
         }).then((responce)=>{ return responce.json()})
         .then((json)=>{setEmployes(json)})
 
@@ -34,9 +41,56 @@ function EmployeePage() {
             credentials: 'include'
         }).then((responce)=>responce.json())
         .then((json)=>{setEmployTimeSheet(json)})
+     }
+    useEffect(()=>{
+      fetchFromBackend()
     },[]);
 
+    // Calculating Total Monthly Pay Role
+    
+    useEffect(() => {
+        let salary = 0;
 
+        let Today = new Date();
+        let year = Today.getFullYear();
+        let month = Today.getMonth();
+
+        let numberOfDays = new Date(year, month + 1, 0).getDate();
+
+        let monthDays = [];
+
+        for (let day = 1; day <= numberOfDays; day++) {
+            let date = new Date(year, month, day);
+
+            let formattedDate =
+                date.getFullYear() + '-' +
+                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                String(date.getDate()).padStart(2, '0');
+
+            monthDays.push(formattedDate);
+        }
+
+        employes.forEach((employ) => {
+            let totalHours = 0;
+
+            employTimeSheet.forEach((hoursSheet) => {
+                if (
+                    hoursSheet.employID == employ.id &&
+                    monthDays.includes(hoursSheet.date)
+                ) {
+                    totalHours += Number(hoursSheet.hours) || 0;
+                }
+            });
+
+            salary += totalHours * Number(employ.hourleyWage);
+        });
+
+        setTotalPayroll(salary);
+
+    }, [employes, employTimeSheet]);
+
+
+    //////////////////////    
 
     employes.sort((a)=>{
         return a.shiftType=='Morning'?-1 : 1
@@ -44,7 +98,7 @@ function EmployeePage() {
 
     return(
         <>
-        <Header />
+        <Header userEmail={userEmail} />
         <SideBar />
         <main className="main-addingEmploy-page">
 
@@ -76,7 +130,7 @@ function EmployeePage() {
                         <div className="Total-Payroll-div">
                             <img className="currency-icon" src={currencyImg}/>
                             <p className="total-Payroll-text">Total Payroll (This Month)</p>
-                            <p className="monthly-Payroll-Amount js-monthly-Payroll-Amount">0</p>
+                            <p className="monthly-Payroll-Amount js-monthly-Payroll-Amount">{totalPayroll}</p>
                         </div>
                     </div>
                     <div className="Employe-Details-main-div">
@@ -108,10 +162,10 @@ function EmployeePage() {
                 </div>
                
                 {singleEmployPopup  && <SingleemployDetail setSingleEmployPopup={setSingleEmployPopup}
-                 employ={selectEmploy} hoursSheet={employTimeSheet}
+                 employ={selectEmploy} hoursSheet={employTimeSheet}  fetchFromBackend={fetchFromBackend}
                 />}
                 {<div style={{display : addingEmployPage ? 'block' : 'none'}}>
-                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} />
+                    <AddingEmploy setAddingEmployPage={setAddingEmployPage} fetchFromBackend={fetchFromBackend} />
                 </div>
                 }
                 
