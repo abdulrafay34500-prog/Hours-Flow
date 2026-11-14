@@ -46,9 +46,12 @@ function EmployeePage() {
         }).then((responce)=>responce.json())
         .then((json)=>{setEmployTimeSheet(json)})
      }
+
+     useEffect(()=>{
+         fetchFromBackend()
+     })
     useEffect(()=>{
-      let timeOut=fetchFromBackend()
-      setTimeout(()=>{
+      let timeOut=setTimeout(()=>{
          setSuccessPopup({
             bolean:false,
             textMessage :''
