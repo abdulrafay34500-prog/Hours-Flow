@@ -49,7 +49,7 @@ function EmployeePage() {
 
      useEffect(()=>{
          fetchFromBackend()
-     })
+     },[])
     useEffect(()=>{
       let timeOut=setTimeout(()=>{
          setSuccessPopup({
