@@ -282,6 +282,10 @@
     outline: 3px solid rgba(37, 99, 235, 0.3);
     outline-offset: 3px;
 }
+.make-report-Selet-shift-type-main-div{
+    display: flex;
+    align-items: center;
+}
 .menu-container {
   position: relative;
   display: inline-block;

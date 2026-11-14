@@ -26,7 +26,6 @@ function EmployeePage() {
         bolean:false,
         textMessage :''
      })
-
  
      let fetchFromBackend=async()=>{
         fetch('https://hours-flow-backend.vercel.app/api/employes',{
@@ -46,7 +45,6 @@ function EmployeePage() {
         }).then((responce)=>responce.json())
         .then((json)=>{setEmployTimeSheet(json)})
      }
-
      useEffect(()=>{
          fetchFromBackend()
      },[])

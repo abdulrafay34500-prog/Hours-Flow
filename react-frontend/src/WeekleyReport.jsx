@@ -126,27 +126,30 @@ function WeekleyReport() {
                         <p className="GoingMonth-Text">
                             {GoingMonth}
                         </p>
-                        <div className="menu-container">
-                             <select className="selects" onChange={(e)=>setSelectedShift(e.target.value)}>
+                          
+                        <div className='make-report-Selet-shift-type-main-div'>
+                            <select className="selects" onChange={(e)=>setSelectedShift(e.target.value)}>
                                 <option value="">All Employees</option>
                                 <option value="Morning">Morning Employees</option>
                                 <option value="Evening">Evening Employees</option>
                             </select>
-                            <button className="three-dots"  
-                                onClick={() => setOptionsButton(true)}>
-                                ⋮
-                             </button>
-                             
-                           {optionsButton && 
-                           <div className="dropdown-menu" 
-                               onMouseLeave={() => setOptionsButton(false)}>
-                                <button onClick={()=>{
-                                    FetchingData().then(()=>{
-                                        setWeekleyReport(true)
-                                    })           
-                                }
-                                }>Make Weekley Report</button>
-                            </div>}
+                            <div className="menu-container">                     
+                                <button className="three-dots"  
+                                    onClick={() => setOptionsButton(true)}>
+                                    ⋮
+                                </button>
+                                    
+                                {optionsButton && 
+                                <div className="dropdown-menu" 
+                                    onMouseLeave={() => setOptionsButton(false)}>
+                                        <button onClick={()=>{
+                                            FetchingData().then(()=>{
+                                                setWeekleyReport(true)
+                                        })           
+                                    }
+                                    }>Make Weekley Report</button>
+                                </div>}
+                            </div>
                         </div>
                        
                     </div>

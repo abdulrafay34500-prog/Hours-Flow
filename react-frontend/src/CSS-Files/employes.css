@@ -540,14 +540,14 @@
 
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     z-index: 9999;
-    animation: animate 2.5s;
+    animation: animate 1.5s ease-in-out;
 }
-@keyframes animate{
-    from{
-       transform:translateX(50px)
+@keyframes animate {
+    from {
+        transform: translateX(calc(-50% + 50px));
     }
-    to{
-       transform:translateX(-50px)
+    to {
+        transform: translateX(-50%);
     }
 }
 
