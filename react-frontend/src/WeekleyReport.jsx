@@ -27,29 +27,33 @@ function WeekleyReport() {
     let [weekleyReport , setWeekleyReport]=useState(false)
     let [search ,setSearch]=useState('')
     let [selectedShift ,setSelectedShift]=useState('')
+    let [loading,setLoading]=useState(false)
 
 
      let FetchingData = async () => {
-     try {
-        let employResponse = await fetch(
-            'https://hours-flow-backend.vercel.app/api/employes',
-            { credentials: 'include' }
-        );
+        setLoading(true)
+        try {
+            let employResponse = await fetch(
+                'https://hours-flow-backend.vercel.app/api/employes',
+                { credentials: 'include' }
+            );
 
-        let employData = await employResponse.json();
+            let employData = await employResponse.json();
 
-        let hoursResponse = await fetch(
-            'https://hours-flow-backend.vercel.app/api/timeSheet',
-            { credentials: 'include' }
-        );
+            let hoursResponse = await fetch(
+                'https://hours-flow-backend.vercel.app/api/timeSheet',
+                { credentials: 'include' }
+            );
 
-        let hoursData = await hoursResponse.json();
+            let hoursData = await hoursResponse.json();
 
-        setEmployes(employData);
-        setEmployTimeSheet(hoursData);
+            setEmployes(employData);
+            setEmployTimeSheet(hoursData);
 
         } catch (error) {
             console.log(error);
+        }finally{
+         setLoading(false)
         }
      };
     useEffect(()=>{
@@ -165,7 +169,8 @@ function WeekleyReport() {
                         <p>Total Hours</p>
                     </div>
                     <div className="Weekley-report-main-div">
-                         {searchedEmploy.length == 0 &&
+                        {loading && <p className='weekley-noEmployFound-Text'>Loading...</p>}
+                         {!loading && searchedEmploy.length == 0 &&
                              <p className='weekley-noEmployFound-Text'>No employ found</p>}
                          {searchedEmploy.map((employ)=>(
                                   <div  key={employ.id}  >

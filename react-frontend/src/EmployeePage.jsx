@@ -14,6 +14,7 @@ function EmployeePage() {
     const location = useLocation()
     let userEmail=location.state?.email
 
+    let [loading ,setLoading]=useState(false)
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
@@ -27,27 +28,45 @@ function EmployeePage() {
         textMessage :''
      })
  
-     let fetchFromBackend=async()=>{
-        fetch('https://hours-flow-backend.vercel.app/api/employes',{
-        credentials: 'include'
-        }).then((responce)=>{ return responce.json()})
-        .then((json)=>{setEmployes(json)})
+    
+    let fetchFromBackend = async () => {
+        setLoading(true);
 
-        fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours',
-        {
-            credentials: 'include'
-        }).then((responce)=>responce.json())
-        .then((json)=>{setTotalMonthlyHours(json)})
+        try {
+            let [employeesResponse, monthlyHoursResponse, timeSheetResponse] =
+                await Promise.all([
+                    fetch('https://hours-flow-backend.vercel.app/api/employes', {
+                        credentials: 'include'
+                    }),
+                    fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours', {
+                        credentials: 'include'
+                    }),
+                    fetch('https://hours-flow-backend.vercel.app/api/timeSheet', {
+                        credentials: 'include'
+                    })
+                ]);
 
-        fetch('https://hours-flow-backend.vercel.app/api/timeSheet',
-        {
-            credentials: 'include'
-        }).then((responce)=>responce.json())
-        .then((json)=>{setEmployTimeSheet(json)})
-     }
+            let [employees, monthlyHours, timeSheet] = await Promise.all([
+                employeesResponse.json(),
+                monthlyHoursResponse.json(),
+                timeSheetResponse.json()
+            ]);
+
+            setEmployes(employees);
+            setTotalMonthlyHours(monthlyHours);
+            setEmployTimeSheet(timeSheet);
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+     console.log(loading)
      useEffect(()=>{
          fetchFromBackend()
      },[])
+
     useEffect(()=>{
       let timeOut=setTimeout(()=>{
          setSuccessPopup({
@@ -158,8 +177,8 @@ function EmployeePage() {
                             <p className="Employ-ShiftTypee">Shift Type</p>
                         </div>
                         <div className="added-Employes-details">
-                            
-                            {searchedEmploy.length == 0 &&
+                            {loading && <p className='noEmployFound-Text'>Loading...</p> }
+                            {!loading && searchedEmploy.length == 0 &&
                               <p className='noEmployFound-Text'>No Employee Found</p>                           
                              }
                             {searchedEmploy.map((employ)=>(
