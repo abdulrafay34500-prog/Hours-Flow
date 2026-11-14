@@ -105,7 +105,7 @@ function EmployeePage() {
 
     let searchedEmploy=employes.filter((employ)=>
         employ.name.toLowerCase().includes(search.toLowerCase()) ||
-        employ.id.includes(search)
+        String(employ.id).includes(search)
     )
     //////////////////////    
 
