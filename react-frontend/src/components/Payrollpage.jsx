@@ -1,7 +1,99 @@
 import SideBar from './SideBar'
 import Header from './Header'
 import '../CSS-Files/payroll.css'
+import { useEffect , useState} from 'react'
 function Payrollpage() {
+    let [employes ,setEmployes]=useState([]);
+    let [employTimeSheet ,setEmployTimeSheet]=useState([]);
+    let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
+
+    let fetchData=async()=>{
+        try{
+            let [employesResponce , monthlyHoursResponce , timeSheetResponce]=
+            await Promise.all([
+                fetch('https://hours-flow-backend.vercel.app/api/employes', {
+                        credentials: 'include'
+                    }),
+                fetch('https://hours-flow-backend.vercel.app/api/timeSheet/TotalMonthlyHours', {
+                    credentials: 'include'
+                }),
+                fetch('https://hours-flow-backend.vercel.app/api/timeSheet', {
+                    credentials: 'include'
+                })
+            ])
+
+            let [employes , monthlyHours ,timeSheet]=
+            await Promise.all([
+                employesResponce.json(),
+                monthlyHoursResponce.json(),
+                timeSheetResponce.json(),
+            ])
+
+            setEmployes(employes)
+            setTotalMonthlyHours(monthlyHours)
+            setEmployTimeSheet(timeSheet)
+
+
+        }catch(err){
+           console.log(err.message)
+        }
+    }
+
+    useEffect(()=>{
+        fetchData()
+    },[])
+
+    // Merging Employes with timeSheet
+
+    let employesWithSheet=employes.map((employ)=>{
+        let emplployHours={}
+
+        employTimeSheet.forEach((hourSheet)=>{
+            if(employ.id==hourSheet.employID){
+               emplployHours[hourSheet.date]=hourSheet.hours
+            }
+        })
+        
+        return({
+            ...employ,
+           hours:emplployHours
+        })
+    })
+
+
+
+    // Making Current Month All Dates
+
+    let today=new Date()
+    let month=today.getMonth()
+    let year=today.getFullYear()
+
+    let numberOfDays=new Date(year , month+1 , 0).getDate()
+
+    let monthlyDates=[]
+    for(let days=1; days <= numberOfDays ; days++){
+       let date=new Date(year , month , days)
+
+       let formatedDate=date.getFullYear() + '-' +
+       String(date.getMonth()+1).padStart('2' , 0) + '-' +
+       String(date.getDate()).padStart('2' , 0)
+
+       monthlyDates.push(formatedDate)
+    }
+     
+    
+
+    // Generating All employes MonthlyTotal Payroll
+    let MonthlyPayroll=0
+    monthlyDates.forEach((dates)=>{
+        employesWithSheet.forEach((employ)=>{
+           MonthlyPayroll+=(employ.hours[dates] || 0)*Number(employ.hourleyWage)
+        })
+    })
+
+    // Calculating Average Salary Of Total Payroll
+    let AverageSalary=MonthlyPayroll / employesWithSheet.length
+
     return(
         <>
         <Header/>
@@ -27,9 +119,9 @@ function Payrollpage() {
                 <div className="payroll-card">
                     <div className="card-top">
                         <span>Total Monthly Payroll</span>
-                        <div className="card-icon">£</div>
+                        <div className="card-icon">PKR</div>
                     </div>
-                    <h2>£12,450</h2>
+                    <h2> {MonthlyPayroll.toLocaleString('en-GB')}</h2>
                     <p>Total employee salaries</p>
                 </div>
 
@@ -54,9 +146,9 @@ function Payrollpage() {
                 <div className="payroll-card">
                     <div className="card-top">
                         <span>Average Salary</span>
-                        <div className="card-icon">£</div>
+                        <div className="card-icon">PKR</div>
                     </div>
-                    <h2>£542</h2>
+                    <h2>{AverageSalary.toLocaleString('en-GB')}</h2>
                     <p>Average monthly salary</p>
                 </div>
 
@@ -92,79 +184,9 @@ function Payrollpage() {
                         </thead>
 
                         <tbody>
-
-                            <tr>
-                                <td>
-                                    <div className="employee-info">
-                                        <div className="employee-avatar">R</div>
-                                        <span>Rafay</span>
-                                    </div>
-                                </td>
-                                <td>160 hrs</td>
-                                <td>£12.00</td>
-                                <td className="salary">£1,920.00</td>
-                                <td>
-                                    <span className="status paid">Paid</span>
-                                </td>
-                                <td>
-                                    <button className="view-button">View</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div className="employee-info">
-                                        <div className="employee-avatar">A</div>
-                                        <span>Ali</span>
-                                    </div>
-                                </td>
-                                <td>145 hrs</td>
-                                <td>£10.00</td>
-                                <td className="salary">£1,450.00</td>
-                                <td>
-                                    <span className="status pending">Pending</span>
-                                </td>
-                                <td>
-                                    <button className="view-button">View</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div className="employee-info">
-                                        <div className="employee-avatar">A</div>
-                                        <span>Ahmed</span>
-                                    </div>
-                                </td>
-                                <td>170 hrs</td>
-                                <td>£15.00</td>
-                                <td className="salary">£2,550.00</td>
-                                <td>
-                                    <span className="status paid">Paid</span>
-                                </td>
-                                <td>
-                                    <button className="view-button">View</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div className="employee-info">
-                                        <div className="employee-avatar">H</div>
-                                        <span>Hamza</span>
-                                    </div>
-                                </td>
-                                <td>155 hrs</td>
-                                <td>£11.00</td>
-                                <td className="salary">£1,705.00</td>
-                                <td>
-                                    <span className="status pending">Pending</span>
-                                </td>
-                                <td>
-                                    <button className="view-button">View</button>
-                                </td>
-                            </tr>
-
+                        {employesWithSheet.map((employ)=>(
+                           <EmployesList  key={employ.id} employ={employ} monthlyDates={monthlyDates} />
+                        ))}                           
                         </tbody>
 
                     </table>
@@ -175,6 +197,40 @@ function Payrollpage() {
         </div>
 
         </>
+    )
+}
+
+function EmployesList({employ ,monthlyDates}) {
+
+    // Calculating Single employ Monthly Hours
+       let TotalMonthlyHours=0
+        monthlyDates.forEach((dates)=>{
+           TotalMonthlyHours+=employ.hours[dates] || 0
+        })
+
+    // Calculating Single employ Monthly Salary
+      let currentMonthSalary=Number(TotalMonthlyHours *employ.hourleyWage)
+
+    // Getting First Alphabet Of name
+    let initialLetter=employ.name.split('')[0].toUpperCase()
+    return(
+        <tr key={employ.id}>
+            <td>
+                <div className="employee-info">
+                    <div className="employee-avatar">{initialLetter}</div>
+                    <span>{employ.name}</span>
+                </div>
+            </td>
+            <td>{TotalMonthlyHours}</td>
+            <td>{employ.hourleyWage} PKR</td>
+            <td className="salary">PKR {currentMonthSalary.toLocaleString('en-GB')}</td>
+            <td>
+                <span className="status paid">Paid</span>
+            </td>
+            <td>
+                <button className="view-button">View</button>
+            </td>
+        </tr>
     )
 }
 export default Payrollpage

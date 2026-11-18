@@ -62,7 +62,7 @@ function EmployeePage() {
             setLoading(false);
         }
     };
-     console.log(loading)
+    
      useEffect(()=>{
          fetchFromBackend()
      },[])
