@@ -2,10 +2,26 @@ import SideBar from './SideBar'
 import Header from './Header'
 import '../CSS-Files/payroll.css'
 import { useEffect , useState} from 'react'
+let months = [
+"January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December"
+    ];
+
 function Payrollpage() {
     let [employes ,setEmployes]=useState([]);
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
+    let [monthlyDates ,setMonthlyDates]=useState([])
 
     let fetchData=async()=>{
         try{
@@ -41,7 +57,10 @@ function Payrollpage() {
 
     useEffect(()=>{
         fetchData()
+         selectingMonth({month:months[month] , year:year})
     },[])
+
+
 
     // Merging Employes with timeSheet
 
@@ -60,29 +79,44 @@ function Payrollpage() {
         })
     })
 
-
-
-    // Making Current Month All Dates
-
-    let today=new Date()
-    let month=today.getMonth()
-    let year=today.getFullYear()
-
-    let numberOfDays=new Date(year , month+1 , 0).getDate()
-
-    let monthlyDates=[]
-    for(let days=1; days <= numberOfDays ; days++){
-       let date=new Date(year , month , days)
-
-       let formatedDate=date.getFullYear() + '-' +
-       String(date.getMonth()+1).padStart('2' , 0) + '-' +
-       String(date.getDate()).padStart('2' , 0)
-
-       monthlyDates.push(formatedDate)
-    }
      
+    // Making  Last 6  Months 
+    let  last6Months=[]
+     let currentDate=new Date()
+    for(let i =0 ; i < 6 ; i ++){
+       let passDate= new Date(currentDate.getFullYear(),currentDate.getMonth()-i, 1)
+
+       last6Months.push({month :months[passDate.getMonth()] , year :passDate.getFullYear()})
+    }
     
 
+    // Selecting Month Function
+    let today=new Date()
+    let year=today.getFullYear()
+    let month=today.getMonth()
+    
+    let selectingMonth=(selectedmonth)=>{
+        
+        // Making Current Month All Dates
+
+        let monthIndex=months.indexOf(selectedmonth.month)
+
+        let numberOfDays=new Date(selectedmonth.year , monthIndex+1 , 0).getDate()
+        let allDates=[]
+        for(let days=1; days <= numberOfDays ; days++){
+            let date=new Date(selectedmonth.year , monthIndex , days)
+
+            let formatedDate=date.getFullYear() + '-' +
+            String(date.getMonth()+1).padStart('2' , 0) + '-' +
+            String(date.getDate()).padStart('2' , 0)
+
+            allDates.push(formatedDate)
+        }
+
+        setMonthlyDates(allDates)
+    }
+    
+   
     // Generating All employes MonthlyTotal Payroll
     let MonthlyPayroll=0
     monthlyDates.forEach((dates)=>{
@@ -93,6 +127,7 @@ function Payrollpage() {
 
     // Calculating Average Salary Of Total Payroll
     let AverageSalary=MonthlyPayroll / employesWithSheet.length
+
 
     return(
         <>
@@ -107,10 +142,13 @@ function Payrollpage() {
                     <p>Manage employee salaries and payments</p>
                 </div>
 
-                <select className="month-select">
-                    <option>November 2026</option>
-                    <option>October 2026</option>
-                    <option>September 2026</option>
+                <select className="month-select" onChange={(e)=>{
+                     let selectedDate=last6Months[e.target.value];
+                     selectingMonth(selectedDate)
+                }}>
+                    {last6Months.map((date , index)=>(  
+                        <option key={index} value={index} >{date.month} {date.year}</option>
+                    ))}
                 </select>
             </div>
 
