@@ -1,4 +1,5 @@
 import './CSS-Files/employes.css'
+import './CSS-Files/loader.css'
 import employImg from './logo&Img/employ.png'
 import clockImg from './logo&Img/clock.png'
 import currencyImg from './logo&Img/rupee.png'
@@ -177,7 +178,12 @@ function EmployeePage() {
                             <p className="Employ-ShiftTypee">Shift Type</p>
                         </div>
                         <div className="added-Employes-details">
-                            {loading && <p className='noEmployFound-Text'>Loading...</p> }
+                            {loading && <div className="loading-overlay">
+                            <div className="loading-box">
+                                <div className="loader"></div>
+                                <p>Loading...</p>
+                            </div>
+                            </div>}
                             {!loading && searchedEmploy.length == 0 &&
                               <p className='noEmployFound-Text'>No Employee Found</p>                           
                              }

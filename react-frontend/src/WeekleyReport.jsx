@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import SideBar from './components/SideBar'
 import './CSS-Files/weekley-overview.css'
+import './CSS-Files/loader.css'
 import { useEffect ,useState } from 'react'
 import ShareWeekleyReport from './components/ShareWeekleyReport'
 let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -169,21 +170,31 @@ function WeekleyReport() {
                         <p>Total Hours</p>
                     </div>
                     <div className="Weekley-report-main-div">
-                        {loading && <p className='weekley-noEmployFound-Text'>Loading...</p>}
+                        {loading && <div className="loading-overlay">
+                            <div className="loading-box">
+                                <div className="loader"></div>
+                                <p>Loading...</p>
+                            </div>
+                        </div>}
                          {!loading && searchedEmploy.length == 0 &&
                              <p className='weekley-noEmployFound-Text'>No employ found</p>}
                          {searchedEmploy.map((employ)=>(
-                                  <div  key={employ.id}  >
+                                  <div  key={employ.id} >
                                      <HoursInWeekleyReport employ={employ} weekDays={weekDays} fetchingData={FetchingData}/>
                                   </div>
                             ))
-                        }
+                            
+                          }
+                          
                     </div>
                     
-                    {weekleyReport && <ShareWeekleyReport employes={employWithHours} weekDays={weekDays} 
-                      months={months} dayNames={dayNames} crossWeekleyReport={setWeekleyReport}
-                    />}
-
+                    {weekleyReport &&          
+                     <ShareWeekleyReport employes={employWithHours} weekDays={weekDays} 
+                      months={months} dayNames={dayNames} crossWeekleyReport={setWeekleyReport}/>               
+                    }
+                    <button className='SaveEmployHoursBtn' onClick={async()=>{await FetchingData()}}>
+                        Save
+                    </button>
             </div>
         </>
     )
@@ -233,6 +244,7 @@ function WeekleyReport() {
                 throw new Error(`Server error: ${response.status}`);
             }
 
+
         }catch(error){
             console.log(error.message)
         }
@@ -240,6 +252,7 @@ function WeekleyReport() {
     }
  
 return(  
+    
 <div className="Every-employ-details js-Every-employ-details-${Employe.Id}">
     <div className="employ-name">{employ.name}</div>
         {weekDays.map((date, index) => (
@@ -254,7 +267,6 @@ return(
         ))}
     <div>{TotalHours}</div>  
 </div>
-    
 )
 }
 

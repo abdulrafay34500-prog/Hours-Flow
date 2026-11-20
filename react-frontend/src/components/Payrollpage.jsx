@@ -1,6 +1,7 @@
 import SideBar from './SideBar'
 import Header from './Header'
 import '../CSS-Files/payroll.css'
+import '../CSS-Files/loader.css'
 import { useEffect , useState} from 'react'
 let months = [
 "January",
@@ -22,8 +23,10 @@ function Payrollpage() {
     let [employTimeSheet ,setEmployTimeSheet]=useState([]);
     let [totalMonthlyHours , setTotalMonthlyHours]=useState(0);
     let [monthlyDates ,setMonthlyDates]=useState([])
-
+    let [loading,setLoading]=useState(false)
+       
     let fetchData=async()=>{
+        setLoading(true)
         try{
             let [employesResponce , monthlyHoursResponce , timeSheetResponce]=
             await Promise.all([
@@ -52,6 +55,8 @@ function Payrollpage() {
 
         }catch(err){
            console.log(err.message)
+        }finally {
+            setLoading(false);
         }
     }
 
@@ -145,7 +150,7 @@ function Payrollpage() {
                 <select className="month-select" onChange={(e)=>{
                      let selectedDate=last6Months[e.target.value];
                      selectingMonth(selectedDate)
-                }}>
+                    }}>                  
                     {last6Months.map((date , index)=>(  
                         <option key={index} value={index} >{date.month} {date.year}</option>
                     ))}
@@ -222,6 +227,13 @@ function Payrollpage() {
                         </thead>
 
                         <tbody>
+                        {loading &&
+                        <div className="loading-overlay">
+                                <div className="loading-box">
+                                    <div className="loader"></div>
+                                    <p>Loading...</p>
+                                </div>
+                        </div>}
                         {employesWithSheet.map((employ)=>(
                            <EmployesList  key={employ.id} employ={employ} monthlyDates={monthlyDates} />
                         ))}                           
