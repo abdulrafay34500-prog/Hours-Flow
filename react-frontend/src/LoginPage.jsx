@@ -3,6 +3,7 @@ import './CSS-Files/loginpage.css'
 import componyLogo from './logo&Img/logo.png.png'
 import {Link , useNavigate} from 'react-router-dom'
 function Login() {
+    let [loading ,setLoading]=useState(false)
     const navigate = useNavigate()
 
     let [email ,setEmail]=useState('')
@@ -10,6 +11,7 @@ function Login() {
 
     
     let LoginFun=async(e)=>{
+        setLoading(true)
         e.preventDefault()
         let loginDeatils={
             email,
@@ -40,11 +42,20 @@ function Login() {
        }catch(err){
              console.log(err.message)
              alert('Server not running or working properley')
+       }finally{
+        setLoading(false)
        }
     }
     return (
 
         <div className='bodyy'>
+            {loading &&
+             <div className="loading-overlay">
+                <div className="loading-box">
+                    <div className="loader"></div>
+                    <p>Loading...</p>
+                </div>
+            </div>}
         <div className="login-container">
         <div className="login-card">
 
